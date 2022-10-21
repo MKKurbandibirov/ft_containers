@@ -3,6 +3,8 @@
 #ifndef VECTOR_HPP
 # define VECTOR_HPP
 
+#include <vector>
+
 # include <iostream>
 # include <memory>
 # include <iterator>
@@ -13,17 +15,51 @@ namespace ft
 {
 	template <typename T>
 	class vector {
-	private:
+	public:
 		T* arr;
 		std::size_t sz;
 		std::size_t cap;
 		std::allocator<T> alloc;
-		// std::iterator<T> iter;
 
 	public:
+		class iterator {
+		private:
+			T* curr;
+		
+		public:
+			iterator(T* p): curr(p) {}
+
+			iterator& operator++() {
+				curr++;
+				return *this;
+			}
+
+			iterator& operator--() {
+				curr--;
+				return *this;
+			}
+
+			T& operator*() {
+				return *curr;
+			}
+
+			bool operator==(const iterator& other) const {
+				return *curr == *other.curr;
+			}
+
+			bool operator!=(const iterator& other) const {
+				return *curr != *other.curr;
+			}
+
+			T* base() {
+				return curr;
+			}
+		};
 
 		// ---------- Construtors ---------- //
-		vector(): sz(0), cap(0) {}
+		vector(): sz(0), cap(0) {
+			arr = NULL;
+		}
 
 		vector(std::size_t sz): sz(sz), cap(sz) {
 			arr = alloc.allocate(sz);
@@ -31,59 +67,102 @@ namespace ft
 
 		vector(std::size_t sz, T value): sz(sz), cap(sz) {
 			arr = alloc.allocate(sz);
-			for (std::size_t i = 0; i < sz; i++) {
+			for (std::size_t i = 0; i < sz; ++i) {
 				arr[i] = value;
 			}
 		}
 
-		// vector(const vector& other) {
-		// 	this->sz = other.sz;
-		// 	this->cap = other.cap;
-			
-		// }
+		vector(const vector& other) {
+			sz = other.sz;
+			cap = other.cap;
+			arr = alloc.allocate(sz);
+			for (std::size_t i = 0; i < sz; ++i) {
+				arr[i] = other.arr[i];
+			}
+		}
 
-		// vector(std::iterator first, std::iterator last) {
-			
-		// 	while (first != last) {
-				
-		// 		++first;
-		// 	}
-		// }
+		vector& operator=(const vector& other) {
+			if (this == &other) {
+				return *this;
+			}
+			sz = other.sz;
+			cap = other.cap;
+			arr = alloc.allocate(sz);
+			for (std::size_t i = 0; i < sz; ++i) {
+				arr[i] = other.arr[i];
+			}
+			return *this;
+		}
 
+		vector(typename ft::vector<T>::iterator first, typename ft::vector<T>::iterator last) {
+			sz = last.base() - first.base() ;
+			cap = sz;
+			arr = alloc.allocate(sz);
+			for (std::size_t i = 0; first != last; ++i) {
+				arr[i] = *first;
+				++first;
+			}
+		}
 
-		// vector(const vector& other) {
-			
-		// }
+		~vector() {
+			if (arr != NULL) {
+				alloc.deallocate(arr, cap);
+			}
+		}
 
 		// ------------ Iterators ------------ //
-		T* begin() {
-			return arr;
+		iterator begin() {
+			return iterator(arr);
 		}
 
-		const T* begin() const {
-			return arr;
+		const iterator cbegin() const {
+			return iterator(arr);
 		}
 
-		T* end() {
-			return arr + (sz - 1);
+		iterator end() {
+			return iterator(arr + (sz - 1));
 		}
 
-		const T* end() const {
-			return arr + (sz - 1);
+		const iterator cend() const {
+			return iterator(arr + (sz - 1));
 		}
 
 		// ------------- Capacity ------------- //
 		std::size_t size() const {
-			return this->sz;
+			return sz;
 		}
 
 		std::size_t capacity() const {
-			return this->cap;
+			return cap;
 		}
 
 		std::size_t max_size() const {
 			return std::numeric_limits<T>::max();
 		}
+
+		// void resize(std::size_t new_sz) {
+		// 	if (cap < new_sz) {
+		// 		try {
+		// 			arr = alloc.allocate(new_sz - cap);
+		// 		} catch(...) {
+		// 			T* tmp = alloc.allocate(new_sz);
+		// 			for (std::size_t i = 0; i < sz; ++i) {
+		// 				tmp[i] = arr[i];
+		// 			}
+		// 			alloc.deallocate(arr, cap);
+		// 			arr = tmp;
+		// 		}
+		// 		cap = new_sz;
+		// 	} //else {
+		// 	// 	alloc.deallocate(arr, cap - new_sz);
+		// 	// }
+		// 	sz = new_sz;
+		// 	// cap = new_sz;
+		// }
+
+		// void resize(std::size_t new_sz, const T& value) {
+			
+		// }
 
 		// ---------- Element Access ---------- //
 		T& at(std::size_t pos) {
@@ -123,6 +202,20 @@ namespace ft
 		const T& back() const {
 			return *(arr + (sz - 1));
 		}
+
+		// -------------- Data Access -------------- //
+		T* data() {
+			return arr;
+		}
+
+		const T* data() const {
+			return arr;
+		}
+
+		// --------------- Modifiers --------------- //
+		// void push_back(const T& x) {
+
+		// }
 
 	};
 }
