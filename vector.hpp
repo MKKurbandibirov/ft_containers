@@ -3,221 +3,86 @@
 #ifndef VECTOR_HPP
 # define VECTOR_HPP
 
-#include <vector>
-
 # include <iostream>
 # include <memory>
 # include <iterator>
 # include <stdexcept>
 # include <limits>
 
+# include "vector_base.hpp"
 namespace ft
 {
-	template <typename T>
-	class vector {
+	template<class T>
+	class vector : public vector_base<T> {
 	public:
-		T* arr;
-		std::size_t sz;
-		std::size_t cap;
-		std::allocator<T> alloc;
+		typedef typename vector_base<T>::value_type value_type;
+		typedef typename vector_base<T>::size_type size_type;
+		typedef typename vector_base<T>::pointer pointer;
+		typedef typename vector_base<T>::const_pointer const_pointer;
+		typedef typename vector_base<T>::reference reference;
+		typedef typename vector_base<T>::const_reference const_reference;
+		typedef typename vector_base<T>::iterator iterator;
+		typedef typename vector_base<T>::const_iterator const_iterator;
+		typedef std::allocator<T> allocator_type;
+		// typedef ft::reverse_iterator<iterator> reverse_iterator;
+		// typedef ft::reverse_iterator<const_iterator> const_reverse_iterator;
+
+	private:
+		size_type cap;
+		allocator_type alloc;
 
 	public:
-		class iterator {
-		private:
-			T* curr;
-		
-		public:
-			iterator(T* p): curr(p) {}
+		explicit vector();
+		explicit vector(size_type n, const value_type& value = value_type());
+		// template <class InputIterator>
+			// vector(InputIterator first, InputIterator last);
+		vector(const vector& other);
+		~vector();
+		vector &operator=(const vector& other);
+		// template <class InputIterator>
+			// void assign(InputIterator first, InputIterator last);
+		// void assign(size_type n, const T& u);
+		allocator_type get_allocator() const;
 
-			iterator& operator++() {
-				curr++;
-				return *this;
-			}
+		iterator begin();
+		const_iterator begin() const;
+		iterator end();
+		const_iterator end() const;
+		reverse_iterator rbegin();
+		const_reverse_iterator rbegin() const;
+		reverse_iterator rend();
+		const_reverse_iterator rend() const;
 
-			iterator& operator--() {
-				curr--;
-				return *this;
-			}
+		size_type size() const;
+		size_type max_size() const;
+		void resize(size_type sz, T c = T());
+		size_type capacity() const;
+		bool empty() const;
+		void reserve(size_type n);
 
-			T& operator*() {
-				return *curr;
-			}
+		reference operator[](size_type n);
+		const_reference operator[](size_type n) const;
+		const_reference at(size_type n) const;
+		reference at(size_type n);
+		reference front();
+		const_reference front() const;
+		reference back();
+		const_reference back() const;
 
-			bool operator==(const iterator& other) const {
-				return *curr == *other.curr;
-			}
-
-			bool operator!=(const iterator& other) const {
-				return *curr != *other.curr;
-			}
-
-			T* base() {
-				return curr;
-			}
-		};
-
-		// ---------- Construtors ---------- //
-		vector(): sz(0), cap(0) {
-			arr = NULL;
-		}
-
-		vector(std::size_t sz): sz(sz), cap(sz) {
-			arr = alloc.allocate(sz);
-		}
-
-		vector(std::size_t sz, T value): sz(sz), cap(sz) {
-			arr = alloc.allocate(sz);
-			for (std::size_t i = 0; i < sz; ++i) {
-				arr[i] = value;
-			}
-		}
-
-		vector(const vector& other) {
-			sz = other.sz;
-			cap = other.cap;
-			arr = alloc.allocate(sz);
-			for (std::size_t i = 0; i < sz; ++i) {
-				arr[i] = other.arr[i];
-			}
-		}
-
-		vector& operator=(const vector& other) {
-			if (this == &other) {
-				return *this;
-			}
-			sz = other.sz;
-			cap = other.cap;
-			arr = alloc.allocate(sz);
-			for (std::size_t i = 0; i < sz; ++i) {
-				arr[i] = other.arr[i];
-			}
-			return *this;
-		}
-
-		vector(typename ft::vector<T>::iterator first, typename ft::vector<T>::iterator last) {
-			sz = last.base() - first.base() ;
-			cap = sz;
-			arr = alloc.allocate(sz);
-			for (std::size_t i = 0; first != last; ++i) {
-				arr[i] = *first;
-				++first;
-			}
-		}
-
-		~vector() {
-			if (arr != NULL) {
-				alloc.deallocate(arr, cap);
-			}
-		}
-
-		// ------------ Iterators ------------ //
-		iterator begin() {
-			return iterator(arr);
-		}
-
-		const iterator cbegin() const {
-			return iterator(arr);
-		}
-
-		iterator end() {
-			return iterator(arr + (sz - 1));
-		}
-
-		const iterator cend() const {
-			return iterator(arr + (sz - 1));
-		}
-
-		// ------------- Capacity ------------- //
-		std::size_t size() const {
-			return sz;
-		}
-
-		std::size_t capacity() const {
-			return cap;
-		}
-
-		std::size_t max_size() const {
-			return std::numeric_limits<T>::max();
-		}
-
-		// void resize(std::size_t new_sz) {
-		// 	if (cap < new_sz) {
-		// 		try {
-		// 			arr = alloc.allocate(new_sz - cap);
-		// 		} catch(...) {
-		// 			T* tmp = alloc.allocate(new_sz);
-		// 			for (std::size_t i = 0; i < sz; ++i) {
-		// 				tmp[i] = arr[i];
-		// 			}
-		// 			alloc.deallocate(arr, cap);
-		// 			arr = tmp;
-		// 		}
-		// 		cap = new_sz;
-		// 	} //else {
-		// 	// 	alloc.deallocate(arr, cap - new_sz);
-		// 	// }
-		// 	sz = new_sz;
-		// 	// cap = new_sz;
-		// }
-
-		// void resize(std::size_t new_sz, const T& value) {
-			
-		// }
-
-		// ---------- Element Access ---------- //
-		T& at(std::size_t pos) {
-			if (pos > sz) {
-				throw std::out_of_range("vector");
-			}
-			return *(arr + pos);
-		}
-
-		const T& at(std::size_t pos) const {
-			if (pos > sz) {
-				throw std::out_of_range("vector");
-			}
-			return *(arr + pos);
-		}
-
-		T& operator[](std::size_t pos) {
-			return *(arr + pos);
-		}
-
-		const T& operator[](std::size_t pos) const {
-			return *(arr + pos);
-		}
-
-		T& front() {
-			return *(arr);
-		}
-
-		const T& front() const {
-			return *(arr);
-		}
-
-		T& back() {
-			return *(arr + (sz - 1));
-		}
-
-		const T& back() const {
-			return *(arr + (sz - 1));
-		}
-
-		// -------------- Data Access -------------- //
-		T* data() {
-			return arr;
-		}
-
-		const T* data() const {
-			return arr;
-		}
-
-		// --------------- Modifiers --------------- //
-		// void push_back(const T& x) {
-
-		// }
-
+		void push_back(const T& x);
+		void pop_back();
+		iterator insert(iterator position, const T& x);
+		void insert(iterator position, size_type n, const T& x);
+		template <class InputIterator>
+		void insert(iterator position,
+		InputIterator first, InputIterator last);
+		iterator erase(iterator position);
+		iterator erase(iterator first, iterator last);
+		void swap(vector<T>&);
+		void clear();
 	};
 }
+
+# include "vector.tpp"
 
 #endif
