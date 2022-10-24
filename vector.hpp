@@ -10,6 +10,7 @@
 # include <limits>
 
 # include "vector_base.hpp"
+# include "reverse_iterator.hpp"
 namespace ft
 {
 	template<class T>
@@ -24,8 +25,8 @@ namespace ft
 		typedef typename vector_base<T>::iterator iterator;
 		typedef typename vector_base<T>::const_iterator const_iterator;
 		typedef std::allocator<T> allocator_type;
-		// typedef ft::reverse_iterator<iterator> reverse_iterator;
-		// typedef ft::reverse_iterator<const_iterator> const_reverse_iterator;
+		typedef ft::ReverseIterator<iterator> reverse_iterator;
+		typedef ft::ReverseIterator<const_iterator> const_reverse_iterator;
 
 	private:
 		size_type cap;
@@ -45,10 +46,10 @@ namespace ft
 		allocator_type get_allocator() const;
 
 		// ------------- Iterators ----------- //
-		// reverse_iterator rbegin();
-		// const_reverse_iterator rbegin() const;
-		// reverse_iterator rend();
-		// const_reverse_iterator rend() const;
+		reverse_iterator rbegin();
+		const_reverse_iterator rbegin() const;
+		reverse_iterator rend();
+		const_reverse_iterator rend() const;
 
 		// ------------- Capacity ------------- //
 		size_type size() const;
