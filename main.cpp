@@ -1,8 +1,11 @@
-#include "vector.hpp"
+// #include "vector.hpp"
 #include <vector>
-#include <list>
+#include <iostream>
 
 #include <stdio.h>
+
+#include "vector.hpp"
+
 int main() {
 	// {
 	// 	std::vector<int> v;
@@ -34,6 +37,7 @@ int main() {
 	// 	}
 
 	// 	ft::vector<int> ft_v(5, 123);
+	// 	// std::cout << ft_v[0] << " " << ft_v[1] << " " << ft_v[2] << " " << ft_v[3] << " " << ft_v[4] << std::endl;
 	// 	std::cout << ft_v[4] << " " << ft_v.at(2) << " " << ft_v.front() << " " << ft_v.back() << "\n";
 	// 	try {
 	// 		ft_v.at(9);
@@ -63,13 +67,10 @@ int main() {
 	// 	std::cout << bool(beg == end) << " " << bool(beg != end) << " " << *beg << " " << *end << std::endl;
 
 
-		ft::vector<int> _v(6);
-		_v[5] = 12;
-		std::cout << _v.sz;
+		// ft::vector<int> _v(6);
+		// _v[5] = 12;
+		// std::cout << _v.sz;
 
-		std::vector<int> sv(6);
-		sv[5] = 5;
-		std::cout << sv._Vector_base 
 		// std::vector<int>::iterator _beg = _v.begin();
 
 		// std::vector<int>::iterator _end = _v.end();
@@ -101,5 +102,188 @@ int main() {
 
 	// 	std::cout << ft_i.size() << std::endl;
 	// }
+
+	// {
+	// 	std::vector<uint64_t> v(4);
+	// 	v[0] = 0;
+	// 	v[1] = 1;
+	// 	v[2] = 2;
+	// 	v[3] = 3;
+	// 	std::cout << v[0] << " " << v[1] << " " << v[2] << " " << v[3] << std::endl;
+
+	// 	v.reserve(6);
+	// 	std::cout << v.size() << " " << v.capacity() << std::endl;
+	// 	std::cout << v[0] << " " << v[1] << " " << v[2] << " " << v[3] << std::endl;
+
+	// 	v.reserve(3);
+	// 	std::cout << v.size() << " " << v.capacity() << std::endl;
+	// 	std::cout << v[0] << " " << v[1] << " " << v[2] << " " << v[3] << std::endl;
+
+	// 	std::cout << "---------------------------------------------------------------------\n";
+
+	// 	ft::vector<uint64_t> ft_v(4);
+	// 	ft_v[0] = 0;
+	// 	ft_v[1] = 1;
+	// 	ft_v[2] = 2;
+	// 	ft_v[3] = 3;
+	// 	std::cout << ft_v[0] << " " << ft_v[1] << " " << ft_v[2] << " " << ft_v[3] << std::endl;
+
+	// 	ft_v.reserve(6);
+	// 	std::cout << ft_v.size() << " " << ft_v.capacity() << std::endl;
+	// 	std::cout << ft_v[0] << " " << ft_v[1] << " " << ft_v[2] << " " << ft_v[3] << std::endl;
+
+	// 	ft_v.reserve(3);
+	// 	std::cout << ft_v.size() << " " << ft_v.capacity() << std::endl;
+	// 	std::cout << ft_v[0] << " " << ft_v[1] << " " << ft_v[2] << " " << ft_v[3] << std::endl;
+	// }
+
+	// {
+	// 	std::vector<uint64_t> v(4);
+	// 	v[0] = 0;
+	// 	v[1] = 1;
+	// 	v[2] = 2;
+	// 	v[3] = 3;
+	// 	std::cout << v[0] << " " << v[1] << " " << v[2] << " " << v[3] << std::endl;
+
+	// 	v.resize(6, 9);
+	// 	std::cout << v.size() << " " << v.capacity() << std::endl;
+	// 	std::cout << v[0] << " " << v[1] << " " << v[2] << " " << v[3] << " " << v[4] << " " << v[5] << std::endl;
+	// 	v.resize(8);
+	// 	std::cout << v.size() << " " << v.capacity() << std::endl;
+
+	// 	v.resize(3);
+	// 	std::cout << v.size() << " " << v.capacity() << std::endl;
+	// 	std::cout << v[0] << " " << v[1] << " " << v[2] << std::endl;
+
+	// 	std::cout << "---------------------------------------------------------------------\n";
+
+	// 	ft::vector<uint64_t> ft_v(4);
+	// 	ft_v[0] = 0;
+	// 	ft_v[1] = 1;
+	// 	ft_v[2] = 2;
+	// 	ft_v[3] = 3;
+	// 	std::cout << ft_v[0] << " " << ft_v[1] << " " << ft_v[2] << " " << ft_v[3] << std::endl;
+
+	// 	ft_v.resize(6, 9);
+	// 	std::cout << ft_v.size() << " " << ft_v.capacity() << std::endl;
+	// 	std::cout << ft_v[0] << " " << ft_v[1] << " " << ft_v[2] << " " << ft_v[3] << " " << ft_v[4] << " " << ft_v[5] << std::endl;
+	// 	ft_v.resize(8);
+	// 	std::cout << ft_v.size() << " " << ft_v.capacity() << std::endl;
+
+	// 	ft_v.resize(3);
+	// 	std::cout << ft_v.size() << " " << ft_v.capacity() << std::endl;
+	// 	std::cout << ft_v[0] << " " << ft_v[1] << " " << ft_v[2] << std::endl;
+	// }
+
+	// {
+		// std::vector<uint64_t> v;
+		// v.push_back(0);
+		// v.push_back(1);
+		// v.push_back(2);
+		// v.push_back(3);
+		// v.push_back(4);
+		// std::cout << v.size() << " " << v.capacity() << std::endl;
+		// std::cout << v[0] << " " << v[1] << " " << v[2] << " " << v[3] << " " << v[4] << std::endl;
+
+		// std::cout << "---------------------------------------------------------------------\n";
+
+		// ft::vector<uint64_t> ft_v;
+		// ft_v.push_back(0);
+		// ft_v.push_back(1);
+		// ft_v.push_back(2);
+		// ft_v.push_back(3);
+		// ft_v.push_back(4);
+		// std::cout << ft_v.size() << " " << ft_v.capacity() << std::endl;
+		// std::cout << ft_v[0] << " " << ft_v[1] << " " << ft_v[2] << " " << ft_v[3] << " " << ft_v[4]<< std::endl;
+	// }
+
+	// {
+	// 	std::vector<uint64_t> v;
+	// 	v.push_back(0);
+	// 	v.push_back(1);
+	// 	v.push_back(2);
+	// 	v.push_back(3);
+	// 	v.push_back(4);
+	// 	std::cout << v.size() << " " << v.capacity() << std::endl;
+	// 	std::cout << v[0] << " " << v[1] << " " << v[2] << " " << v[3] << " " << v[4] << std::endl;
+
+	// 	v.pop_back();
+	// 	v.pop_back();
+	// 	std::cout << v.size() << " " << v.capacity() << std::endl;
+	// 	std::cout << v[0] << " " << v[1] << " " << v[2] << " " << v[3] << " " << v[4] << std::endl;
+
+	// 	std::cout << "---------------------------------------------------------------------\n";
+
+	// 	ft::vector<uint64_t> ft_v;
+	// 	ft_v.push_back(0);
+	// 	ft_v.push_back(1);
+	// 	ft_v.push_back(2);
+	// 	ft_v.push_back(3);
+	// 	ft_v.push_back(4);
+	// 	std::cout << ft_v.size() << " " << ft_v.capacity() << std::endl;
+	// 	std::cout << ft_v[0] << " " << ft_v[1] << " " << ft_v[2] << " " << ft_v[3] << " " << ft_v[4]<< std::endl;
+
+	// 	ft_v.pop_back();
+	// 	ft_v.pop_back();
+	// 	std::cout << ft_v.size() << " " << ft_v.capacity() << std::endl;
+	// 	std::cout << ft_v[0] << " " << ft_v[1] << " " << ft_v[2] << " " << ft_v[3] << " " << ft_v[4] << std::endl;
+	// }
+	
+	// {
+	// 	std::vector<uint64_t> v(4, 4);
+
+	// 	v.clear();
+	// 	std::cout << v.size() << " " << v.capacity() << std::endl;
+	// 	std::cout << v[0] << " " << v[1] << " " << v[2] << " " << v[3] << std::endl;
+
+	// 	std::cout << "---------------------------------------------------------------------\n";
+
+	// 	ft::vector<uint64_t> ft_v(4, 4);
+
+	// 	ft_v.clear();
+	// 	std::cout << ft_v.size() << " " << ft_v.capacity() << std::endl;
+	// 	std::cout << ft_v[0] << " " << ft_v[1] << " " << ft_v[2] << " " << ft_v[3] << std::endl;
+	// }
+
+	{
+		std::vector<uint64_t> v(4, 4);
+
+		std::vector<uint64_t>::iterator it = v.begin();
+		// v.pop_back();
+		++it;
+		++it;
+		++it;
+		std::vector<uint64_t>::iterator res = v.insert(v.begin(), 3);
+		std::cout << v.size() << " " << v.capacity() << " " << *res << std::endl;
+		std::cout << v[0] << " " << v[1] << " " << v[2] << " " << v[3] << " " << v[4] << std::endl;
+
+		std::cout << "---------------------------------------------------------------------\n";
+
+		ft::vector<uint64_t> ft_v(4, 4);
+
+		ft::vector<uint64_t>::iterator ft_it = ft_v.begin();
+		// ft_v.pop_back();
+		++ft_it;
+		++ft_it;
+		++ft_it;
+		ft::vector<uint64_t>::iterator ft_res = ft_v.insert(ft_v.begin(), 3);
+		std::cout << ft_v.size() << " " << ft_v.capacity() << " " << *ft_res << std::endl;
+		std::cout << ft_v[0] << " " << ft_v[1] << " " << ft_v[2] << " " << ft_v[3] << " " << ft_v[4] << std::endl;
+	}
+
+	// {
+		// ft::vector<int> v;
+		// ft::vector<double> v1(5);
+		// ft::vector<double> v2(5, 6);
+		// ft::vector<int> v3(5, 6);
+		// ft::vector<int> v4(v3);
+		// ft::vector<int> v5 = v4;
+
+		// std::cout << v1.size() << " " << v1.capacity() << " " << v1.empty() << std::endl;
+
+		// std::cout << *v4.begin() << "\n";
+	// }
+
+
 	return 0;
 }

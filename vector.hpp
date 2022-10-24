@@ -44,12 +44,13 @@ namespace ft
 		// void assign(size_type n, const T& u);
 		allocator_type get_allocator() const;
 
+		// ------------- Iterators ----------- //
 		// reverse_iterator rbegin();
 		// const_reverse_iterator rbegin() const;
 		// reverse_iterator rend();
 		// const_reverse_iterator rend() const;
 
-		// ---------- Capacity ---------- //
+		// ------------- Capacity ------------- //
 		size_type size() const;
 		size_type max_size() const;
 		void resize(size_type sz, value_type c = value_type());
@@ -67,13 +68,14 @@ namespace ft
 		reference back();
 		const_reference back() const;
 
-		void push_back(const T& x);
+		// ------------- Modifiers ------------- //
+		void push_back(const_reference x);
 		void pop_back();
-		iterator insert(iterator position, const T& x);
-		void insert(iterator position, size_type n, const T& x);
+		iterator insert(iterator position, const_reference x);
+		void insert(iterator position, size_type n, const_reference x);
 		template <class InputIterator>
-		void insert(iterator position,
-		InputIterator first, InputIterator last);
+			void insert(iterator position,
+				InputIterator first, InputIterator last);
 		iterator erase(iterator position);
 		iterator erase(iterator first, iterator last);
 		void swap(vector<T>&);

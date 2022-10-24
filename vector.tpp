@@ -178,4 +178,50 @@ vector<value_type>::back() const {
 	return *(this->arr+(this->sz - 1));
 }
 
+// ------------------- Modifiers ------------------- //
+template<class value_type>
+void vector<value_type>::push_back(const_reference x) {
+	if (this->sz == 0) {
+		this->reserve(1);
+	}
+	if (this->cap == this->sz) {
+		this->reserve(2 * this->sz);
+	}
+	this->arr[this->sz] = x;
+	++this->sz;
+}
+
+template<class value_type>
+void vector<value_type>::pop_back() {
+	--this->sz;
+}
+
+template<class value_type>
+void vector<value_type>::clear() {
+	this->sz = 0;
+}
+
+template<class value_type>
+typename vector<value_type>::iterator
+vector<value_type>::insert(iterator pos, const_reference x) {
+	size_type ind = pos.base() - this->arr;
+	if (pos == this->end()) {
+		this->arr[this->sz] = x;
+		++this->sz;
+		return iterator(this->arr + ind);
+	}
+	if (this->sz + 1 > this->cap) {
+		reserve(this->cap * 2);
+	}
+	++this->sz;
+	value_type tmp = this->arr[ind];
+	this->arr[ind] = x;
+	for (size_type i = ind + 1; i < this->sz; ++i) {
+		value_type temp = this->arr[i];
+		this->arr[i] = tmp;
+		tmp = temp;
+	}
+	return iterator(this->arr + ind);
+} 
+
 }

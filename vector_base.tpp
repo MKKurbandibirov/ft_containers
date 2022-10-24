@@ -90,13 +90,13 @@ vector_base<value_type>::begin() const{
 template<class value_type>
 typename vector_base<value_type>::iterator
 vector_base<value_type>::end() {
-	return iterator(arr + (sz - 1));
+	return iterator(arr + sz);
 }
 
 template<class value_type>
 typename vector_base<value_type>::const_iterator
 vector_base<value_type>::end() const{
-	return const_iterator(arr + (sz - 1));
+	return const_iterator(arr + sz);
 }
 
 }
