@@ -10,7 +10,7 @@ namespace ft{
 template<class T>
 class vector_base {
 protected:
-	vector_base() {}
+	// vector_base() {}
 	T* arr;
 	std::size_t sz;
 
@@ -70,9 +70,15 @@ public:
 	};
 	typedef Iterator iterator;
 	typedef Const_Iterator const_iterator;
+
+	iterator begin();
+	const_iterator begin() const;
+	iterator end();
+	const_iterator end() const;
 };
 
 }
 
 # include "vector_base.tpp"
+
 #endif

@@ -74,4 +74,29 @@ vector_base<value_type>::Iterator::base() {
 	return curr;
 }
 
+// --------- iterators methods --------- //
+template<class value_type>
+typename vector_base<value_type>::iterator
+vector_base<value_type>::begin() {
+	return iterator(arr);
+}
+
+template<class value_type>
+typename vector_base<value_type>::const_iterator
+vector_base<value_type>::begin() const{
+	return const_iterator(arr);
+}
+
+template<class value_type>
+typename vector_base<value_type>::iterator
+vector_base<value_type>::end() {
+	return iterator(arr + (sz - 1));
+}
+
+template<class value_type>
+typename vector_base<value_type>::const_iterator
+vector_base<value_type>::end() const{
+	return const_iterator(arr + (sz - 1));
+}
+
 }

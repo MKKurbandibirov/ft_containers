@@ -44,22 +44,20 @@ namespace ft
 		// void assign(size_type n, const T& u);
 		allocator_type get_allocator() const;
 
-		iterator begin();
-		const_iterator begin() const;
-		iterator end();
-		const_iterator end() const;
-		reverse_iterator rbegin();
-		const_reverse_iterator rbegin() const;
-		reverse_iterator rend();
-		const_reverse_iterator rend() const;
+		// reverse_iterator rbegin();
+		// const_reverse_iterator rbegin() const;
+		// reverse_iterator rend();
+		// const_reverse_iterator rend() const;
 
+		// ---------- Capacity ---------- //
 		size_type size() const;
 		size_type max_size() const;
-		void resize(size_type sz, T c = T());
+		void resize(size_type sz, value_type c = value_type());
 		size_type capacity() const;
 		bool empty() const;
 		void reserve(size_type n);
 
+		// ---------- Element Access ---------- //
 		reference operator[](size_type n);
 		const_reference operator[](size_type n) const;
 		const_reference at(size_type n) const;
