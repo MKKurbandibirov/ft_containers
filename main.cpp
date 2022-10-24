@@ -338,65 +338,102 @@ int main() {
 	// }
 
 
+	// {
+	// 	std::vector<uint64_t> v;
+	// 	v.push_back(0);
+	// 	v.push_back(1);
+	// 	v.push_back(2);
+	// 	v.push_back(3);
+	// 	v.push_back(4);
+	// 	v.push_back(5);
+	// 	std::cout << v.size() << " " << v.capacity() << std::endl;
+	// 	for (std::size_t i = 0; i < v.size(); ++i) {
+	// 		std::cout << v[i] << " ";
+	// 	}
+	// 	std::cout << "\n";
+		
+	// 	// std::vector<uint64_t>::iterator it = v.begin();
+	// 	// ++it;
+
+	// 	// std::vector<uint64_t>::iterator it1 = v.begin();
+	// 	// ++it1;
+	// 	// ++it1;
+	// 	// ++it1;
+
+	// 	std::vector<uint64_t>::iterator res_it = v.erase(v.begin(), v.end());
+	// 	std::cout << v.size() << " " << v.capacity() << " " << *res_it << std::endl;
+	// 	for (std::size_t i = 0; i < v.size(); ++i) {
+	// 		std::cout << v[i] << " ";
+	// 	}
+	// 	std::cout << "\n";
+		
+
+	// 	std::cout << "---------------------------------------------------------------------\n";
+
+	// 	ft::vector<uint64_t> ft_v;
+	// 	ft_v.push_back(0);
+	// 	ft_v.push_back(1);
+	// 	ft_v.push_back(2);
+	// 	ft_v.push_back(3);
+	// 	ft_v.push_back(4);
+	// 	ft_v.push_back(5);
+	// 	std::cout << ft_v.size() << " " << ft_v.capacity() << std::endl;
+	// 	for (std::size_t i = 0; i < ft_v.size(); ++i) {
+	// 		std::cout << ft_v[i] << " ";
+	// 	}
+	// 	std::cout << "\n";
+
+	// 	// ft::vector<uint64_t>::iterator ft_it = ft_v.begin();
+	// 	// ++ft_it;
+
+	// 	// ft::vector<uint64_t>::iterator ft_it1 = ft_v.begin();
+	// 	// ++ft_it1;
+	// 	// ++ft_it1;
+	// 	// ++ft_it1;
+		
+	// 	ft::vector<uint64_t>::iterator ft_res_it  = ft_v.erase(ft_v.begin(), ft_v.end());
+	// 	std::cout << ft_v.size() << " " << ft_v.capacity() << " " << *ft_res_it << std::endl;
+	// 	for (std::size_t i = 0; i < v.size(); ++i) {
+	// 		std::cout << ft_v[i] << " ";
+	// 	}
+	// 	std::cout << "\n";
+	// }
+
 	{
-		std::vector<uint64_t> v;
-		v.push_back(0);
-		v.push_back(1);
-		v.push_back(2);
-		v.push_back(3);
-		v.push_back(4);
-		v.push_back(5);
-		std::cout << v.size() << " " << v.capacity() << std::endl;
-		for (std::size_t i = 0; i < v.size(); ++i) {
-			std::cout << v[i] << " ";
-		}
-		std::cout << "\n";
+		std::vector<int> v1;
+		std::vector<int> v2;
+
+		v1.push_back(0);
+		v1.push_back(1);
+		v1.push_back(2);
 		
-		// std::vector<uint64_t>::iterator it = v.begin();
-		// ++it;
+		v2.push_back(5);
+		v2.push_back(6);
 
-		// std::vector<uint64_t>::iterator it1 = v.begin();
-		// ++it1;
-		// ++it1;
-		// ++it1;
+		std::cout << v1.size() << " " << v1.capacity() << std::endl;
+		std::cout << v2.size() << " " << v2.capacity() << std::endl;
+		v1.swap(v2);
 
-		std::vector<uint64_t>::iterator res_it = v.erase(v.begin(), v.end());
-		std::cout << v.size() << " " << v.capacity() << " " << *res_it << std::endl;
-		for (std::size_t i = 0; i < v.size(); ++i) {
-			std::cout << v[i] << " ";
-		}
-		std::cout << "\n";
+		std::cout << v1.size() << " " << v1.capacity() << std::endl;
+		std::cout << v2.size() << " " << v2.capacity() << std::endl;
+
+
+		std::vector<int> ft_v1;
+		std::vector<int> ft_v2;
+
+		ft_v1.push_back(0);
+		ft_v1.push_back(1);
+		ft_v1.push_back(2);
 		
+		ft_v2.push_back(5);
+		ft_v2.push_back(6);
 
-		std::cout << "---------------------------------------------------------------------\n";
+		std::cout << ft_v1.size() << " " << ft_v1.capacity() << std::endl;
+		std::cout << ft_v2.size() << " " << ft_v2.capacity() << std::endl;
+		ft_v1.swap(ft_v2);
 
-		ft::vector<uint64_t> ft_v;
-		ft_v.push_back(0);
-		ft_v.push_back(1);
-		ft_v.push_back(2);
-		ft_v.push_back(3);
-		ft_v.push_back(4);
-		ft_v.push_back(5);
-		std::cout << ft_v.size() << " " << ft_v.capacity() << std::endl;
-		for (std::size_t i = 0; i < ft_v.size(); ++i) {
-			std::cout << ft_v[i] << " ";
-		}
-		std::cout << "\n";
-
-		// ft::vector<uint64_t>::iterator ft_it = ft_v.begin();
-		// ++ft_it;
-
-		// ft::vector<uint64_t>::iterator ft_it1 = ft_v.begin();
-		// ++ft_it1;
-		// ++ft_it1;
-		// ++ft_it1;
-		
-		ft::vector<uint64_t>::iterator ft_res_it  = ft_v.erase(ft_v.begin(), ft_v.end());
-		std::cout << ft_v.size() << " " << ft_v.capacity() << " " << *ft_res_it << std::endl;
-		for (std::size_t i = 0; i < v.size(); ++i) {
-			std::cout << ft_v[i] << " ";
-		}
-		std::cout << "\n";
+		std::cout << ft_v1.size() << " " << ft_v1.capacity() << std::endl;
+		std::cout << ft_v2.size() << " " << ft_v2.capacity() << std::endl;
 	}
 
 	return 0;

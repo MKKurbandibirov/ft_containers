@@ -78,7 +78,7 @@ namespace ft
 		// 		InputIterator first, InputIterator last);
 		iterator erase(iterator position);
 		iterator erase(iterator first, iterator last);
-		void swap(vector<T>&);
+		void swap(vector<value_type>&);
 		void clear();
 	};
 }

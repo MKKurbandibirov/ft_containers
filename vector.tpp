@@ -289,4 +289,13 @@ vector<value_type>::erase(iterator first, iterator last) {
 	return iterator(this->arr + (first.base() - this->arr));
 }
 
+template<class value_type>
+void vector<value_type>::swap(vector<value_type>& other) {
+	if (this->arr != other.arr) {
+		std::swap(this->sz, other.sz);
+		std::swap(this->cap, other.cap);
+		std::swap(this->arr, other.arr);
+	}
+}
+
 }
