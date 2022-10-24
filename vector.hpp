@@ -73,9 +73,9 @@ namespace ft
 		void pop_back();
 		iterator insert(iterator position, const_reference x);
 		void insert(iterator position, size_type n, const_reference x);
-		template <class InputIterator>
-			void insert(iterator position,
-				InputIterator first, InputIterator last);
+		// template <class InputIterator>
+		// 	void insert(iterator position,
+		// 		InputIterator first, InputIterator last);
 		iterator erase(iterator position);
 		iterator erase(iterator first, iterator last);
 		void swap(vector<T>&);

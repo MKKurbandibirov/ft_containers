@@ -205,13 +205,14 @@ template<class value_type>
 typename vector<value_type>::iterator
 vector<value_type>::insert(iterator pos, const_reference x) {
 	size_type ind = pos.base() - this->arr;
-	if (pos == this->end()) {
+	iterator it_end = this->end();
+	if (this->sz + 1 > this->cap) {
+		reserve(this->cap * 2);
+	}
+	if (pos == it_end) {
 		this->arr[this->sz] = x;
 		++this->sz;
 		return iterator(this->arr + ind);
-	}
-	if (this->sz + 1 > this->cap) {
-		reserve(this->cap * 2);
 	}
 	++this->sz;
 	value_type tmp = this->arr[ind];
@@ -222,6 +223,48 @@ vector<value_type>::insert(iterator pos, const_reference x) {
 		tmp = temp;
 	}
 	return iterator(this->arr + ind);
-} 
+}
+
+template<class value_type>
+void vector<value_type>::insert(iterator pos, size_type n, const_reference x) {
+	if (n <= 0) {
+		return;
+	}
+	size_type ind = pos.base() - this->arr;
+	iterator it_end = this->end();
+	if (this->sz + n > this->cap) {
+		reserve(this->sz + n);
+	}
+	if (pos == it_end) {
+		for (size_type i = 0; i < n; ++i) {
+			this->arr[this->sz] = x;
+			++this->sz;
+		}
+		return;
+	}
+	for (size_type i = 0; i < n; ++i) {
+		++this->sz;
+		value_type tmp = this->arr[ind];
+		this->arr[ind] = x;
+		for (size_type i = ind + 1; i < this->sz; ++i) {
+			value_type temp = this->arr[i];
+			this->arr[i] = tmp;
+			tmp = temp;
+		}
+		++ind;
+	}
+}
+
+template<class value_type>
+typename vector<value_type>::iterator
+vector<value_type>::erase(iterator pos) {
+
+}
+
+template<class value_type>
+typename vector<value_type>::iterator
+vector<value_type>::erase(iterator first, iterator last) {
+	
+}
 
 }

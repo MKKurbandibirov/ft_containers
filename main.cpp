@@ -245,29 +245,56 @@ int main() {
 	// 	std::cout << ft_v[0] << " " << ft_v[1] << " " << ft_v[2] << " " << ft_v[3] << std::endl;
 	// }
 
+	// {
+	// 	std::vector<uint64_t> v(4, 4);
+
+	// 	std::vector<uint64_t>::iterator it = v.begin();
+	// 	// v.pop_back();
+	// 	++it;
+	// 	++it;
+	// 	++it;
+	// 	std::vector<uint64_t>::iterator res = v.insert(v.begin(), 3);
+	// 	std::cout << v.size() << " " << v.capacity() << " " << *res << std::endl;
+	// 	std::cout << v[0] << " " << v[1] << " " << v[2] << " " << v[3] << " " << v[4] << std::endl;
+
+	// 	std::cout << "---------------------------------------------------------------------\n";
+
+	// 	ft::vector<uint64_t> ft_v(4, 4);
+
+	// 	ft::vector<uint64_t>::iterator ft_it = ft_v.begin();
+	// 	// ft_v.pop_back();
+	// 	++ft_it;
+	// 	++ft_it;
+	// 	++ft_it;
+	// 	ft::vector<uint64_t>::iterator ft_res = ft_v.insert(ft_v.begin(), 3);
+	// 	std::cout << ft_v.size() << " " << ft_v.capacity() << " " << *ft_res << std::endl;
+	// 	std::cout << ft_v[0] << " " << ft_v[1] << " " << ft_v[2] << " " << ft_v[3] << " " << ft_v[4] << std::endl;
+	// }
+
+
 	{
-		std::vector<uint64_t> v(4, 4);
+		std::vector<uint64_t> v(2, 4);
 
 		std::vector<uint64_t>::iterator it = v.begin();
 		// v.pop_back();
 		++it;
-		++it;
-		++it;
-		std::vector<uint64_t>::iterator res = v.insert(v.begin(), 3);
-		std::cout << v.size() << " " << v.capacity() << " " << *res << std::endl;
+		// ++it;
+		// ++it;
+		v.insert(it,3, 3);
+		std::cout << v.size() << " " << v.capacity() << std::endl;
 		std::cout << v[0] << " " << v[1] << " " << v[2] << " " << v[3] << " " << v[4] << std::endl;
 
 		std::cout << "---------------------------------------------------------------------\n";
 
-		ft::vector<uint64_t> ft_v(4, 4);
+		ft::vector<uint64_t> ft_v(2, 4);
 
 		ft::vector<uint64_t>::iterator ft_it = ft_v.begin();
 		// ft_v.pop_back();
 		++ft_it;
-		++ft_it;
-		++ft_it;
-		ft::vector<uint64_t>::iterator ft_res = ft_v.insert(ft_v.begin(), 3);
-		std::cout << ft_v.size() << " " << ft_v.capacity() << " " << *ft_res << std::endl;
+		// ++ft_it;
+		// ++ft_it;
+		ft_v.insert(ft_it,3, 3);
+		std::cout << ft_v.size() << " " << ft_v.capacity() << std::endl;
 		std::cout << ft_v[0] << " " << ft_v[1] << " " << ft_v[2] << " " << ft_v[3] << " " << ft_v[4] << std::endl;
 	}
 
