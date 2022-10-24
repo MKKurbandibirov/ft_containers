@@ -258,13 +258,35 @@ void vector<value_type>::insert(iterator pos, size_type n, const_reference x) {
 template<class value_type>
 typename vector<value_type>::iterator
 vector<value_type>::erase(iterator pos) {
-
+	size_type ind = pos.base() - this->arr;
+	if (pos == --this->end()) {
+		--this->sz;
+		return this->end();
+	}
+	for (size_type i = ind + 1; i < this->sz; ++i) {
+		this->arr[ind] = this->arr[i];
+		++ind;
+	}
+	--this->sz;
+	return pos;
 }
 
 template<class value_type>
 typename vector<value_type>::iterator
 vector<value_type>::erase(iterator first, iterator last) {
-	
+	if (first == last) {
+		return last;
+	}
+	size_type f_ind = first.base() - this->arr, l_ind = last.base() - this->arr;
+	size_type distance = l_ind - f_ind;
+	while (last != this->end()) {
+		this->arr[f_ind] = this->arr[l_ind];
+		++f_ind;
+		++l_ind;
+		++last;
+	}
+	this->sz -= distance;
+	return iterator(this->arr + (first.base() - this->arr));
 }
 
 }
