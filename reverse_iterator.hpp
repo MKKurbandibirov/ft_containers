@@ -29,34 +29,32 @@ public:
 };
 
 template<class T>
-ReverseIterator& ReverseIterator::operator++() {
-	++this.iter;
+ReverseIterator<T>& ReverseIterator<T>::operator++() {
+	++this->iter;
 	return *this;
 }
 
 template<class T>
-ReverseIterator& ReverseIterator::operator--() {
-	--this.iter;
+ReverseIterator<T>& ReverseIterator<T>::operator--() {
+	--this->iter;
 	return *this;
 }
 
 template<class T>
-const T& ReverseIterator::operator*() {
-	return *this->iter;
+const T& ReverseIterator<T>::operator*() {
+	return *(this->iter);
 }
 
 template<class T>
-bool ReverseIterator::operator==(const ReverseIterator& other) {
+bool ReverseIterator<T>::operator==(const ReverseIterator& other) const {
 	return this->iter == other.iter;
 }
 
 template<class T>
-bool ReverseIterator::operator!=(const ReverseIterator& other) {
+bool ReverseIterator<T>::operator!=(const ReverseIterator& other) const {
 	return this->iter != other.iter;
 }
 
 } // namespace ft
-
-
 
 #endif

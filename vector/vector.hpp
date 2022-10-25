@@ -42,14 +42,14 @@ namespace ft
 		vector &operator=(const vector& other);
 		// template <class InputIterator>
 			// void assign(InputIterator first, InputIterator last);
-		// void assign(size_type n, const T& u);
+		void assign(size_type n, const_reference u);
 		allocator_type get_allocator() const;
 
 		// ------------- Iterators ----------- //
 		reverse_iterator rbegin();
 		const_reverse_iterator rbegin() const;
-		reverse_iterator rend();
-		const_reverse_iterator rend() const;
+		// reverse_iterator rend();
+		// const_reverse_iterator rend() const;
 
 		// ------------- Capacity ------------- //
 		size_type size() const;

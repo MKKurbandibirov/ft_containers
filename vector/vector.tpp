@@ -68,7 +68,31 @@ vector<value_type>::get_allocator() const {
 	return this->alloc;
 }
 
+template<class value_type>
+void vector<value_type>::assign(size_type n, const_reference u) {
+	if (this->arr) {
+		this->alloc.deallocate(this->arr, this->cap);
+	}
+	this->arr = this->alloc.allocate(n);
+	this->sz = n;
+	this->cap = n;
+	for (size_type i = 0; i < this->sz; ++i) {
+		this->arr[i] = u;
+	}
+}
+
 // ------------------------ Iterators ------------------------ //
+template<class value_type>
+typename vector<value_type>::reverse_iterator
+vector<value_type>::rbegin() {
+	return reverse_iterator(this->end());
+}
+
+template<class value_type>
+typename vector<value_type>::const_reverse_iterator
+vector<value_type>::rbegin() const {
+	return const_reverse_iterator(this->end());
+}
 
 
 // ------------------------ Capacity ------------------------ //
