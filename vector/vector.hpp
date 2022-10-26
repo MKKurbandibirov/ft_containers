@@ -11,6 +11,7 @@
 
 # include "vector_base.hpp"
 # include "../reverse_iterator.hpp"
+# include "../equal.hpp"
 namespace ft
 {
 	template<class T>
@@ -82,6 +83,47 @@ namespace ft
 		void swap(vector<value_type>&);
 		void clear();
 	};
+
+	template <class T>
+	bool operator==(const vector<T>& x,const vector<T>& y) {
+		if (&x == &y) {
+			return true;
+		}	
+		if (x.size() != y.size()) {
+			return false;
+		}
+		if (x.capacity() == y.capacity()) {
+			return false;
+		}
+		
+		return ft::equal(x.begin(), x.end(), y.begin());
+	}
+
+	template <class T>
+	bool operator!=(const vector<T>& x,const vector<T>& y) {
+		if (x == y) {
+			return false;
+		}
+		return true;
+	}
+
+	// template <class T>
+	// bool operator<=(const vector<T>& x,const vector<T>& y);
+
+	// template <class T>
+	// bool operator>=(const vector<T>& x,const vector<T>& y);
+
+	// template <class T>
+	// bool operator>(const vector<T>& x,const vector<T>& y);
+
+	// template <class T>
+	// bool operator<(const vector<T>& x,const vector<T>& y) {
+		
+	// }
+
+	// specialized algorithms:
+	template <class T>
+	void swap(vector<T>& x, vector<T>& y);
 }
 
 # include "vector.tpp"
