@@ -4,7 +4,7 @@
 # define VECTOR_BASE_HPP
 
 # include <iostream>
-
+# include "../iterator_traits.hpp"
 namespace ft{
 
 template<class T>
@@ -26,6 +26,12 @@ public:
 	private:
 		pointer curr;
 	public:
+		typedef T value_type;
+		typedef T* pointer;
+		typedef const T& reference;
+		typedef typename iterator_traits<T*>::difference_type difference_type;
+		typedef typename iterator_traits<T*>::iterator_category iterator_category;
+
 		Const_Iterator(): curr(NULL) {}
 		Const_Iterator(pointer p): curr(p) {}
 		Const_Iterator(const Const_Iterator& other): curr(other.curr) {}
@@ -42,6 +48,7 @@ public:
 		const_reference operator*();
 		bool operator==(const Const_Iterator& other) const;
 		bool operator!=(const Const_Iterator& other) const;
+		// Const_Iterator& operator-
 
 		pointer base();
 	};
@@ -49,6 +56,12 @@ public:
 	private:
 		pointer curr;
 	public:
+		typedef T value_type;
+		typedef T* pointer;
+		typedef T& reference;
+		typedef typename iterator_traits<T*>::difference_type difference_type;
+		typedef typename iterator_traits<T*>::iterator_category iterator_category;
+
 		Iterator(): curr(NULL) {}
 		Iterator(pointer p): curr(p) {}
 		Iterator(const Iterator& other): curr(other.curr) {}
@@ -65,6 +78,7 @@ public:
 		reference operator*();
 		bool operator==(const Iterator& other) const;
 		bool operator!=(const Iterator& other) const;
+		Iterator& operator-(const Iterator& other);
 
 		pointer base();
 	};

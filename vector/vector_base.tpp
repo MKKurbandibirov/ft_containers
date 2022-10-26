@@ -74,6 +74,12 @@ vector_base<value_type>::Iterator::base() {
 	return curr;
 }
 
+template<class value_type>
+typename vector_base<value_type>::iterator&
+vector_base<value_type>::Iterator::operator-(const Iterator& other) {
+	return Iterator(this->curr - other.curr);
+}
+
 // --------- iterators methods --------- //
 template<class value_type>
 typename vector_base<value_type>::iterator

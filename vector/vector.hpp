@@ -10,7 +10,7 @@
 # include <limits>
 
 # include "vector_base.hpp"
-# include "reverse_iterator.hpp"
+# include "../reverse_iterator.hpp"
 namespace ft
 {
 	template<class T>
@@ -48,8 +48,8 @@ namespace ft
 		// ------------- Iterators ----------- //
 		reverse_iterator rbegin();
 		const_reverse_iterator rbegin() const;
-		// reverse_iterator rend();
-		// const_reverse_iterator rend() const;
+		reverse_iterator rend();
+		const_reverse_iterator rend() const;
 
 		// ------------- Capacity ------------- //
 		size_type size() const;

@@ -94,6 +94,20 @@ vector<value_type>::rbegin() const {
 	return const_reverse_iterator(this->end());
 }
 
+template<class value_type>
+typename vector<value_type>::reverse_iterator
+vector<value_type>::rend() {
+	// value_type tmp = this->begin();
+	return reverse_iterator(this->begin());
+}
+
+template<class value_type>
+typename vector<value_type>::const_reverse_iterator
+vector<value_type>::rend() const {
+	// value_type tmp = this->begin();
+	return reverse_iterator(this->begin());
+}
+
 
 // ------------------------ Capacity ------------------------ //
 template<class value_type>
