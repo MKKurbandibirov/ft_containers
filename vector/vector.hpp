@@ -12,6 +12,7 @@
 # include "vector_base.hpp"
 # include "../reverse_iterator.hpp"
 # include "../equal.hpp"
+# include "../lexicographical_compare.hpp"
 namespace ft
 {
 	template<class T>
@@ -107,23 +108,31 @@ namespace ft
 		return true;
 	}
 
-	// template <class T>
-	// bool operator<=(const vector<T>& x,const vector<T>& y);
+	template <class T>
+	bool operator<=(const vector<T>& x,const vector<T>& y) {
+		return x == y || x < y;
+	}
 
-	// template <class T>
-	// bool operator>=(const vector<T>& x,const vector<T>& y);
+	template <class T>
+	bool operator>=(const vector<T>& x,const vector<T>& y) {
+		return !(x < y);
+	}
 
-	// template <class T>
-	// bool operator>(const vector<T>& x,const vector<T>& y);
+	template <class T>
+	bool operator>(const vector<T>& x,const vector<T>& y) {
+		return !(x <= y);
+	}
 
-	// template <class T>
-	// bool operator<(const vector<T>& x,const vector<T>& y) {
-		
-	// }
+	template <class T>
+	bool operator<(const vector<T>& x,const vector<T>& y) {
+		return lexicographical_compare(x.begin(), x.end(), y.begin(), y.end());
+	}
 
 	// specialized algorithms:
 	template <class T>
-	void swap(vector<T>& x, vector<T>& y);
+	void swap(vector<T>& x, vector<T>& y) {
+		x.swap(y);
+	}
 }
 
 # include "vector.tpp"

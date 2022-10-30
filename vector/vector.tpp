@@ -195,25 +195,25 @@ vector<value_type>::at(size_type pos) const {
 template<class value_type>
 typename vector<value_type>::reference
 vector<value_type>::front() {
-	return *this->arr;
+	return this->at(0);
 }
 
 template<class value_type>
 typename vector<value_type>::const_reference
 vector<value_type>::front() const {
-	return *this->arr;
+	return this->at(0);
 }
 
 template<class value_type>
 typename vector<value_type>::reference
 vector<value_type>::back() {
-	return *(this->arr+(this->sz - 1));
+	return this->at(this->sz - 1);
 }
 
 template<class value_type>
 typename vector<value_type>::const_reference
 vector<value_type>::back() const {
-	return *(this->arr+(this->sz - 1));
+	return this->at(this->sz - 1);
 }
 
 // ------------------- Modifiers ------------------- //
