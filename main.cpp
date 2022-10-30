@@ -3,10 +3,15 @@
 #include <type_traits>
 #include <utility>
 #include <vector>
+#include <sstream>
+
 
 #include "enable_if.hpp"
 #include "vector/vector.hpp"
 #include "stack/stack.hpp"
+#include "red_black_tree/rb_tree.hpp"
+
+
 
 class govno
 {
@@ -21,6 +26,12 @@ govno::govno(/* args */)
 {}
 
 govno::~govno(){}
+
+std::ostream& operator<<(std::ostream& out, govno& g) {
+	(void)g;
+	out << "Govnishe!";
+	return out;
+}
 
 int main() {
 
@@ -117,6 +128,20 @@ int main() {
 
 	// 	std::cout << tmp << std::endl;
 	// }
+
+	{
+		ft::rb_tree<int> t(22);
+
+		t.insert_node(12);
+		t.insert_node(11);
+		t.insert_node(9);
+		t.insert_node(4);
+		t.insert_node(1);
+
+		
+
+
+	}
 
 	return 0;
 }
