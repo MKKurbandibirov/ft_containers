@@ -24,23 +24,25 @@ namespace ft
 		Node<T> *NIL;
 		std::allocator< Node<T> > alloc;
 
-		void clear_tree();
-	
-	public:
-		rb_tree();
-		// rb_tree(T value);
-		~rb_tree();
+		void clear_tree(Node<T> *x);
 
 		void rotate_right(Node<T> *x);
 		void rotate_left(Node<T> *x);
 
-		Node<T>* insert_node(const T &value);
 		void insert_fixup(Node<T> *x);
-		
-		Node<T>* find_node(const T &value);
-		void delete_node(Node<T> *z);
+
 		void delete_fixup(Node<T> *x);
 
+	public:
+		rb_tree();
+		~rb_tree();
+
+		Node<T>* insert_node(const T &value);
+		
+		Node<T>* find_node(const T &value);
+
+		void delete_node(Node<T> *z);
+		
 		Node<T>* get_root() const;
 	};
 

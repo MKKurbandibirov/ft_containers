@@ -10,23 +10,6 @@ rb_tree<T>::rb_tree() {
 	NIL->color = BLACK;
 }
 
-// template<class T>
-// rb_tree<T>::rb_tree(T value) {
-// 	NIL = alloc.allocate(1);
-// 	NIL->parent = NULL;
-// 	NIL->left = NIL;
-// 	NIL->right = NIL;
-// 	NIL->value = T();
-// 	NIL->color = BLACK;
-
-// 	root = alloc.allocate(1);
-// 	root->parent = NIL;
-// 	root->left = NIL;
-// 	root->right = NIL;
-// 	root->value = value;
-// 	root->color = BLACK;
-// }
-
 template<class T>
 void rb_tree<T>::rotate_left(Node<T>* x) {
 	Node<T> *y = x->right;
@@ -40,7 +23,7 @@ void rb_tree<T>::rotate_left(Node<T>* x) {
 		y->parent = x->parent;
 	}
 
-	if (x->parent != NULL) {
+	if (x->parent) {
 		if (x == x->parent->left) {
 			x->parent->left = y;
 		} else {
@@ -69,7 +52,7 @@ void rb_tree<T>::rotate_right(Node<T> *x) {
 		y->parent = x->parent;
 	}
 
-	if (x->parent != NULL) {
+	if (x->parent) {
 		if (x == x->parent->right) {
 			x->parent->right = y;
 		} else {
@@ -198,7 +181,7 @@ void rb_tree<T>::delete_fixup(Node<T>* x) {
 			if (w->color == RED) {
 				w->color = BLACK;
 				x->parent->color = RED;
-				rotate_left(x->parent);
+				rotate_right(x->parent);
 				w = x->parent->left;
 			}
 			if (w->right->color == BLACK && w->left->color == BLACK) {
@@ -261,19 +244,41 @@ void rb_tree<T>::delete_node(Node<T>* z) {
 	}
 
 	if (y->color == BLACK) {
-		insert_fixup(x); 
+		delete_fixup(x);
 	}
 	alloc.deallocate(y, 1);
 }
 
+template<class T>
+Node<T>* rb_tree<T>::find_node(const T& value) {
+	Node<T> *current = root;
+	while (current != NIL) {
+		if (current->value == value) {
+			return current;
+		} else if (current->value > value) {
+			current = current->left;
+		} else {
+			current = current->right;
+		}
+	}
+	return NULL;
+}
 
-// template<class T>
-// void rb_tree<T>::clear_tree() {
-	
-// }
+template<class T>
+void rb_tree<T>::clear_tree(Node<T>* x) {
+	if (x == NIL) {
+		return;
+	}
+	clear_tree(x->left);
+	clear_tree(x->right);
+	alloc.deallocate(x, 1);
+
+}
+
 template<class T>
 rb_tree<T>::~rb_tree() {
-	// std::cout << root->value << std::endl;
+	clear_tree(root);
+	alloc.deallocate(NIL, 1);
 }
 
 template<class T>

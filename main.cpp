@@ -140,13 +140,15 @@ int main() {
 		t.insert_node(8);
 		t.insert_node(7);
 		
+
+		t.delete_node(t.find_node(10));
+
 		ft::Node<int>* r = t.get_root();
 
 		std::cout << r->value << std::endl;
 		std::cout << r->right->value << std::endl;
 		std::cout << r->left->value << std::endl;
 		std::cout << r->left->left->value << std::endl;
-
 	}
 
 	return 0;
