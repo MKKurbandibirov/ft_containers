@@ -130,16 +130,22 @@ int main() {
 	// }
 
 	{
-		ft::rb_tree<int> t(22);
+		ft::rb_tree<int> t;
 
+		t.insert_node(13);
 		t.insert_node(12);
 		t.insert_node(11);
+		t.insert_node(10);
 		t.insert_node(9);
-		t.insert_node(4);
-		t.insert_node(1);
-
+		t.insert_node(8);
+		t.insert_node(7);
 		
+		ft::Node<int>* r = t.get_root();
 
+		std::cout << r->value << std::endl;
+		std::cout << r->right->value << std::endl;
+		std::cout << r->left->value << std::endl;
+		std::cout << r->left->left->value << std::endl;
 
 	}
 

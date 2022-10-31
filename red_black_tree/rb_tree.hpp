@@ -28,7 +28,7 @@ namespace ft
 	
 	public:
 		rb_tree();
-		rb_tree(T value);
+		// rb_tree(T value);
 		~rb_tree();
 
 		void rotate_right(Node<T> *x);
@@ -40,6 +40,8 @@ namespace ft
 		Node<T>* find_node(const T &value);
 		void delete_node(Node<T> *z);
 		void delete_fixup(Node<T> *x);
+
+		Node<T>* get_root() const;
 	};
 
 

@@ -10,22 +10,22 @@ rb_tree<T>::rb_tree() {
 	NIL->color = BLACK;
 }
 
-template<class T>
-rb_tree<T>::rb_tree(T value) {
-	NIL = alloc.allocate(1);
-	NIL->parent = NULL;
-	NIL->left = NULL;
-	NIL->right = NULL;
-	NIL->value = value;
-	NIL->color = BLACK;
+// template<class T>
+// rb_tree<T>::rb_tree(T value) {
+// 	NIL = alloc.allocate(1);
+// 	NIL->parent = NULL;
+// 	NIL->left = NIL;
+// 	NIL->right = NIL;
+// 	NIL->value = T();
+// 	NIL->color = BLACK;
 
-	root = alloc.allocate(1);
-	root->parent = NIL;
-	root->left = NIL;
-	root->right = NIL;
-	root->value = value;
-	root->color = BLACK;
-}
+// 	root = alloc.allocate(1);
+// 	root->parent = NIL;
+// 	root->left = NIL;
+// 	root->right = NIL;
+// 	root->value = value;
+// 	root->color = BLACK;
+// }
 
 template<class T>
 void rb_tree<T>::rotate_left(Node<T>* x) {
@@ -166,6 +166,106 @@ Node<T>* rb_tree<T>::insert_node(const T& value) {
 	return x;
 }
 
+template<class T>
+void rb_tree<T>::delete_fixup(Node<T>* x) {
+	while(x != root && x->color == BLACK) {
+		if (x == x->parent->left) {
+			Node<T> *w = x->parent->right;
+			if (w->color == RED) {
+				w->color = BLACK;
+				x->parent->color = RED;
+				rotate_left(x->parent);
+				w = x->parent->right;
+			}
+			if (w->left->color == BLACK && w->right->color == BLACK) {
+				w->color = RED;
+				x = x->parent;
+			} else {
+				if (w->right->color == BLACK) {
+					w->left->color = BLACK;
+					w->color = RED;
+					rotate_right(w);
+					w = x->parent->right;
+				}
+				w->color = x->parent->color;
+				x->parent->color = BLACK;
+				w->right->color = BLACK;
+				rotate_left(x->parent);
+				x = root;
+			}
+		} else {
+			Node<T> *w = x->parent->left;
+			if (w->color == RED) {
+				w->color = BLACK;
+				x->parent->color = RED;
+				rotate_left(x->parent);
+				w = x->parent->left;
+			}
+			if (w->right->color == BLACK && w->left->color == BLACK) {
+				w->color = RED;
+				x = x->parent;
+			} else {
+				if (w->left->color == BLACK) {
+					w->right->color = BLACK;
+					w->color = RED;
+					rotate_left(w);
+					w = x->parent->left;
+				}
+				w->color = x->parent->color;
+				x->parent->color = BLACK;
+				w->left->color = BLACK;
+				rotate_right(x->parent);
+				x = root;
+			}
+		}
+	}
+	x->color = BLACK;
+}
+
+template<class T>
+void rb_tree<T>::delete_node(Node<T>* z) {
+	Node<T> *x, *y;
+
+	if (z == NULL || z == NIL) {
+		return;
+	}
+
+	if (z->left == NIL || z->right == NIL) {
+		y = z;
+	} else {
+		y = z->right;
+		while (y->left != NIL) {
+			y = y->left;
+		}
+	}
+
+	if (y->left != NIL) {
+		x = y->left;
+	} else {
+		x = y->right;
+	}
+
+	x->parent = y->parent;
+	if (y->parent != NULL) {
+		if (y == y->parent->left) {
+			y->parent->left = x;
+		} else {
+			y->parent->right = x;
+		}
+	} else {
+		root = x;
+	}
+	
+	if (y != z) {
+		z->value = y->value;
+	}
+
+	if (y->color == BLACK) {
+		insert_fixup(x); 
+	}
+	alloc.deallocate(y, 1);
+}
+
 
 // template<class T>
 // void rb_tree<T>::clear_tree() {
@@ -173,7 +273,12 @@ Node<T>* rb_tree<T>::insert_node(const T& value) {
 // }
 template<class T>
 rb_tree<T>::~rb_tree() {
-	std::cout << root->value << std::endl;
+	// std::cout << root->value << std::endl;
+}
+
+template<class T>
+Node<T>* rb_tree<T>::get_root() const {
+	return root;
 }
 
 } // namespace ft
