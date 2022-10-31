@@ -118,5 +118,22 @@ int main() {
 	// 	std::cout << tmp << std::endl;
 	// }
 
+	{
+		ft::vector<int> v(6);
+
+		std::cout << v.size() << std::endl;
+
+		// ft::vector<int> vf(++v.begin(), v.end());
+
+		// std::cout << vf.size() << std::endl;
+
+		ft::vector<int> v2(3, 5);
+		std::cout << v2.size() << std::endl;
+
+		// v2.assign(vf.begin(), vf.end());
+		// std::cout << v2.size() << std::endl;
+
+	}
+
 	return 0;
 }

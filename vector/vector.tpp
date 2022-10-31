@@ -10,9 +10,6 @@ vector<value_type>::vector() {
 
 template<class value_type>
 vector<value_type>::vector(size_type n, const value_type& value) {
-	// if (n > max_size()) {
-	// 	throw std::length_error()
-	// }
 	this->sz = n;
 	this->cap = n;
 	this->alloc = alloc;
@@ -24,6 +21,24 @@ vector<value_type>::vector(size_type n, const value_type& value) {
 		this->arr[i] = value;
 	}	
 }
+
+// template<class value_type>
+// template<class InputIterator>
+// vector<value_type>::vector(InputIterator first, InputIterator last) {
+// 	size_type n = 0;
+// 	InputIterator tmp_f = first;
+// 	while (tmp_f != last) {
+// 		++tmp_f;
+// 		++n;
+// 	}
+// 	this->arr = alloc.allocate(n);
+// 	this->sz = n;
+// 	this->cap = n;
+// 	for (size_type i = 0; i < n; ++i) {
+// 		this->arr[i] = *first;
+// 		++first;
+// 	}
+// }
 
 template<class value_type>
 vector<value_type>::vector(const vector& other) {
@@ -80,6 +95,27 @@ void vector<value_type>::assign(size_type n, const_reference u) {
 		this->arr[i] = u;
 	}
 }
+
+// template<class value_type>
+// template<class InputIterator>
+// void vector<value_type>::assign(InputIterator first, InputIterator last) {
+// 	if (this->arr) {
+// 		this->alloc.deallocate(this->arr, this->cap);
+// 	}
+// 	size_type n = 0;
+// 	InputIterator tmp_f = first;
+// 	while (tmp_f != last) {
+// 		++tmp_f;
+// 		++n;
+// 	}
+// 	this->arr = alloc.allocate(n);
+// 	this->sz = n;
+// 	this->cap = n;
+// 	for (size_type i = 0; i < n; ++i) {
+// 		this->arr[i] = *first;
+// 		++first;
+// 	}
+// }
 
 // ------------------------ Iterators ------------------------ //
 template<class value_type>

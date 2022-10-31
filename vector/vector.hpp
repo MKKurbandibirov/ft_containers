@@ -37,13 +37,13 @@ namespace ft
 	public:
 		explicit vector();
 		explicit vector(size_type n, const value_type& value = value_type());
-		// template <class InputIterator>
-			// vector(InputIterator first, InputIterator last);
+		template <class InputIterator>
+			vector(InputIterator first, InputIterator last);
 		vector(const vector& other);
 		~vector();
 		vector &operator=(const vector& other);
-		// template <class InputIterator>
-			// void assign(InputIterator first, InputIterator last);
+		template <class InputIterator>
+			void assign(InputIterator first, InputIterator last);
 		void assign(size_type n, const_reference u);
 		allocator_type get_allocator() const;
 
