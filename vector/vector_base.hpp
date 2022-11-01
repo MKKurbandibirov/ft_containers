@@ -1,10 +1,8 @@
-#pragma once
-
 #ifndef VECTOR_BASE_HPP
 # define VECTOR_BASE_HPP
 
 # include <iostream>
-# include "../iterator_traits.hpp"
+# include "../util/iterator_traits.hpp"
 namespace ft{
 
 template<class T>

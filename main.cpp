@@ -4,12 +4,13 @@
 #include <utility>
 #include <vector>
 #include <sstream>
+#include <iomanip>
+#include <type_traits>
 
-
-#include "enable_if.hpp"
 #include "vector/vector.hpp"
 #include "stack/stack.hpp"
 #include "red_black_tree/rb_tree.hpp"
+#include "util/is_integral.hpp"
 
 
 
@@ -32,6 +33,12 @@ std::ostream& operator<<(std::ostream& out, govno& g) {
 	out << "Govnishe!";
 	return out;
 }
+
+
+
+class A {};
+ 
+enum E : int {};
 
 int main() {
 
@@ -129,6 +136,42 @@ int main() {
 	// 	std::cout << tmp << std::endl;
 	// }
 
+	// {
+	// 	ft::rb_tree<int> t;
+
+	// 	t.insert_node(13);
+	// 	t.insert_node(12);
+	// 	t.insert_node(11);
+	// 	t.insert_node(10);
+	// 	t.insert_node(9);
+	// 	t.insert_node(8);
+	// 	t.insert_node(7);
+		
+
+	// 	t.delete_node(t.find_node(10));
+
+	// 	ft::Node<int>* r = t.get_root();
+
+	// 	std::cout << r->value << std::endl;
+	// 	std::cout << r->right->value << std::endl;
+	// 	std::cout << r->left->value << std::endl;
+	// 	std::cout << r->left->left->value << std::endl;
+	
+		
+	// }
+
+	// {
+	// 	 std::cout << std::boolalpha;
+ 
+	// 	std::cout << ft::is_integral<A>::value << std::endl;
+	// 	std::cout << ft::is_integral<E>::value << std::endl;
+	// 	std::cout << ft::is_integral<float>::value << std::endl;
+	// 	std::cout << ft::is_integral<int>::value << std::endl;
+	// 	std::cout << ft::is_integral<const int>::value << std::endl;
+	// 	std::cout << ft::is_integral<bool>::value << std::endl;
+	// 	std::cout << ft::is_integral<const bool>::value << std::endl;
+	// }
+
 	{
 		ft::rb_tree<int> t;
 
@@ -141,14 +184,17 @@ int main() {
 		t.insert_node(7);
 		
 
-		t.delete_node(t.find_node(10));
+		// t.delete_node(t.find_node(10));
 
-		ft::Node<int>* r = t.get_root();
+		// ft::Node<int> *n;
 
-		std::cout << r->value << std::endl;
-		std::cout << r->right->value << std::endl;
-		std::cout << r->left->value << std::endl;
-		std::cout << r->left->left->value << std::endl;
+		ft::rb_tree<int>::RBT_iterator it(NULL, t);
+	
+		// for (int i = 0; i < 5; ++i) {
+			++it;
+			std::cout << *it << std::endl;
+		// }
+		
 	}
 
 	return 0;

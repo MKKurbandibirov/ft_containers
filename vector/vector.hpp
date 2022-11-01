@@ -10,9 +10,9 @@
 # include <limits>
 
 # include "vector_base.hpp"
-# include "../reverse_iterator.hpp"
-# include "../equal.hpp"
-# include "../lexicographical_compare.hpp"
+# include "../util/reverse_iterator.hpp"
+# include "../util/equal.hpp"
+# include "../util/lexicographical_compare.hpp"
 namespace ft
 {
 	template<class T>
