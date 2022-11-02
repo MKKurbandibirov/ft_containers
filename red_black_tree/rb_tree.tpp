@@ -2,12 +2,7 @@ namespace ft {
 
 template<class T>
 rb_tree<T>::rb_tree() {
-	NIL = alloc.allocate(1);
-	NIL->parent = NULL;
-	NIL->left = NULL;
-	NIL->right = NULL;
-	NIL->value = T();
-	NIL->color = BLACK;
+	root = NULL;
 }
 
 template<class T>
@@ -15,11 +10,11 @@ void rb_tree<T>::rotate_left(Node<T>* x) {
 	Node<T> *y = x->right;
 
 	x->right = y->left;
-	if (y->left != NIL) {
+	if (y->left != NULL) {
 		y->left->parent = x;
 	}
 
-	if (y != NIL) {
+	if (y != NULL) {
 		y->parent = x->parent;
 	}
 
@@ -34,7 +29,7 @@ void rb_tree<T>::rotate_left(Node<T>* x) {
 	}
 
 	y->left = x;
-	if (x != NIL) {
+	if (x != NULL) {
 		x->parent = y;
 	}
 }
@@ -44,11 +39,11 @@ void rb_tree<T>::rotate_right(Node<T> *x) {
 	Node<T>* y = x->left;
 
 	x->left = y->right;
-	if (y->right != NIL) {
+	if (y->right != NULL) {
 		y->right->parent = x;
 	}
 
-	if (y != NIL) {
+	if (y != NULL) {
 		y->parent = x->parent;
 	}
 
@@ -63,7 +58,7 @@ void rb_tree<T>::rotate_right(Node<T> *x) {
 	}
 
 	y->right = x;
-	if (x != NIL) {
+	if (x != NULL) {
 		x->parent = y;
 	}
 }
@@ -73,7 +68,7 @@ void rb_tree<T>::insert_fixup(Node<T> *x) {
 	while (x != root && x->parent->color == RED) {
 		if (x->parent == x->parent->parent->left) {
 			Node<T> *y = x->parent->parent->right;
-			if (y->color == RED) {
+			if (y && y->color == RED) {
 				x->parent->color = BLACK;
 				y->color = BLACK;
 				x->parent->parent->color = RED;
@@ -90,7 +85,7 @@ void rb_tree<T>::insert_fixup(Node<T> *x) {
 			} 
 		} else {
 			Node<T> *y = x->parent->parent->left;
-			if (y->color == RED) {
+			if (y && y->color == RED) {
 				x->parent->color = BLACK;
 				y->color = BLACK;
 				x->parent->parent->color = BLACK;
@@ -116,7 +111,7 @@ Node<T>* rb_tree<T>::insert_node(const T& value) {
 
 	current = root;
 	parent = NULL;
-	while (current != NIL && root != NULL) {
+	while (current != NULL && root != NULL) {
 		if (current->value == value) {
 			return current;
 		}
@@ -131,8 +126,8 @@ Node<T>* rb_tree<T>::insert_node(const T& value) {
 	x = alloc.allocate(1);
 	x->value = value;
 	x->parent = parent;
-	x->left = NIL;
-	x->right = NIL;
+	x->left = NULL;
+	x->right = NULL;
 	x->color = RED;
 
 	if (parent != NULL) {
@@ -209,20 +204,20 @@ template<class T>
 void rb_tree<T>::delete_node(Node<T>* z) {
 	Node<T> *x, *y;
 
-	if (z == NULL || z == NIL) {
+	if (z == NULL) {
 		return;
 	}
 
-	if (z->left == NIL || z->right == NIL) {
+	if (z->left == NULL || z->right == NULL) {
 		y = z;
 	} else {
 		y = z->right;
-		while (y->left != NIL) {
+		while (y->left != NULL) {
 			y = y->left;
 		}
 	}
 
-	if (y->left != NIL) {
+	if (y->left != NULL) {
 		x = y->left;
 	} else {
 		x = y->right;
@@ -252,7 +247,7 @@ void rb_tree<T>::delete_node(Node<T>* z) {
 template<class T>
 Node<T>* rb_tree<T>::find_node(const T& value) {
 	Node<T> *current = root;
-	while (current != NIL) {
+	while (current != NULL) {
 		if (current->value == value) {
 			return current;
 		} else if (current->value > value) {
@@ -266,7 +261,7 @@ Node<T>* rb_tree<T>::find_node(const T& value) {
 
 template<class T>
 void rb_tree<T>::clear_tree(Node<T>* x) {
-	if (x == NIL) {
+	if (x == NULL) {
 		return;
 	}
 	clear_tree(x->left);
@@ -277,8 +272,9 @@ void rb_tree<T>::clear_tree(Node<T>* x) {
 
 template<class T>
 rb_tree<T>::~rb_tree() {
-	clear_tree(root);
-	alloc.deallocate(NIL, 1);
+	if (root != NULL) {
+		clear_tree(root);
+	}
 }
 
 template<class T>

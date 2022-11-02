@@ -17,22 +17,45 @@ namespace ft
 		NodeColor color;
 		T value;
 
-		// Node() {
-		// 	left = NULL;
-		// 	right = NULL;
-		// 	parent = NULL;
-		// 	color = BLACK;
-		// 	value = T();
-		// }
-	};
+		Node<T>* minimum(Node<T>* x) {
+			if (x->left == NULL)
+				return x;
+			return minimum(x->left);
+		}
 
-	// template<class T>
+		Node<T>* maximum(Node<T>* x) {
+			if (x->right == NULL)
+				return x;
+			return minimum(x->right);
+		}
+
+		Node<T>* next(Node<T>* x) {
+			if (x->right != NULL)
+				return minimum(x->right);
+			Node<T> *y = x->parent;
+			while (y != NULL && x == y->right) {
+				x = y;
+				y = y->parent;
+			}
+			return y;
+		}
+
+		Node<T>* prev(Node<T>* x) {
+			if (x->left != NULL)
+				return maximum(x->left);
+			Node<T> *y = x->parent;
+			while (y != NULL && x == y->left) {
+				x = y;
+				y = y->parent;
+			}
+			return y;
+		}
+	};
 
 	template<class T>
 	class rb_tree {
 	private:
 		Node<T> *root;
-		Node<T> *NIL;
 		std::allocator< Node<T> > alloc;
 
 		void clear_tree(Node<T> *x);
@@ -41,7 +64,6 @@ namespace ft
 		void rotate_left(Node<T> *x);
 
 		void insert_fixup(Node<T> *x);
-
 		void delete_fixup(Node<T> *x);
 
 	public:
@@ -57,19 +79,19 @@ namespace ft
 		Node<T>* get_root() const;
 
 		class RBT_iterator: std::iterator<std::bidirectional_iterator_tag, T> {
-		public:
+		private:
 			Node<T>*	node;
-			rb_tree<T>	tree;
 
+		public:
 			typedef T																						value_type;
 			typedef typename std::iterator<std::bidirectional_iterator_tag, value_type>::iterator_category	iterator_category;
 			typedef typename std::iterator<std::bidirectional_iterator_tag, value_type>::difference_type	difference_type;
 			typedef typename std::iterator<std::bidirectional_iterator_tag, value_type>::pointer			pointer;
 			typedef typename std::iterator<std::bidirectional_iterator_tag, value_type>::reference			reference;
 
-			RBT_iterator(): node(NULL), tree() {}
-			RBT_iterator(Node<T>* node, rb_tree<T> tree): node(node), tree(tree) {}
-			RBT_iterator(const RBT_iterator& other): node(other.node), tree(other.tree) {}
+			RBT_iterator() {}
+			RBT_iterator(Node<T>* node): node(node) {}
+			RBT_iterator(const RBT_iterator& other): node(other.node) {}
 			virtual ~RBT_iterator() {}
 
 			RBT_iterator& operator=(const RBT_iterator& other) {
@@ -77,7 +99,6 @@ namespace ft
 					return *this;
 				}
 				node = other.node;
-				tree = other.tree;
 				return *this;
 			}
 
@@ -94,35 +115,89 @@ namespace ft
 			}
 
 			RBT_iterator& operator++(void) {
-				Node<T>* p;
-				if (node == NULL) {
-					node = tree.root;
-					// std::cout << tree.NIL;
-					while (node->left->left != NULL) {
-						node = node->left;
-					}
-				} else if (node->right != NULL) {
-					node = node->right;
-					while (node->left->left != NULL) {
-						node = node->left;
-					}
-				} else {
-					p = node->parent;
-					while (p != NULL && node == p->right) {
-						node = p;
-						p = p->parent;
-					}
-					node = p;
-				}
+				node = node->next(node);
 				return *this;
 			}
 
-			RBT_iterator& operator++(int);
-			// RBT_iterator& operator--(void);
-			// RBT_iterator& operator--(int);
-		};
-	};
+			RBT_iterator& operator++(int) {
+				RBT_iterator tmp(*this);
+				operator++();
+				return tmp;
+			}
 
+			RBT_iterator& operator--(void) {
+				node = node->prev(node);
+				return *this;
+			}
+
+			RBT_iterator& operator--(int) {
+				RBT_iterator tmp(*this);
+				operator--();
+				return tmp;
+			}
+		};
+		typedef RBT_iterator iterator;
+
+		class RBT_const_iterator: std::iterator<std::bidirectional_iterator_tag, T> {
+		private:
+			Node<T>*	node;
+
+		public:
+			typedef T																						value_type;
+			typedef typename std::iterator<std::bidirectional_iterator_tag, value_type>::iterator_category	iterator_category;
+			typedef typename std::iterator<std::bidirectional_iterator_tag, value_type>::difference_type	difference_type;
+			typedef typename std::iterator<std::bidirectional_iterator_tag, value_type>::pointer			pointer;
+			typedef typename std::iterator<std::bidirectional_iterator_tag, value_type>::reference			reference;
+
+			RBT_const_iterator() {}
+			RBT_const_iterator(Node<T>* node): node(node) {}
+			RBT_const_iterator(const RBT_const_iterator& other): node(other.node) {}
+			virtual ~RBT_const_iterator() {}
+
+			RBT_const_iterator& operator=(const RBT_const_iterator& other) {
+				if (*this == other) {
+					return *this;
+				}
+				node = other.node;
+				return *this;
+			}
+
+			bool operator==(const RBT_const_iterator& other) {
+				return node == other.node;
+			}
+
+			bool operator!=(const RBT_const_iterator& other) {
+				return node != other.node;
+			}
+
+			reference operator*() const {
+				return node->value;
+			}
+
+			RBT_const_iterator& operator++(void) {
+				node = node->next(node);
+				return *this;
+			}
+
+			RBT_const_iterator& operator++(int) {
+				RBT_const_iterator tmp(*this);
+				operator++();
+				return tmp;
+			}
+
+			RBT_const_iterator& operator--(void) {
+				node = node->prev(node);
+				return *this;
+			}
+
+			RBT_const_iterator& operator--(int) {
+				RBT_const_iterator tmp(*this);
+				operator--();
+				return tmp;
+			}
+		};
+		typedef RBT_const_iterator const_iterator;
+	};
 
 } // namespace ft
 

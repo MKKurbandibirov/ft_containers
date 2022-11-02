@@ -3,6 +3,7 @@
 #include <type_traits>
 #include <utility>
 #include <vector>
+#include <map>
 #include <sstream>
 #include <iomanip>
 #include <type_traits>
@@ -186,15 +187,25 @@ int main() {
 
 		// t.delete_node(t.find_node(10));
 
-		// ft::Node<int> *n;
+		ft::Node<int> *n = t.get_root();
 
-		ft::rb_tree<int>::RBT_iterator it(NULL, t);
+
+
+		ft::rb_tree<int>::RBT_iterator it1(n->minimum(n));
 	
-		// for (int i = 0; i < 5; ++i) {
-			++it;
-			std::cout << *it << std::endl;
-		// }
+		for (int i = 0; i < 7; ++i) {
+			std::cout << *it1 << std::endl;
+			++it1;
+		}
+
+		ft::rb_tree<int>::RBT_iterator it2(n->maximum(n));
+	
+		for (int i = 6; i >= 0; --i) {
+			std::cout << *it2 << std::endl;
+			--it2;
+		}
 		
+		// std::map<int, int>::iterator
 	}
 
 	return 0;
