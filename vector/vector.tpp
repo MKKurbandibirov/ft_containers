@@ -98,6 +98,27 @@ void vector<value_type>::assign(size_type n, const_reference u) {
 	}
 }
 
+template<class value_type>
+template<class InputIterator>
+void vector<value_type>::assign(InputIterator first, InputIterator last,
+	typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type*) {
+	if (first > last) {
+		throw std::length_error("vector");
+	}
+	if (this->arr) {
+		this->alloc.deallocate(this->arr, this->cap);
+	}
+	InputIterator it_tmp = first;
+	difference_type n = ft::distance(it_tmp, last);
+	this->arr = this->alloc.allocate(n);
+	this->sz = n;
+	this->cap = n;
+	for (size_type i = 0; first != last; ++i) {
+		this->arr[i] = *first;
+		++first;
+	}
+}
+
 // ------------------------ Iterators ------------------------ //
 template<class value_type>
 typename vector<value_type>::reverse_iterator
@@ -114,14 +135,12 @@ vector<value_type>::rbegin() const {
 template<class value_type>
 typename vector<value_type>::reverse_iterator
 vector<value_type>::rend() {
-	// value_type tmp = this->begin();
 	return reverse_iterator(this->begin());
 }
 
 template<class value_type>
 typename vector<value_type>::const_reverse_iterator
 vector<value_type>::rend() const {
-	// value_type tmp = this->begin();
 	return reverse_iterator(this->begin());
 }
 
@@ -307,6 +326,41 @@ void vector<value_type>::insert(iterator pos, size_type n, const_reference x) {
 			tmp = temp;
 		}
 		++ind;
+	}
+}
+
+
+// Remake this
+template<class value_type>
+template<class InputIterator>
+void vector<value_type>::insert(iterator pos, InputIterator first, InputIterator last,
+	typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type*) {
+	size_type ind = pos.base() - this->arr;
+	iterator it_end = this->end();
+	InputIterator it_tmp = first;
+	difference_type n = ft::distance(it_tmp, last);
+	if (this->sz + n > this->cap) {
+		reserve(this->sz + n);
+	}
+	if (pos == it_end) {
+		for (difference_type i = 0; i < n; ++i) {
+			this->arr[this->sz] = *first;
+			++this->sz;
+			++first;
+		}
+		return;
+	}
+	for (difference_type i = 0; i < n; ++i) {
+		++this->sz;
+		value_type tmp = this->arr[ind];
+		this->arr[ind] = *first;
+		for (size_type i = ind + 1; i < this->sz; ++i) {
+			value_type temp = this->arr[i];
+			this->arr[i] = tmp;
+			tmp = temp;
+		}
+		++ind;
+		++first;
 	}
 }
 

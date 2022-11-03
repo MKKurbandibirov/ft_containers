@@ -47,8 +47,9 @@ namespace ft
 		vector(const vector& other);
 		~vector();
 		vector &operator=(const vector& other);
-		// template <class InputIterator>
-			// void assign(InputIterator first, InputIterator last);
+		template <class InputIterator>
+			void assign(InputIterator first, InputIterator last,
+				typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = NULL);
 		void assign(size_type n, const_reference u);
 		allocator_type get_allocator() const;
 
@@ -81,9 +82,9 @@ namespace ft
 		void pop_back();
 		iterator insert(iterator position, const_reference x);
 		void insert(iterator position, size_type n, const_reference x);
-		// template <class InputIterator>
-		// 	void insert(iterator position,
-		// 		InputIterator first, InputIterator last);
+		template <class InputIterator>
+			void insert(iterator position, InputIterator first, InputIterator last,
+				typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = NULL);
 		iterator erase(iterator position);
 		iterator erase(iterator first, iterator last);
 		void swap(vector<value_type>&);

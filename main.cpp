@@ -213,6 +213,14 @@ int main() {
 		ft::vector<int> ft_v1(ft_v.begin(), ft_v.end());
 		
 		std::cout << ft_v1[0] << std::endl;
+
+		std::vector<int> v(2, 2);
+		ft::vector<int> ft_v2(v.begin(), v.end());
+		ft::vector<int> as;
+		as.assign(ft_v1.begin(), ft_v1.end());
+		as.insert(as.begin(), as.begin(), as.end());
+		
+		std::cout << as[0] << std::endl;
 	}
 
 	return 0;
