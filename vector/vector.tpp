@@ -10,9 +10,9 @@ vector<value_type>::vector() {
 
 template<class value_type>
 vector<value_type>::vector(size_type n, const value_type& value) {
-	// if (n > max_size()) {
-	// 	throw std::length_error()
-	// }
+	if (n > max_size()) {
+		throw std::length_error("vector");
+	}
 	this->sz = n;
 	this->cap = n;
 	this->alloc = alloc;
@@ -53,6 +53,22 @@ vector<value_type> &vector<value_type>::operator=(const vector& other) {
 		this->arr[i] = other.arr[i];
 	}
 	return *this;
+}
+
+template<class value_type>
+template<class InputIterator>
+vector<value_type>::vector(InputIterator first, InputIterator last, typename ft::enable_if<ft::is_iter<InputIterator>::value, InputIterator>::type* = NULL) {
+	// if (first > last) {
+	// 	throw std::length_error("vector")
+	// }
+	difference_type n = ft::distance(first, last);
+	this->arr = this->alloc.allocate(n);
+	this->sz = n;
+	this->cap = n;
+	for (size_type i = 0; first != last; ++i) {
+		this->arr[i] = *first;
+		++first;
+	}
 }
 
 template<class value_type>

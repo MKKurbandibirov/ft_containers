@@ -13,6 +13,12 @@
 # include "../util/reverse_iterator.hpp"
 # include "../util/equal.hpp"
 # include "../util/lexicographical_compare.hpp"
+# include "../util/enable_if.hpp"
+# include "../util/is_iter.hpp"
+# include "../util/distance.hpp"
+# include "../util/iterator_traits.hpp"
+# include "../util/distance.hpp"
+
 namespace ft
 {
 	template<class T>
@@ -26,6 +32,7 @@ namespace ft
 		typedef typename vector_base<T>::const_reference const_reference;
 		typedef typename vector_base<T>::iterator iterator;
 		typedef typename vector_base<T>::const_iterator const_iterator;
+		typedef typename ft::iterator_traits<iterator>::difference_type difference_type;
 		typedef std::allocator<T> allocator_type;
 		typedef ft::ReverseIterator<iterator> reverse_iterator;
 		typedef ft::ReverseIterator<const_iterator> const_reverse_iterator;
@@ -37,8 +44,8 @@ namespace ft
 	public:
 		explicit vector();
 		explicit vector(size_type n, const value_type& value = value_type());
-		// template <class InputIterator>
-			// vector(InputIterator first, InputIterator last);
+		template <class InputIterator>
+			vector(InputIterator first, InputIterator last, typename ft::enable_if<ft::is_iter<InputIterator>::value, InputIterator>::type* = NULL);
 		vector(const vector& other);
 		~vector();
 		vector &operator=(const vector& other);

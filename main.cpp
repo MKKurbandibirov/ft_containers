@@ -173,39 +173,45 @@ int main() {
 	// 	std::cout << ft::is_integral<const bool>::value << std::endl;
 	// }
 
+	// {
+	// 	ft::rb_tree<int> t;
+
+	// 	t.insert_node(13);
+	// 	t.insert_node(12);
+	// 	t.insert_node(11);
+	// 	t.insert_node(10);
+	// 	t.insert_node(9);
+	// 	t.insert_node(8);
+	// 	t.insert_node(7);
+		
+
+	// 	// t.delete_node(t.find_node(10));
+
+	// 	ft::Node<int> *n = t.get_root();
+
+
+
+	// 	ft::rb_tree<int>::RBT_iterator it1(n->minimum(n));
+	
+	// 	for (int i = 0; i < 7; ++i) {
+	// 		std::cout << *it1 << std::endl;
+	// 		++it1;
+	// 	}
+
+	// 	ft::rb_tree<int>::RBT_iterator it2(n->maximum(n));
+	
+	// 	for (int i = 6; i >= 0; --i) {
+	// 		std::cout << *it2 << std::endl;
+	// 		--it2;
+	// 	}
+		
+	// 	// std::map<int, int>::iterator
+	// }
+
 	{
-		ft::rb_tree<int> t;
-
-		t.insert_node(13);
-		t.insert_node(12);
-		t.insert_node(11);
-		t.insert_node(10);
-		t.insert_node(9);
-		t.insert_node(8);
-		t.insert_node(7);
+		ft::vector<int> ft_v(5, 5);
+		ft::vector<int> ft_v1(ft_v.begin(), ft_v.end());
 		
-
-		// t.delete_node(t.find_node(10));
-
-		ft::Node<int> *n = t.get_root();
-
-
-
-		ft::rb_tree<int>::RBT_iterator it1(n->minimum(n));
-	
-		for (int i = 0; i < 7; ++i) {
-			std::cout << *it1 << std::endl;
-			++it1;
-		}
-
-		ft::rb_tree<int>::RBT_iterator it2(n->maximum(n));
-	
-		for (int i = 6; i >= 0; --i) {
-			std::cout << *it2 << std::endl;
-			--it2;
-		}
-		
-		// std::map<int, int>::iterator
 	}
 
 	return 0;
