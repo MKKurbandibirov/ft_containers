@@ -57,10 +57,11 @@ vector<value_type> &vector<value_type>::operator=(const vector& other) {
 
 template<class value_type>
 template<class InputIterator>
-vector<value_type>::vector(InputIterator first, InputIterator last, typename ft::enable_if<ft::is_iter<InputIterator>::value, InputIterator>::type* = NULL) {
-	// if (first > last) {
-	// 	throw std::length_error("vector")
-	// }
+vector<value_type>::vector(InputIterator first, InputIterator last,
+	typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type*) {
+	if (first > last) {
+		throw std::length_error("vector");
+	}
 	difference_type n = ft::distance(first, last);
 	this->arr = this->alloc.allocate(n);
 	this->sz = n;

@@ -212,6 +212,7 @@ int main() {
 		ft::vector<int> ft_v(5, 5);
 		ft::vector<int> ft_v1(ft_v.begin(), ft_v.end());
 		
+		std::cout << ft_v1[0] << std::endl;
 	}
 
 	return 0;

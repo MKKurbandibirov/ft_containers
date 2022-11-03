@@ -16,7 +16,7 @@ namespace ft
 
 	template<typename T> struct is_iter<typename std::iterator<std::random_access_iterator_tag, T*> >: public true_value {};
 	template<typename T> struct is_iter<typename ft::ReverseIterator<T*> >: public true_value {};
-	template<typename T> struct is_iter<__gnu_cxx::__normal_iterator<T*, std::vector<T> > >: public true_value {};
+	// template<typename T> struct is_iter<__gnu_cxx::__normal_iterator<T*, std::vector<T> > >: public true_value {};
 
 } // namespace ft
 

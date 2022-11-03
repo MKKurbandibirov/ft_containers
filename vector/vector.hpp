@@ -1,11 +1,8 @@
-#pragma once
-
 #ifndef VECTOR_HPP
 # define VECTOR_HPP
 
 # include <iostream>
 # include <memory>
-# include <iterator>
 # include <stdexcept>
 # include <limits>
 
@@ -14,10 +11,10 @@
 # include "../util/equal.hpp"
 # include "../util/lexicographical_compare.hpp"
 # include "../util/enable_if.hpp"
-# include "../util/is_iter.hpp"
 # include "../util/distance.hpp"
 # include "../util/iterator_traits.hpp"
 # include "../util/distance.hpp"
+# include "../util/is_integral.hpp"
 
 namespace ft
 {
@@ -45,7 +42,8 @@ namespace ft
 		explicit vector();
 		explicit vector(size_type n, const value_type& value = value_type());
 		template <class InputIterator>
-			vector(InputIterator first, InputIterator last, typename ft::enable_if<ft::is_iter<InputIterator>::value, InputIterator>::type* = NULL);
+			vector(InputIterator first, InputIterator last,
+				typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = NULL);
 		vector(const vector& other);
 		~vector();
 		vector &operator=(const vector& other);
@@ -135,7 +133,6 @@ namespace ft
 		return lexicographical_compare(x.begin(), x.end(), y.begin(), y.end());
 	}
 
-	// specialized algorithms:
 	template <class T>
 	void swap(vector<T>& x, vector<T>& y) {
 		x.swap(y);

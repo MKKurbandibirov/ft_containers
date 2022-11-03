@@ -20,7 +20,7 @@ public:
 	typedef T& reference;
 	typedef const T& const_reference;
 
-	class Const_Iterator: std::iterator<std::random_access_iterator_tag, T> {
+	class Const_Iterator {
 	private:
 		pointer curr;
 	public:
@@ -48,9 +48,8 @@ public:
 		bool operator!=(const Const_Iterator& other) const;
 		
 		pointer base();
-		// difference_type distance();
 	};
-	class Iterator: std::iterator<std::random_access_iterator_tag, T> {
+	class Iterator {
 	private:
 		pointer curr;
 	public:
@@ -76,10 +75,11 @@ public:
 		reference operator*();
 		bool operator==(const Iterator& other) const;
 		bool operator!=(const Iterator& other) const;
-		Iterator& operator-(const Iterator& other);
+		bool operator>(const Iterator& other) const;
+		bool operator<(const Iterator& other) const;
+		// Iterator& operator-(const Iterator& other);
 
 		pointer base();
-		// difference_type distance(const Iterator& first, const Iterator& last);
 	};
 	typedef Iterator iterator;
 	typedef Const_Iterator const_iterator;
