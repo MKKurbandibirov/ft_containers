@@ -18,13 +18,13 @@ namespace ft
 		T value;
 
 		Node<T>* minimum(Node<T>* x) {
-			if (x->left == NULL)
+			if (x == NULL || x->left == NULL)
 				return x;
 			return minimum(x->left);
 		}
 
 		Node<T>* maximum(Node<T>* x) {
-			if (x->right == NULL)
+			if (x == NULL || x->right == NULL)
 				return x;
 			return maximum(x->right);
 		}
@@ -52,10 +52,27 @@ namespace ft
 		}
 	};
 
+	// template<class T>
+	// bool operator==(const Node<T>& x, const Node<T>& y) {
+	// 	return x.
+	// }
+
+	// template<class T>
+	// struct rb_tree_header {
+	// 	Node<T>* header;
+	// 	std::size_t node_count;
+
+	// 	rb_tree_header() {
+	// 		header->color = RED;
+	// 		header->left = NULL;
+	// 		header->right = NULL;
+	// 		header->parent = NULL;
+	// 	}
+	// };
+
 	template<class T>
 	class rb_tree {
 	private:
-		Node<T> *root;
 		std::allocator< Node<T> > alloc;
 
 		void clear_tree(Node<T> *x);
@@ -67,6 +84,9 @@ namespace ft
 		void delete_fixup(Node<T> *x);
 
 	public:
+		Node<T> *root;
+		// rb_tree_header header;
+
 		rb_tree();
 		~rb_tree();
 
@@ -81,6 +101,15 @@ namespace ft
 		class RBT_iterator: std::iterator<std::bidirectional_iterator_tag, T> {
 		private:
 			Node<T>*	node;
+			Node<T>*	root;
+
+			Node<T>* get_root(Node<T>* node) {
+				Node<T>* curr = node;
+				while (curr->parent != NULL) {
+					curr = curr->parent;
+				}
+				return curr;
+			}
 
 		public:
 			typedef T																						value_type;
@@ -90,7 +119,7 @@ namespace ft
 			typedef typename std::iterator<std::bidirectional_iterator_tag, value_type>::reference			reference;
 
 			RBT_iterator() {}
-			RBT_iterator(Node<T>* node): node(node) {}
+			RBT_iterator(Node<T>* node): node(node), root(get_root(node)) {}
 			RBT_iterator(const RBT_iterator& other): node(other.node) {}
 			virtual ~RBT_iterator() {}
 
@@ -115,7 +144,11 @@ namespace ft
 			}
 
 			RBT_iterator& operator++(void) {
-				node = node->next(node);
+				if (node->value == node->maximum(root)->value) {
+					node = NULL;
+				} else {
+					node = node->next(node);
+				}
 				return *this;
 			}
 
@@ -126,7 +159,11 @@ namespace ft
 			}
 
 			RBT_iterator& operator--(void) {
-				node = node->prev(node);
+				if (node == NULL) {
+					node = node->maximum(root);
+				} else {
+					node = node->prev(node);
+				}
 				return *this;
 			}
 

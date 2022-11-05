@@ -209,24 +209,43 @@ int main() {
 	// 	// std::map<int, int>::iterator
 	// }
 
-	{
-		ft::vector<int> ft_v(5, 5);
-		ft::vector<int> ft_v1(ft_v.begin(), ft_v.end());
-		
-		std::cout << ft_v1[0] << std::endl;
-
-		std::vector<int> v(2, 2);
-		ft::vector<int> ft_v2(v.begin(), v.end());
-		ft::vector<int> as;
-		as.assign(ft_v1.begin(), ft_v1.end());
-		as.insert(as.begin(), ft_v2.begin(), ft_v2.end());
-		
-		std::cout << as[3] << std::endl;
-	}
-
 	// {
-	// 	ft::map<int, std::string> m;
+	// 	ft::vector<int> ft_v(5, 5);
+	// 	ft::vector<int> ft_v1(ft_v.begin(), ft_v.end());
+		
+	// 	std::cout << ft_v1[0] << std::endl;
+
+	// 	std::vector<int> v(2, 2);
+	// 	ft::vector<int> ft_v2(v.begin(), v.end());
+	// 	ft::vector<int> as;
+	// 	as.assign(ft_v1.begin(), ft_v1.end());
+	// 	as.insert(as.begin(), ft_v2.begin(), ft_v2.end());
+		
+	// 	std::cout << as[3] << std::endl;
 	// }
+
+	{
+		ft::map<int, std::string> m;
+		ft::pair<int, std::string> elem2(2, "Simon");
+		m.insert(elem2);
+		ft::pair<int, std::string> elem1(1, "John");
+		m.insert(elem1);
+		ft::pair<int, std::string> elem3(3, "Jack");
+		m.insert(elem3);
+		ft::map<int, std::string>::iterator it_b = m.begin();
+		
+		ft::map<int, std::string>::iterator it_e = m.end();
+		while (it_b != it_e) {
+			std::cout << (*it_b).first << std::endl;
+			++it_b;
+		}
+		// Cool: std::cout << (*--it_e).first << std::endl;
+
+		std::map<int, std::string> mm;
+		mm.insert(std::make_pair(1, "jdjdjd"));
+		mm.insert(std::make_pair(2, "jdjdjd"));
+		std::cout << (*--mm.end()).first << std::endl;
+	}
 
 	return 0;
 }
