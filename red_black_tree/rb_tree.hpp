@@ -26,7 +26,7 @@ namespace ft
 		Node<T>* maximum(Node<T>* x) {
 			if (x->right == NULL)
 				return x;
-			return minimum(x->right);
+			return maximum(x->right);
 		}
 
 		Node<T>* next(Node<T>* x) {

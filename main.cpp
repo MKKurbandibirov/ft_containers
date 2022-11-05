@@ -12,6 +12,7 @@
 #include "stack/stack.hpp"
 #include "red_black_tree/rb_tree.hpp"
 #include "util/is_integral.hpp"
+#include "map/map.hpp"
 
 
 
@@ -218,10 +219,14 @@ int main() {
 		ft::vector<int> ft_v2(v.begin(), v.end());
 		ft::vector<int> as;
 		as.assign(ft_v1.begin(), ft_v1.end());
-		as.insert(as.begin(), as.begin(), as.end());
+		as.insert(as.begin(), ft_v2.begin(), ft_v2.end());
 		
-		std::cout << as[0] << std::endl;
+		std::cout << as[3] << std::endl;
 	}
+
+	// {
+	// 	ft::map<int, std::string> m;
+	// }
 
 	return 0;
 }

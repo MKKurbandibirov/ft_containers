@@ -329,8 +329,6 @@ void vector<value_type>::insert(iterator pos, size_type n, const_reference x) {
 	}
 }
 
-
-// Remake this
 template<class value_type>
 template<class InputIterator>
 void vector<value_type>::insert(iterator pos, InputIterator first, InputIterator last,
