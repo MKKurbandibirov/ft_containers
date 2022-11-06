@@ -48,9 +48,9 @@ namespace ft
     // };
 
 	explicit map();
-	// template <class InputIterator>
-	// 	map(InputIterator first, InputIterator last,
-	// 		typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = NULL);
+	template <class InputIterator>
+		map(InputIterator first, InputIterator last,
+			typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = NULL);
 	map(const map<Key,T>& other);
 	~map();
 	map<Key,T>& operator=(const map<Key,T>& other);
@@ -76,11 +76,12 @@ namespace ft
 	// ------------ Modifiers ------------ //
 	pair<iterator, bool> insert(const value_type& x);
 	iterator insert(iterator position, const value_type& x);
-	// template <class InputIterator>
-		// void insert(InputIterator first, InputIterator last);
-	// void erase(iterator position);
+	template <class InputIterator>
+		void insert(InputIterator first, InputIterator last,
+			typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = NULL);
+	void erase(iterator position);
 	// size_type erase(const key_type& x);
-	// void erase(iterator first, iterator last);
+	void erase(iterator first, iterator last);
 	// void swap(map<Key,T>&);
 	void clear();
 

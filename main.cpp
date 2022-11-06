@@ -230,19 +230,32 @@ int main() {
 
 		ft::map<int, std::string> m3 = m2;
 
+		m3.erase(m3.begin(), m3.end());
 		// m3.erase(m3.begin());
+		// m3.erase(m3.begin());
+		std::cout << std::boolalpha << m3.empty() << std::endl;
 
-		ft::map<int, std::string>::iterator it_b = m3.begin();
-		ft::map<int, std::string>::iterator it_e = m3.end();
+		// ft::map<int, std::string>::iterator it_b = m3.begin();
+		// ft::map<int, std::string>::iterator it_e = m3.end();
+		// while (it_b != it_e) {
+		// 	std::cout << (*it_b).first << std::endl;
+		// 	++it_b;
+		// }
+		// std::cout << (*--m.end()).first << std::endl;
+
+		std::cout << m3.size() << std::endl;
+		std::cout << m3.max_size() << std::endl;
+
+		std::map<int, std::string> mm;
+		mm.insert(std::make_pair<int, std::string>(11, "ahaha"));
+		mm.insert(std::make_pair<int, std::string>(12, "hahah"));
+		ft::map<int, std::string> m5(mm.begin(), mm.end());
+		ft::map<int, std::string>::iterator it_b = m5.begin();
+		ft::map<int, std::string>::iterator it_e = m5.end();
 		while (it_b != it_e) {
 			std::cout << (*it_b).first << std::endl;
 			++it_b;
 		}
-		std::cout << (*--m.end()).first << std::endl;
-
-		std::cout << std::boolalpha << m2.empty() << std::endl;
-		std::cout << m2.size() << std::endl;
-		std::cout << m2.max_size() << std::endl;
 	}
 
 	return 0;

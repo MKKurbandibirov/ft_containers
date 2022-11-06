@@ -19,13 +19,13 @@ map<key_type, mapped_type>::map(const map& other) {
 // template<class InputIterator>
 // map<key_type, mapped_type>::map(InputIterator first, InputIterator last,
 // 	typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type*) {
-// 	if (first > last) {
-// 		throw std::length_error("map");
-// 	}
-// 	while (first != last) {
-// 		insert(*first);
-// 		++first;
-// 	}
+// 	// if (first > last) {
+// 	// 	throw std::length_error("map");
+// 	// }
+// 	// while (first != last) {
+// 		insert(first, last);
+// 		// ++first;
+// 	// }
 // }
 
 template<class key_type, class mapped_type>
@@ -112,12 +112,41 @@ map<key_type, mapped_type>::insert(iterator position, const value_type& value) {
 	return iterator(insert(value).first, tree.root, tree.header);
 }
 
-
-
 // template<class key_type, class mapped_type>
-// void map<key_type, mapped_type>::erase(iterator position) {
-// 	tree.delete_node(tree.find_node(*position));
+// template<class InputIterator>
+// void map<key_type, mapped_type>::insert(InputIterator first, InputIterator last,
+// 	typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type*) {
+// 	difference_type n = ft::distance(first, last);
+// 	while (n--) {
+// 		insert(*(first++));
+// 	}
 // }
+
+template<class key_type, class mapped_type>
+void map<key_type, mapped_type>::erase(iterator position) {
+	if (empty()) {
+		return;
+	}
+	tree.delete_node(tree.find_node(*position));
+}
+
+template<class key_type, class mapped_type>
+void map<key_type, mapped_type>::erase(iterator first, iterator last) {
+	if (empty()) {
+		return;
+	}
+	difference_type n = ft::distance(first, last);
+	allocator_type allocator;
+	value_type* arr = allocator.allocate(n);
+	for (int i = 0; i < n; ++i) {
+		arr[i] = *first;
+		++first;
+	}
+	for (int i = 0; i < n; ++i) {
+		tree.delete_node(tree.find_node(arr[i]));
+	}
+	allocator.deallocate(arr, n);
+}
 
 
 } // namespace ft
