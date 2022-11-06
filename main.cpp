@@ -185,28 +185,21 @@ int main() {
 	// 	t.insert_node(8);
 	// 	t.insert_node(7);
 		
+	// 	t.delete_node(t.find_node(10));
 
-	// 	// t.delete_node(t.find_node(10));
-
-	// 	ft::Node<int> *n = t.get_root();
-
-
-
-	// 	ft::rb_tree<int>::RBT_iterator it1(n->minimum(n));
+	// 	ft::rb_tree<int>::RBT_iterator it1(t.minimum(t.root), t.root, t.header);
 	
-	// 	for (int i = 0; i < 7; ++i) {
+	// 	for (int i = 0; i < 6; ++i) {
 	// 		std::cout << *it1 << std::endl;
 	// 		++it1;
 	// 	}
 
-	// 	ft::rb_tree<int>::RBT_iterator it2(n->maximum(n));
+	// 	ft::rb_tree<int>::RBT_iterator it2(t.maximum(t.root), t.root, t.header);
 	
-	// 	for (int i = 6; i >= 0; --i) {
+	// 	for (int i = 0; i < 6; ++i) {
 	// 		std::cout << *it2 << std::endl;
 	// 		--it2;
 	// 	}
-		
-	// 	// std::map<int, int>::iterator
 	// }
 
 	// {
@@ -232,19 +225,24 @@ int main() {
 		m.insert(elem1);
 		ft::pair<int, std::string> elem3(3, "Jack");
 		m.insert(elem3);
-		ft::map<int, std::string>::iterator it_b = m.begin();
-		
-		ft::map<int, std::string>::iterator it_e = m.end();
+
+		ft::map<int, std::string> m2(m);
+
+		ft::map<int, std::string> m3 = m2;
+
+		// m3.erase(m3.begin());
+
+		ft::map<int, std::string>::iterator it_b = m3.begin();
+		ft::map<int, std::string>::iterator it_e = m3.end();
 		while (it_b != it_e) {
 			std::cout << (*it_b).first << std::endl;
 			++it_b;
 		}
-		// Cool: std::cout << (*--it_e).first << std::endl;
+		std::cout << (*--m.end()).first << std::endl;
 
-		std::map<int, std::string> mm;
-		mm.insert(std::make_pair(1, "jdjdjd"));
-		mm.insert(std::make_pair(2, "jdjdjd"));
-		std::cout << (*--mm.end()).first << std::endl;
+		std::cout << std::boolalpha << m2.empty() << std::endl;
+		std::cout << m2.size() << std::endl;
+		std::cout << m2.max_size() << std::endl;
 	}
 
 	return 0;
