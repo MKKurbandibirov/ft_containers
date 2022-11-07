@@ -15,6 +15,7 @@ map<key_type, mapped_type>::map(const map& other) {
 	tree.header = other.tree.header;
 }
 
+// Dont work!
 // template<class key_type, class mapped_type>
 // template<class InputIterator>
 // map<key_type, mapped_type>::map(InputIterator first, InputIterator last,
@@ -22,10 +23,7 @@ map<key_type, mapped_type>::map(const map& other) {
 // 	// if (first > last) {
 // 	// 	throw std::length_error("map");
 // 	// }
-// 	// while (first != last) {
-// 		insert(first, last);
-// 		// ++first;
-// 	// }
+// 	insert(first, last);
 // }
 
 template<class key_type, class mapped_type>
@@ -71,6 +69,30 @@ map<key_type, mapped_type>::end() const {
 	return const_iterator(tree.header.header, tree.root, tree.header);
 }
 
+template<class key_type, class mapped_type>
+typename map<key_type, mapped_type>::reverse_iterator
+map<key_type, mapped_type>::rbegin() {
+	return reverse_iterator(end());
+}
+
+template<class key_type, class mapped_type>
+typename map<key_type, mapped_type>::const_reverse_iterator
+map<key_type, mapped_type>::rbegin() const {
+	return const_reverse_iterator(end());
+}
+
+template<class key_type, class mapped_type>
+typename map<key_type, mapped_type>::reverse_iterator
+map<key_type, mapped_type>::rend() {
+	return reverse_iterator(begin());
+}
+
+template<class key_type, class mapped_type>
+typename map<key_type, mapped_type>::const_reverse_iterator
+map<key_type, mapped_type>::rend() const {
+	return const_reverse_iterator(begin());
+}
+
 // ------------- Capacity ------------- //
 template<class key_type, class mapped_type>
 bool map<key_type, mapped_type>::empty() const {
@@ -90,6 +112,13 @@ template<class key_type, class mapped_type>
 typename map<key_type, mapped_type>::size_type
 map<key_type, mapped_type>::max_size() const {
 	return tree.alloc.max_size();
+}
+
+// --------- Element Access --------- //
+template<class key_type, class mapped_type>
+typename map<key_type, mapped_type>::value_type&
+map<key_type, mapped_type>::operator[](const key_type& x) {
+	return *find(x);
 }
 
 // ------------ Modifiers ------------ //
@@ -112,13 +141,15 @@ map<key_type, mapped_type>::insert(iterator position, const value_type& value) {
 	return iterator(insert(value).first, tree.root, tree.header);
 }
 
+// Dont work!
 // template<class key_type, class mapped_type>
 // template<class InputIterator>
 // void map<key_type, mapped_type>::insert(InputIterator first, InputIterator last,
 // 	typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type*) {
 // 	difference_type n = ft::distance(first, last);
 // 	while (n--) {
-// 		insert(*(first++));
+// 		insert(*first);
+// 		++first;
 // 	}
 // }
 
@@ -147,6 +178,56 @@ void map<key_type, mapped_type>::erase(iterator first, iterator last) {
 	}
 	allocator.deallocate(arr, n);
 }
+
+template<class key_type, class mapped_type>
+typename map<key_type, mapped_type>::size_type
+map<key_type, mapped_type>::erase(const key_type& x) {
+	iterator it = find(x);
+	if (it == end()) {
+		return 0;
+	}
+	erase(it);
+	return 1;
+}
+
+template<class key_type, class mapped_type>
+void map<key_type, mapped_type>::swap(map<key_type, mapped_type>& other) {
+	tree.swap(other.tree);
+}
+
+
+
+// ----------- Map Operations ----------- //
+template<class key_type, class mapped_type>
+typename map<key_type, mapped_type>::iterator
+map<key_type, mapped_type>::find(const key_type& val) {
+	Node<value_type>* node = tree.find_node_by_key(ft::make_pare(val, mapped_type()));
+	if (node == NULL) {
+		return end();
+	}
+	return iterator(node, tree.root, tree.header);
+}
+
+template<class key_type, class mapped_type>
+typename map<key_type, mapped_type>::const_iterator
+map<key_type, mapped_type>::find(const key_type& val) const {
+	Node<value_type>* node = tree.find_node_by_key(ft::make_pare(val, mapped_type()));
+	if (node == NULL) {
+		return end();
+	}
+	return const_iterator(node, tree.root, tree.header);
+}
+
+template<class key_type, class mapped_type>
+typename map<key_type, mapped_type>::size_type
+map<key_type, mapped_type>::count(const key_type& val) const {
+	Node<value_type>* node = tree.find_node_by_key(ft::make_pare(val, mapped_type()));
+	if (node == NULL) {
+		return 0;
+	}
+	return 1;
+}
+
 
 
 } // namespace ft

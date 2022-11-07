@@ -48,9 +48,9 @@ namespace ft
     // };
 
 	explicit map();
-	template <class InputIterator>
-		map(InputIterator first, InputIterator last,
-			typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = NULL);
+	// template <class InputIterator>
+	// 	map(InputIterator first, InputIterator last,
+	// 		typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = NULL);
 	map(const map<Key,T>& other);
 	~map();
 	map<Key,T>& operator=(const map<Key,T>& other);
@@ -60,10 +60,10 @@ namespace ft
 	const_iterator begin() const;
 	iterator end();
 	const_iterator end() const;
-	// reverse_iterator rbegin();
-	// const_reverse_iterator rbegin() const;
-	// reverse_iterator rend();
-	// const_reverse_iterator rend() const;
+	reverse_iterator rbegin();
+	const_reverse_iterator rbegin() const;
+	reverse_iterator rend();
+	const_reverse_iterator rend() const;
 
 	// ------------- Capacity ------------- //
 	bool empty() const;
@@ -71,28 +71,28 @@ namespace ft
 	size_type max_size() const;
 
 	// --------- Element Access --------- //
-	T& operator[](const key_type& x);
+	value_type& operator[](const key_type& x);
 	
 	// ------------ Modifiers ------------ //
 	pair<iterator, bool> insert(const value_type& x);
 	iterator insert(iterator position, const value_type& x);
-	template <class InputIterator>
-		void insert(InputIterator first, InputIterator last,
-			typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = NULL);
+	// template <class InputIterator>
+	// 	void insert(InputIterator first, InputIterator last,
+	// 		typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = NULL);
 	void erase(iterator position);
-	// size_type erase(const key_type& x);
+	size_type erase(const key_type& x);
 	void erase(iterator first, iterator last);
-	// void swap(map<Key,T>&);
+	void swap(map<Key,T>&);
 	void clear();
 
 	// // observers:
 	// key_compare key_comp() const;
 	// value_compare value_comp() const;
 
-	// // map operations:
-	// iterator find(const key_type& x);
-	// const_iterator find(const key_type& x) const;
-	// size_type count(const key_type& x) const;
+	// ----------- Map Operations ----------- //
+	iterator find(const key_type& x);
+	const_iterator find(const key_type& x) const;
+	size_type count(const key_type& x) const;
 	// iterator lower_bound(const key_type& x);
 	// const_iterator lower_bound(const key_type& x) const;
 	// iterator upper_bound(const key_type& x);
@@ -102,29 +102,29 @@ namespace ft
 
 	};
 
-	// template <class Key, class T, class Compare, class Allocator>
-	// bool operator==(const map<Key,T,Compare,Allocator>& x,
-	// const map<Key,T,Compare,Allocator>& y);
-	// template <class Key, class T, class Compare, class Allocator>
-	// bool operator< (const map<Key,T,Compare,Allocator>& x,
-	// const map<Key,T,Compare,Allocator>& y);
-	// template <class Key, class T, class Compare, class Allocator>
-	// bool operator!=(const map<Key,T,Compare,Allocator>& x,
-	// const map<Key,T,Compare,Allocator>& y);
-	// template <class Key, class T, class Compare, class Allocator>
-	// bool operator> (const map<Key,T,Compare,Allocator>& x,
-	// const map<Key,T,Compare,Allocator>& y);
-	// template <class Key, class T, class Compare, class Allocator>
-	// bool operator>=(const map<Key,T,Compare,Allocator>& x,
-	// const map<Key,T,Compare,Allocator>& y);
-	// template <class Key, class T, class Compare, class Allocator>
-	// bool operator<=(const map<Key,T,Compare,Allocator>& x,
-	// const map<Key,T,Compare,Allocator>& y);
+	// template <class Key, class T>
+	// bool operator==(const map<Key,T>& x, const map<Key,T>& y);
 
-	// // specialized algorithms:
-	// template <class Key, class T, class Compare, class Allocator>
-	// void swap(map<Key,T,Compare,Allocator>& x,
-	// map<Key,T,Compare,Allocator>& y);
+	// template <class Key, class T>
+	// bool operator!=(const map<Key,T>& x, const map<Key,T>& y);
+
+	// template <class Key, class T>
+	// bool operator>(const map<Key,T>& x, const map<Key,T>& y);
+
+	// template <class Key, class T>
+	// bool operator<(const map<Key,T>& x, const map<Key,T>& y);
+
+	// template <class Key, class T>
+	// bool operator<=(const map<Key,T>& x, const map<Key,T>& y);
+
+	// template <class Key, class T>
+	// bool operator>=(const map<Key,T>& x, const map<Key,T>& y);
+
+	// ---------- Specialized Algorithms ---------- //
+	template <class Key, class T, class Compare, class Allocator>
+	void swap(map<Key,T>& x, map<Key,T>& y) {
+		x.swap(y);
+	}
 
 
 } // namespace ft

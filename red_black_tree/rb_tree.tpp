@@ -253,12 +253,27 @@ void rb_tree<T>::delete_node(Node<T>* z) {
 }
 
 template<class T>
-Node<T>* rb_tree<T>::find_node(const T& value) {
+Node<T>* rb_tree<T>::find_node(const T& value) const {
 	Node<T> *current = root;
 	while (current != NIL && current != NULL) {
 		if (current->value == value) {
 			return current;
 		} else if (current->value > value) {
+			current = current->left;
+		} else {
+			current = current->right;
+		}
+	}
+	return NULL;
+}
+
+template<class T>
+Node<T>* rb_tree<T>::find_node_by_key(const T& value) const {
+	Node<T> *current = root;
+	while (current != NIL && current != NULL) {
+		if (current->value.first == value.first) {
+			return current;
+		} else if (current->value.first > value.first) {
 			current = current->left;
 		} else {
 			current = current->right;
@@ -275,14 +290,13 @@ void rb_tree<T>::clear_tree(Node<T>* x) {
 	clear_tree(x->left);
 	clear_tree(x->right);
 	alloc.deallocate(x, 1);
-
 }
 
 template<class T>
 rb_tree<T>::~rb_tree() {
-	if (root != NULL) {
-		clear_tree(root);
-	}
+	// if (root != NULL) {
+	// 	clear_tree(root);
+	// }
 }
 
 template<class T>
