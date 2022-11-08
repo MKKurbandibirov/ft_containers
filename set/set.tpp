@@ -1,0 +1,4 @@
+namespace ft
+{
+	
+} // namespace ft

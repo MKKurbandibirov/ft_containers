@@ -310,7 +310,7 @@ typename ft::pair<typename map<key_type, mapped_type>::iterator,
 	typename map<key_type, mapped_type>::iterator>
 map<key_type, mapped_type>::equal_range(const key_type& k) {
 	iterator tmp = find(k);
-	return make_pair<iterator,iterator>(tmp, tmp);
+	return ft::make_pair<iterator,iterator>(tmp, tmp);
 }
 
 template<class key_type, class mapped_type>
@@ -318,9 +318,7 @@ typename ft::pair<typename map<key_type, mapped_type>::const_iterator,
 	typename map<key_type, mapped_type>::const_iterator>
 map<key_type, mapped_type>::equal_range(const key_type& k) const {
 	const_iterator tmp = find(k);
-	return make_pair<const_iterator,const_iterator>(tmp, tmp);
+	return ft::make_pair<const_iterator,const_iterator>(tmp, tmp);
 }
-
-
 
 } // namespace ft

@@ -1,8 +1,6 @@
 #ifndef MAP_HPP
 # define MAP_HPP
 
-# include "../util/enable_if.hpp"
-# include "../util/is_integral.hpp"
 # include "../util/pair.hpp"
 # include "../util/reverse_iterator.hpp"
 # include "../util/iterator_traits.hpp"
