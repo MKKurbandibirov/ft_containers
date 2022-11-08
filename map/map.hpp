@@ -19,7 +19,7 @@ namespace ft
 	private:
 		rb_tree<ft::pair<Key, T> > tree;
 	public:
-		// types:
+		// --------------------------------- Types --------------------------------- //
 		typedef Key														key_type;
 		typedef T														mapped_type;
 		typedef ft::pair<key_type, mapped_type>							value_type;
@@ -47,6 +47,7 @@ namespace ft
       	}
     };
 
+	// -------------- Construct/Copy/Destroy -------------- //
 	explicit map();
 	// template <class InputIterator>
 	// 	map(InputIterator first, InputIterator last,
@@ -97,28 +98,47 @@ namespace ft
 	const_iterator lower_bound(const key_type& x) const;
 	iterator upper_bound(const key_type& x);
 	const_iterator upper_bound(const key_type& x) const;
-	// pair<iterator,iterator> equal_range(const key_type& x);
-	// pair<const_iterator,const_iterator> equal_range(const key_type& x) const;
+	pair<iterator,iterator> equal_range(const key_type& x);
+	pair<const_iterator,const_iterator> equal_range(const key_type& x) const;
 
 	};
 
-	// template <class Key, class T>
-	// bool operator==(const map<Key,T>& x, const map<Key,T>& y);
+	template<class Key, class T>
+	bool operator==(const map<Key,T>& x, const map<Key,T>& y) {
+		typename map<Key, T>::const_iterator beg_x = x.begin();
+		typename map<Key, T>::const_iterator end_x = x.end();
+		typename map<Key, T>::const_iterator beg_y = y.begin();
+		return ft::equal(beg_x, end_x, beg_y);	
+	}
 
-	// template <class Key, class T>
-	// bool operator!=(const map<Key,T>& x, const map<Key,T>& y);
+	template<class Key, class T>
+	bool operator!=(const map<Key,T>& x, const map<Key,T>& y) {
+		return !(x == y);
+	}
 
-	// template <class Key, class T>
-	// bool operator>(const map<Key,T>& x, const map<Key,T>& y);
+	template<class Key, class T>
+	bool operator>(const map<Key,T>& x, const map<Key,T>& y) {
+		return x != y && !(x < y);
+	}
 
-	// template <class Key, class T>
-	// bool operator<(const map<Key,T>& x, const map<Key,T>& y);
+	template<class Key, class T>
+	bool operator<(const map<Key,T>& x, const map<Key,T>& y) {
+		typename map<Key, T>::const_iterator beg_x = x.begin();
+		typename map<Key, T>::const_iterator end_x = x.end();
+		typename map<Key, T>::const_iterator beg_y = y.begin();
+		typename map<Key, T>::const_iterator end_y = y.end();
+		return ft::lexicographical_compare(beg_x, end_x, beg_y, end_y);
+	}
 
-	// template <class Key, class T>
-	// bool operator<=(const map<Key,T>& x, const map<Key,T>& y);
+	template<class Key, class T>
+	bool operator<=(const map<Key,T>& x, const map<Key,T>& y) {
+		return x < y || x == y;
+	}
 
-	// template <class Key, class T>
-	// bool operator>=(const map<Key,T>& x, const map<Key,T>& y);
+	template<class Key, class T>
+	bool operator>=(const map<Key,T>& x, const map<Key,T>& y) {
+		return x > y || x == y;
+	}
 
 	// ---------- Specialized Algorithms ---------- //
 	template <class Key, class T, class Compare, class Allocator>

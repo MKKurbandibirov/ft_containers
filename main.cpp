@@ -292,6 +292,8 @@ int main() {
 		ft::map<int, std::string>::value_compare kv = m.value_comp();
 		std::cout << std::boolalpha << kv(ft::make_pare<int, std::string>(6, "John"), ft::make_pare<int, std::string>(4, "John")) << std::endl;
 	
+		std::cout << "---------------------------------------------------\n";
+
 		ft::map<char, int> map;
 		map['a'] = 20;
 		map['b'] = 40;
@@ -301,6 +303,16 @@ int main() {
 
 		ft::map<char, int>::iterator lb = map.lower_bound('b');
 		std::cout << (*lb).first << " - " << (*lb).second << std::endl;
+
+		ft::map<char, int>::iterator ub = map.upper_bound('d');
+		std::cout << (*ub).first << " - " << (*ub).second << std::endl;
+
+		// map.erase(lb, ub);
+		// for (ft::map<char,int>::iterator it=map.begin(); it!=map.end(); ++it)
+    	// 	std::cout << (*it).first << " => " << (*it).second << '\n';
+
+		ft::pair<ft::map<char, int>::iterator, ft::map<char, int>::iterator> p = map.equal_range('c');
+		std::cout << (*p.first).first << " - " << (*p.second).second << std::endl;
 	}
 
 	return 0;

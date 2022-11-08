@@ -244,9 +244,9 @@ map<key_type, mapped_type>::count(const key_type& val) const {
 	return 1;
 }
 
-template<class key_value, class mapped_value>
-typename map<key_value, mapped_value>::iterator
-map<key_value, mapped_value>::lower_bound(const key_type& k) {
+template<class key_type, class mapped_type>
+typename map<key_type, mapped_type>::iterator
+map<key_type, mapped_type>::lower_bound(const key_type& k) {
 	iterator beg = begin();
 	iterator end = this->end();
 	key_compare comp = key_comp();
@@ -259,9 +259,9 @@ map<key_value, mapped_value>::lower_bound(const key_type& k) {
 	return this->end();
 }
 
-template<class key_value, class mapped_value>
-typename map<key_value, mapped_value>::const_iterator 
-map<key_value, mapped_value>::lower_bound(const key_type& k) const {
+template<class key_type, class mapped_type>
+typename map<key_type, mapped_type>::const_iterator 
+map<key_type, mapped_type>::lower_bound(const key_type& k) const {
 	const_iterator beg = begin();
 	const_iterator end = this->end();
 	key_compare comp = key_comp();
@@ -274,6 +274,52 @@ map<key_value, mapped_value>::lower_bound(const key_type& k) const {
 	return this->end();
 }
 
+template<class key_type, class mapped_type>
+typename map<key_type, mapped_type>::iterator
+map<key_type, mapped_type>::upper_bound(const key_type& k) {
+	iterator beg = begin();
+	iterator end = this->end();
+	key_compare comp = key_comp();
+	while (beg != end) {
+		if (comp(k, (*beg).first)) {
+			return beg;
+		}
+		++beg;
+	}
+	return this->end();
+
+}
+
+template<class key_type, class mapped_type>
+typename map<key_type, mapped_type>::const_iterator
+map<key_type, mapped_type>::upper_bound(const key_type& k) const {
+	const_iterator beg = begin();
+	const_iterator end = this->end();
+	key_compare comp = key_comp();
+	while (beg != end) {
+		if (comp(k, (*beg).first)) {
+			return beg;
+		}
+		++beg;
+	}
+	return this->end();
+}
+
+template<class key_type, class mapped_type>
+typename ft::pair<typename map<key_type, mapped_type>::iterator,
+	typename map<key_type, mapped_type>::iterator>
+map<key_type, mapped_type>::equal_range(const key_type& k) {
+	iterator tmp = find(k);
+	return make_pare<iterator,iterator>(tmp, tmp);
+}
+
+template<class key_type, class mapped_type>
+typename ft::pair<typename map<key_type, mapped_type>::const_iterator,
+	typename map<key_type, mapped_type>::const_iterator>
+map<key_type, mapped_type>::equal_range(const key_type& k) const {
+	const_iterator tmp = find(k);
+	return make_pare<const_iterator,const_iterator>(tmp, tmp);
+}
 
 
 
