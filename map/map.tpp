@@ -120,7 +120,7 @@ typename map<key_type, mapped_type>::mapped_type&
 map<key_type, mapped_type>::operator[](const key_type& x) {
 	iterator tmp = find(x);
 	if (tmp == end()) {
-		insert(ft::make_pare<key_type, mapped_type>(x, mapped_type()));
+		insert(ft::make_pair<key_type, mapped_type>(x, mapped_type()));
 	}
 	tmp = find(x);
 	return (*tmp).second;
@@ -133,10 +133,10 @@ map<key_type, mapped_type>::insert(const value_type& value) {
 	Node<ft::pair<key_type, mapped_type> >* tmp = tree.find_node(value);
 	if (tmp) {
 		typename map<key_type, mapped_type>::iterator iter(tmp, tree.root, tree.header);
-		return ft::make_pare(iter, false);
+		return ft::make_pair(iter, false);
 	}
 	typename map<key_type, mapped_type>::iterator iter(tree.insert_node(value), tree.root, tree.header);
-	return ft::make_pare(iter, true);
+	return ft::make_pair(iter, true);
 }
 
 template<class key_type, class mapped_type>
@@ -217,7 +217,7 @@ map<key_type, mapped_type>::value_comp() const {
 template<class key_type, class mapped_type>
 typename map<key_type, mapped_type>::iterator
 map<key_type, mapped_type>::find(const key_type& val) {
-	Node<value_type>* node = tree.find_node_by_key(ft::make_pare(val, mapped_type()));
+	Node<value_type>* node = tree.find_node_by_key(ft::make_pair(val, mapped_type()));
 	if (node == NULL) {
 		return end();
 	}
@@ -227,7 +227,7 @@ map<key_type, mapped_type>::find(const key_type& val) {
 template<class key_type, class mapped_type>
 typename map<key_type, mapped_type>::const_iterator
 map<key_type, mapped_type>::find(const key_type& val) const {
-	Node<value_type>* node = tree.find_node_by_key(ft::make_pare(val, mapped_type()));
+	Node<value_type>* node = tree.find_node_by_key(ft::make_pair(val, mapped_type()));
 	if (node == NULL) {
 		return end();
 	}
@@ -237,7 +237,7 @@ map<key_type, mapped_type>::find(const key_type& val) const {
 template<class key_type, class mapped_type>
 typename map<key_type, mapped_type>::size_type
 map<key_type, mapped_type>::count(const key_type& val) const {
-	Node<value_type>* node = tree.find_node_by_key(ft::make_pare(val, mapped_type()));
+	Node<value_type>* node = tree.find_node_by_key(ft::make_pair(val, mapped_type()));
 	if (node == NULL) {
 		return 0;
 	}
@@ -310,7 +310,7 @@ typename ft::pair<typename map<key_type, mapped_type>::iterator,
 	typename map<key_type, mapped_type>::iterator>
 map<key_type, mapped_type>::equal_range(const key_type& k) {
 	iterator tmp = find(k);
-	return make_pare<iterator,iterator>(tmp, tmp);
+	return make_pair<iterator,iterator>(tmp, tmp);
 }
 
 template<class key_type, class mapped_type>
@@ -318,7 +318,7 @@ typename ft::pair<typename map<key_type, mapped_type>::const_iterator,
 	typename map<key_type, mapped_type>::const_iterator>
 map<key_type, mapped_type>::equal_range(const key_type& k) const {
 	const_iterator tmp = find(k);
-	return make_pare<const_iterator,const_iterator>(tmp, tmp);
+	return make_pair<const_iterator,const_iterator>(tmp, tmp);
 }
 
 

@@ -9,7 +9,9 @@
 # include <functional>
 # include <memory>
 # include "../red_black_tree/rb_tree.hpp"
-
+# include "../util/equal.hpp"
+# include "../util/lexicographical_compare.hpp"
+# include "../util/distance.hpp"
 
 namespace ft
 {
