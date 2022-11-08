@@ -36,16 +36,16 @@ namespace ft
 		typedef ft::ReverseIterator<iterator>							reverse_iterator;
 		typedef ft::ReverseIterator<const_iterator>						const_reverse_iterator;
 		
-	// class value_compare {
-    // 	friend class map;
-    // protected:
-    // 	key_compare comp;
-    //   	value_compare(key_compare c) : comp(c) {}
-    // public:
-    //   	bool operator()(const value_type& x, const value_type& y) const {
-    //     	return comp(x.first, y.first);
-    //   	}
-    // };
+	class value_compare {
+    	friend class map;
+    protected:
+    	key_compare comp;
+      	value_compare(key_compare c) : comp(c) {}
+    public:
+      	bool operator()(const value_type& x, const value_type& y) const {
+        	return comp(x.first, y.first);
+      	}
+    };
 
 	explicit map();
 	// template <class InputIterator>
@@ -71,7 +71,7 @@ namespace ft
 	size_type max_size() const;
 
 	// --------- Element Access --------- //
-	value_type& operator[](const key_type& x);
+	mapped_type& operator[](const key_type& x);
 	
 	// ------------ Modifiers ------------ //
 	pair<iterator, bool> insert(const value_type& x);
@@ -85,18 +85,18 @@ namespace ft
 	void swap(map<Key,T>&);
 	void clear();
 
-	// // observers:
-	// key_compare key_comp() const;
-	// value_compare value_comp() const;
+	// ------------- Observers ------------- //
+	key_compare key_comp() const;
+	value_compare value_comp() const;
 
 	// ----------- Map Operations ----------- //
 	iterator find(const key_type& x);
 	const_iterator find(const key_type& x) const;
 	size_type count(const key_type& x) const;
-	// iterator lower_bound(const key_type& x);
-	// const_iterator lower_bound(const key_type& x) const;
-	// iterator upper_bound(const key_type& x);
-	// const_iterator upper_bound(const key_type& x) const;
+	iterator lower_bound(const key_type& x);
+	const_iterator lower_bound(const key_type& x) const;
+	iterator upper_bound(const key_type& x);
+	const_iterator upper_bound(const key_type& x) const;
 	// pair<iterator,iterator> equal_range(const key_type& x);
 	// pair<const_iterator,const_iterator> equal_range(const key_type& x) const;
 

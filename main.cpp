@@ -283,8 +283,24 @@ int main() {
 		// 	++it_b;
 		// }
 
-		std::cout << (*m.find(2)).second << std::endl;
-		std::cout << m.erase(3) << m.count(3) << m.count(2) <<  std::endl;
+		// std::cout << m[3].second << std::endl;
+		// std::cout << m.erase(3) << m.count(3) << m.count(2) <<  std::endl;
+
+		ft::map<int, std::string>::key_compare kk = m.key_comp();
+		std::cout << std::boolalpha << kk(4, 2) << std::endl;
+
+		ft::map<int, std::string>::value_compare kv = m.value_comp();
+		std::cout << std::boolalpha << kv(ft::make_pare<int, std::string>(6, "John"), ft::make_pare<int, std::string>(4, "John")) << std::endl;
+	
+		ft::map<char, int> map;
+		map['a'] = 20;
+		map['b'] = 40;
+		map['c'] = 60;
+		map['d'] = 80;
+		map['e'] = 100;
+
+		ft::map<char, int>::iterator lb = map.lower_bound('b');
+		std::cout << (*lb).first << " - " << (*lb).second << std::endl;
 	}
 
 	return 0;

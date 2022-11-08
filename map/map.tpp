@@ -116,9 +116,14 @@ map<key_type, mapped_type>::max_size() const {
 
 // --------- Element Access --------- //
 template<class key_type, class mapped_type>
-typename map<key_type, mapped_type>::value_type&
+typename map<key_type, mapped_type>::mapped_type&
 map<key_type, mapped_type>::operator[](const key_type& x) {
-	return *find(x);
+	iterator tmp = find(x);
+	if (tmp == end()) {
+		insert(ft::make_pare<key_type, mapped_type>(x, mapped_type()));
+	}
+	tmp = find(x);
+	return (*tmp).second;
 }
 
 // ------------ Modifiers ------------ //
@@ -195,7 +200,18 @@ void map<key_type, mapped_type>::swap(map<key_type, mapped_type>& other) {
 	tree.swap(other.tree);
 }
 
+// ------------- Observers ------------- //
+template<class key_type, class mapped_type>
+typename map<key_type, mapped_type>::key_compare
+map<key_type, mapped_type>::key_comp() const {
+	return key_compare();
+}
 
+template<class key_type, class mapped_type>
+typename map<key_type, mapped_type>::value_compare
+map<key_type, mapped_type>::value_comp() const {
+	return value_compare(key_compare());
+}
 
 // ----------- Map Operations ----------- //
 template<class key_type, class mapped_type>
@@ -227,6 +243,37 @@ map<key_type, mapped_type>::count(const key_type& val) const {
 	}
 	return 1;
 }
+
+template<class key_value, class mapped_value>
+typename map<key_value, mapped_value>::iterator
+map<key_value, mapped_value>::lower_bound(const key_type& k) {
+	iterator beg = begin();
+	iterator end = this->end();
+	key_compare comp = key_comp();
+	while (beg != end) {
+		if (!comp((*beg).first, k)) {
+			return beg;
+		}
+		++beg;
+	}
+	return this->end();
+}
+
+template<class key_value, class mapped_value>
+typename map<key_value, mapped_value>::const_iterator 
+map<key_value, mapped_value>::lower_bound(const key_type& k) const {
+	const_iterator beg = begin();
+	const_iterator end = this->end();
+	key_compare comp = key_comp();
+	while (beg != end) {
+		if (!comp((*beg).first, k)) {
+			return beg;
+		}
+		++beg;
+	}
+	return this->end();
+}
+
 
 
 
