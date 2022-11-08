@@ -50,7 +50,7 @@ bool operator>=(const pair<T1, T2> &x, const pair<T1, T2> &y) {
 }
 
 template<class T1, class T2>
-pair<T1, T2> make_pare(const T1 &x, const T2 &y) {
+pair<T1, T2> make_pair(const T1 &x, const T2 &y) {
 	return pair<T1, T2>(x, y);
 }
 

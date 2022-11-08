@@ -15,6 +15,7 @@ map<key_type, mapped_type>::map(const map& other) {
 	tree.header = other.tree.header;
 }
 
+// Dont work!
 // template<class key_type, class mapped_type>
 // template<class InputIterator>
 // map<key_type, mapped_type>::map(InputIterator first, InputIterator last,
@@ -22,10 +23,7 @@ map<key_type, mapped_type>::map(const map& other) {
 // 	// if (first > last) {
 // 	// 	throw std::length_error("map");
 // 	// }
-// 	// while (first != last) {
-// 		insert(first, last);
-// 		// ++first;
-// 	// }
+// 	insert(first, last);
 // }
 
 template<class key_type, class mapped_type>
@@ -71,6 +69,30 @@ map<key_type, mapped_type>::end() const {
 	return const_iterator(tree.header.header, tree.root, tree.header);
 }
 
+template<class key_type, class mapped_type>
+typename map<key_type, mapped_type>::reverse_iterator
+map<key_type, mapped_type>::rbegin() {
+	return reverse_iterator(end());
+}
+
+template<class key_type, class mapped_type>
+typename map<key_type, mapped_type>::const_reverse_iterator
+map<key_type, mapped_type>::rbegin() const {
+	return const_reverse_iterator(end());
+}
+
+template<class key_type, class mapped_type>
+typename map<key_type, mapped_type>::reverse_iterator
+map<key_type, mapped_type>::rend() {
+	return reverse_iterator(begin());
+}
+
+template<class key_type, class mapped_type>
+typename map<key_type, mapped_type>::const_reverse_iterator
+map<key_type, mapped_type>::rend() const {
+	return const_reverse_iterator(begin());
+}
+
 // ------------- Capacity ------------- //
 template<class key_type, class mapped_type>
 bool map<key_type, mapped_type>::empty() const {
@@ -92,6 +114,18 @@ map<key_type, mapped_type>::max_size() const {
 	return tree.alloc.max_size();
 }
 
+// --------- Element Access --------- //
+template<class key_type, class mapped_type>
+typename map<key_type, mapped_type>::mapped_type&
+map<key_type, mapped_type>::operator[](const key_type& x) {
+	iterator tmp = find(x);
+	if (tmp == end()) {
+		insert(ft::make_pair<key_type, mapped_type>(x, mapped_type()));
+	}
+	tmp = find(x);
+	return (*tmp).second;
+}
+
 // ------------ Modifiers ------------ //
 template<class key_type, class mapped_type>
 typename ft::pair<typename map<key_type, mapped_type>::iterator, bool>
@@ -99,10 +133,10 @@ map<key_type, mapped_type>::insert(const value_type& value) {
 	Node<ft::pair<key_type, mapped_type> >* tmp = tree.find_node(value);
 	if (tmp) {
 		typename map<key_type, mapped_type>::iterator iter(tmp, tree.root, tree.header);
-		return ft::make_pare(iter, false);
+		return ft::make_pair(iter, false);
 	}
 	typename map<key_type, mapped_type>::iterator iter(tree.insert_node(value), tree.root, tree.header);
-	return ft::make_pare(iter, true);
+	return ft::make_pair(iter, true);
 }
 
 template<class key_type, class mapped_type>
@@ -112,13 +146,15 @@ map<key_type, mapped_type>::insert(iterator position, const value_type& value) {
 	return iterator(insert(value).first, tree.root, tree.header);
 }
 
+// Dont work!
 // template<class key_type, class mapped_type>
 // template<class InputIterator>
 // void map<key_type, mapped_type>::insert(InputIterator first, InputIterator last,
 // 	typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type*) {
 // 	difference_type n = ft::distance(first, last);
 // 	while (n--) {
-// 		insert(*(first++));
+// 		insert(*first);
+// 		++first;
 // 	}
 // }
 
@@ -148,5 +184,141 @@ void map<key_type, mapped_type>::erase(iterator first, iterator last) {
 	allocator.deallocate(arr, n);
 }
 
+template<class key_type, class mapped_type>
+typename map<key_type, mapped_type>::size_type
+map<key_type, mapped_type>::erase(const key_type& x) {
+	iterator it = find(x);
+	if (it == end()) {
+		return 0;
+	}
+	erase(it);
+	return 1;
+}
+
+template<class key_type, class mapped_type>
+void map<key_type, mapped_type>::swap(map<key_type, mapped_type>& other) {
+	tree.swap(other.tree);
+}
+
+// ------------- Observers ------------- //
+template<class key_type, class mapped_type>
+typename map<key_type, mapped_type>::key_compare
+map<key_type, mapped_type>::key_comp() const {
+	return key_compare();
+}
+
+template<class key_type, class mapped_type>
+typename map<key_type, mapped_type>::value_compare
+map<key_type, mapped_type>::value_comp() const {
+	return value_compare(key_compare());
+}
+
+// ----------- Map Operations ----------- //
+template<class key_type, class mapped_type>
+typename map<key_type, mapped_type>::iterator
+map<key_type, mapped_type>::find(const key_type& val) {
+	Node<value_type>* node = tree.find_node_by_key(ft::make_pair(val, mapped_type()));
+	if (node == NULL) {
+		return end();
+	}
+	return iterator(node, tree.root, tree.header);
+}
+
+template<class key_type, class mapped_type>
+typename map<key_type, mapped_type>::const_iterator
+map<key_type, mapped_type>::find(const key_type& val) const {
+	Node<value_type>* node = tree.find_node_by_key(ft::make_pair(val, mapped_type()));
+	if (node == NULL) {
+		return end();
+	}
+	return const_iterator(node, tree.root, tree.header);
+}
+
+template<class key_type, class mapped_type>
+typename map<key_type, mapped_type>::size_type
+map<key_type, mapped_type>::count(const key_type& val) const {
+	Node<value_type>* node = tree.find_node_by_key(ft::make_pair(val, mapped_type()));
+	if (node == NULL) {
+		return 0;
+	}
+	return 1;
+}
+
+template<class key_type, class mapped_type>
+typename map<key_type, mapped_type>::iterator
+map<key_type, mapped_type>::lower_bound(const key_type& k) {
+	iterator beg = begin();
+	iterator end = this->end();
+	key_compare comp = key_comp();
+	while (beg != end) {
+		if (!comp((*beg).first, k)) {
+			return beg;
+		}
+		++beg;
+	}
+	return this->end();
+}
+
+template<class key_type, class mapped_type>
+typename map<key_type, mapped_type>::const_iterator 
+map<key_type, mapped_type>::lower_bound(const key_type& k) const {
+	const_iterator beg = begin();
+	const_iterator end = this->end();
+	key_compare comp = key_comp();
+	while (beg != end) {
+		if (!comp((*beg).first, k)) {
+			return beg;
+		}
+		++beg;
+	}
+	return this->end();
+}
+
+template<class key_type, class mapped_type>
+typename map<key_type, mapped_type>::iterator
+map<key_type, mapped_type>::upper_bound(const key_type& k) {
+	iterator beg = begin();
+	iterator end = this->end();
+	key_compare comp = key_comp();
+	while (beg != end) {
+		if (comp(k, (*beg).first)) {
+			return beg;
+		}
+		++beg;
+	}
+	return this->end();
+
+}
+
+template<class key_type, class mapped_type>
+typename map<key_type, mapped_type>::const_iterator
+map<key_type, mapped_type>::upper_bound(const key_type& k) const {
+	const_iterator beg = begin();
+	const_iterator end = this->end();
+	key_compare comp = key_comp();
+	while (beg != end) {
+		if (comp(k, (*beg).first)) {
+			return beg;
+		}
+		++beg;
+	}
+	return this->end();
+}
+
+template<class key_type, class mapped_type>
+typename ft::pair<typename map<key_type, mapped_type>::iterator,
+	typename map<key_type, mapped_type>::iterator>
+map<key_type, mapped_type>::equal_range(const key_type& k) {
+	iterator tmp = find(k);
+	return ft::make_pair<iterator,iterator>(tmp, tmp);
+}
+
+template<class key_type, class mapped_type>
+typename ft::pair<typename map<key_type, mapped_type>::const_iterator,
+	typename map<key_type, mapped_type>::const_iterator>
+map<key_type, mapped_type>::equal_range(const key_type& k) const {
+	const_iterator tmp = find(k);
+	return ft::make_pair<const_iterator,const_iterator>(tmp, tmp);
+}
 
 } // namespace ft
