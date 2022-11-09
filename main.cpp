@@ -44,80 +44,80 @@ enum E : int {};
 
 int main() {
 
-	{
-		std::vector<std::string> v;
-		v.push_back("0");
-		v.push_back("1");
-		v.push_back("2");
-		v.push_back("3");
-		v.push_back("4");
+	// {
+	// 	std::vector<std::string> v;
+	// 	v.push_back("0");
+	// 	v.push_back("1");
+	// 	v.push_back("2");
+	// 	v.push_back("3");
+	// 	v.push_back("4");
 		
-		std::cout << v.size() << " " << v.capacity() << std::endl;
-		for (std::size_t i = 0; i < v.size(); ++i) {
-			std::cout << v[i] << " "; 
-		}
-		std::cout << std::endl;
+	// 	std::cout << v.size() << " " << v.capacity() << std::endl;
+	// 	for (std::size_t i = 0; i < v.size(); ++i) {
+	// 		std::cout << v[i] << " "; 
+	// 	}
+	// 	std::cout << std::endl;
 
-		std::vector<std::string>::reverse_iterator r_it = v.rbegin();
-		std::cout << *r_it << std::endl;
-		std::vector<std::string>::reverse_iterator re_it = v.rend();
-		// std::cout << *(--re_it) << std::endl;
-		// std::cout << *(--re_it) << std::endl;
-		--re_it;
-		while (r_it != re_it) {
-			std::cout << *re_it;
-			--re_it;
-		}
-		// std::cout << *r_it << " " << *re_it << " DIST: " << std::distance(r_it, re_it)<< std::endl ;
+	// 	std::vector<std::string>::reverse_iterator r_it = v.rbegin();
+	// 	std::cout << *r_it << std::endl;
+	// 	std::vector<std::string>::reverse_iterator re_it = v.rend();
+	// 	// std::cout << *(--re_it) << std::endl;
+	// 	// std::cout << *(--re_it) << std::endl;
+	// 	--re_it;
+	// 	while (r_it != re_it) {
+	// 		std::cout << *re_it;
+	// 		--re_it;
+	// 	}
+	// 	// std::cout << *r_it << " " << *re_it << " DIST: " << std::distance(r_it, re_it)<< std::endl ;
 
-		std::cout << "---------------------------------------------------------------------\n";
+	// 	std::cout << "---------------------------------------------------------------------\n";
 
-		ft::vector<std::string> ft_v;
-		ft_v.push_back("0");
-		ft_v.push_back("1");
-		ft_v.push_back("2");
-		ft_v.push_back("3");
-		ft_v.push_back("4");
+	// 	ft::vector<std::string> ft_v;
+	// 	ft_v.push_back("0");
+	// 	ft_v.push_back("1");
+	// 	ft_v.push_back("2");
+	// 	ft_v.push_back("3");
+	// 	ft_v.push_back("4");
 		
-		std::cout << ft_v.size() << " " << ft_v.capacity() << std::endl;
-		for (std::size_t i = 0; i < ft_v.size(); ++i) {
-			std::cout << ft_v[i] << " "; 
-		}
-		std::cout << std::endl;
+	// 	std::cout << ft_v.size() << " " << ft_v.capacity() << std::endl;
+	// 	for (std::size_t i = 0; i < ft_v.size(); ++i) {
+	// 		std::cout << ft_v[i] << " "; 
+	// 	}
+	// 	std::cout << std::endl;
 
-		ft::vector<std::string>::reverse_iterator ft_r_it = ft_v.rbegin();
-		// std::cout << *ft_r_it << std::endl;
-		ft::vector<std::string>::reverse_iterator ft_re_it = ft_v.rend();
-		--ft_re_it;
-		while (ft_r_it != ft_re_it) {
-			std::cout << *ft_re_it;
-			--ft_re_it;
-		}
+	// 	ft::vector<std::string>::reverse_iterator ft_r_it = ft_v.rbegin();
+	// 	// std::cout << *ft_r_it << std::endl;
+	// 	ft::vector<std::string>::reverse_iterator ft_re_it = ft_v.rend();
+	// 	--ft_re_it;
+	// 	while (ft_r_it != ft_re_it) {
+	// 		std::cout << *ft_re_it;
+	// 		--ft_re_it;
+	// 	}
 
-		std::cout << "\n---------------------------------------------------------------------\n";
+	// 	std::cout << "\n---------------------------------------------------------------------\n";
 
-		// ft::vector<std::string>::iterator beg = ft_v.begin();
-		// ft::vector<std::string>::iterator end = ft_v.end();
-		// while (beg != end) {
-		// 	end--;
-		// 	std::cout << *end << std::endl;
-		// }
+	// 	// ft::vector<std::string>::iterator beg = ft_v.begin();
+	// 	// ft::vector<std::string>::iterator end = ft_v.end();
+	// 	// while (beg != end) {
+	// 	// 	end--;
+	// 	// 	std::cout << *end << std::endl;
+	// 	// }
 
-		ft::vector<std::string> ftv(ft_v.begin(), ft_v.end());
-		ft::vector<std::string>::iterator beg = ftv.begin();
-		ft::vector<std::string>::iterator end = ftv.end();
-		while (beg != end) {
-			end--;
-			std::cout << *end << std::endl;
-		}
+	// 	ft::vector<std::string> ftv(ft_v.begin(), ft_v.end());
+	// 	ft::vector<std::string>::iterator beg = ftv.begin();
+	// 	ft::vector<std::string>::iterator end = ftv.end();
+	// 	while (beg != end) {
+	// 		end--;
+	// 		std::cout << *end << std::endl;
+	// 	}
 
-		ft::vector<std::string>::reverse_iterator rbeg = ftv.rbegin();
-		ft::vector<std::string>::reverse_iterator rend = ftv.rend();
-		while (rbeg != rend) {
-			--rend;
-			std::cout << *rend << std::endl;
-		}
-	}
+	// 	ft::vector<std::string>::reverse_iterator rbeg = ftv.rbegin();
+	// 	ft::vector<std::string>::reverse_iterator rend = ftv.rend();
+	// 	while (rbeg != rend) {
+	// 		--rend;
+	// 		std::cout << *rend << std::endl;
+	// 	}
+	// }
 
 	// {
 	// 	std::vector<int> v1(4, 4);
@@ -197,33 +197,33 @@ int main() {
 	// 	std::cout << ft::is_integral<const bool>::value << std::endl;
 	// }
 
-	// {
-	// 	ft::rb_tree<int> t;
+	{
+		ft::rb_tree<int> t;
 
-	// 	t.insert_node(13);
-	// 	t.insert_node(12);
-	// 	t.insert_node(11);
-	// 	t.insert_node(10);
-	// 	t.insert_node(9);
-	// 	t.insert_node(8);
-	// 	t.insert_node(7);
+		t.insert_node(13);
+		t.insert_node(12);
+		t.insert_node(11);
+		t.insert_node(10);
+		t.insert_node(9);
+		t.insert_node(8);
+		t.insert_node(7);
 		
-	// 	t.delete_node(t.find_node(10));
+		t.delete_node(t.find_node(10));
 
-	// 	ft::rb_tree<int>::RBT_iterator it1(t.minimum(t.root), t.root, t.header);
+		ft::rb_tree<int>::iterator it1(t.minimum(t.root), t);
 	
-	// 	for (int i = 0; i < 6; ++i) {
-	// 		std::cout << *it1 << std::endl;
-	// 		++it1;
-	// 	}
+		for (int i = 0; i < 6; ++i) {
+			std::cout << *it1 << std::endl;
+			++it1;
+		}
 
-	// 	ft::rb_tree<int>::RBT_iterator it2(t.maximum(t.root), t.root, t.header);
+		ft::rb_tree<int>::iterator it2(t.maximum(t.root), t);
 	
-	// 	for (int i = 0; i < 6; ++i) {
-	// 		std::cout << *it2 << std::endl;
-	// 		--it2;
-	// 	}
-	// }
+		for (int i = 0; i < 6; ++i) {
+			std::cout << *it2 << std::endl;
+			--it2;
+		}
+	}
 
 	// {
 	// 	ft::vector<int> ft_v(5, 5);
