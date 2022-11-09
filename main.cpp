@@ -93,7 +93,30 @@ int main() {
 			std::cout << *ft_re_it;
 			--ft_re_it;
 		}
-		std::cout << ft_v[2] << std::endl ;
+
+		std::cout << "\n---------------------------------------------------------------------\n";
+
+		// ft::vector<std::string>::iterator beg = ft_v.begin();
+		// ft::vector<std::string>::iterator end = ft_v.end();
+		// while (beg != end) {
+		// 	end--;
+		// 	std::cout << *end << std::endl;
+		// }
+
+		ft::vector<std::string> ftv(ft_v.begin(), ft_v.end());
+		ft::vector<std::string>::iterator beg = ftv.begin();
+		ft::vector<std::string>::iterator end = ftv.end();
+		while (beg != end) {
+			end--;
+			std::cout << *end << std::endl;
+		}
+
+		ft::vector<std::string>::reverse_iterator rbeg = ftv.rbegin();
+		ft::vector<std::string>::reverse_iterator rend = ftv.rend();
+		while (rbeg != rend) {
+			--rend;
+			std::cout << *rend << std::endl;
+		}
 	}
 
 	// {

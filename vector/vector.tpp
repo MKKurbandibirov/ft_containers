@@ -58,7 +58,7 @@ vector<value_type> &vector<value_type>::operator=(const vector& other) {
 template<class value_type>
 template<class InputIterator>
 vector<value_type>::vector(InputIterator first, InputIterator last,
-	typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type*) {
+	typename ft::enable_if<ft::is_iter<InputIterator>::value, InputIterator>::type*) {
 	if (first > last) {
 		throw std::length_error("vector");
 	}
@@ -101,7 +101,7 @@ void vector<value_type>::assign(size_type n, const_reference u) {
 template<class value_type>
 template<class InputIterator>
 void vector<value_type>::assign(InputIterator first, InputIterator last,
-	typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type*) {
+	typename ft::enable_if<ft::is_iter<InputIterator>::value, InputIterator>::type*) {
 	if (first > last) {
 		throw std::length_error("vector");
 	}
@@ -356,7 +356,7 @@ void vector<value_type>::insert(iterator pos, size_type n, const_reference x) {
 template<class value_type>
 template<class InputIterator>
 void vector<value_type>::insert(iterator pos, InputIterator first, InputIterator last,
-	typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type*) {
+	typename ft::enable_if<ft::is_iter<InputIterator>::value, InputIterator>::type*) {
 	size_type ind = pos.base() - this->arr;
 	iterator it_end = this->end();
 	InputIterator it_tmp = first;

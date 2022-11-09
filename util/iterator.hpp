@@ -31,7 +31,19 @@ public:
 		return *this;
 	}
 
+	Iterator& operator++(int d) {
+		(void)d;
+		curr++;
+		return *this;
+	}
+
 	Iterator& operator--() {
+		curr--;
+		return *this;
+	}
+
+	Iterator& operator--(int d) {
+		(void)d;
 		curr--;
 		return *this;
 	}
@@ -52,9 +64,18 @@ public:
 		return curr > other.curr;
 	}
 
+	bool operator>=(const Iterator& other) const {
+		return curr > other.curr || curr == other.curr;
+	}
+
 	bool operator<(const Iterator& other) const {
 		return curr < other.curr;
 	}
+
+	bool operator<=(const Iterator& other) const {
+		return curr < other.curr || curr == other.curr;
+	}
+	
 	// Iterator& operator-(const Iterator& other);
 
 	pointer base();
@@ -87,7 +108,19 @@ public:
 		return *this;
 	}
 
+	Const_Iterator& operator++(int d) {
+		(void)d;
+		curr++;
+		return *this;
+	}
+
 	Const_Iterator& operator--() {
+		curr--;
+		return *this;
+	}
+
+	Const_Iterator& operator--(int d) {
+		(void)d;
 		curr--;
 		return *this;
 	}
@@ -108,9 +141,18 @@ public:
 		return curr > other.curr;
 	}
 
+	bool operator>=(const Const_Iterator& other) const {
+		return curr > other.curr || curr == other.curr;
+	}
+
 	bool operator<(const Const_Iterator& other) const {
 		return curr < other.curr;
 	}
+
+	bool operator<=(const Const_Iterator& other) const {
+		return curr < other.curr || curr == other.curr;
+	}
+
 	// Iterator& operator-(const Iterator& other);
 
 	pointer base();

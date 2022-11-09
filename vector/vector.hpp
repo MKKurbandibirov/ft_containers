@@ -15,12 +15,14 @@
 # include "../util/distance.hpp"
 # include "../util/is_integral.hpp"
 # include "../util/iterator.hpp"
+# include "../util/is_iter.hpp"
 
 namespace ft
 {
 template<class T>
 class vector {
 public:
+	// --------------------------------- Types --------------------------------- //
 	typedef T 														value_type;
 	typedef std::size_t 											size_type;
 	typedef T* 														pointer;
@@ -35,17 +37,18 @@ public:
 	typedef ft::ReverseIterator<const_iterator>						const_reverse_iterator;
 
 public:
+	// -------------- Construct/Copy/Destroy -------------- //
 	explicit vector();
 	explicit vector(size_type n, const value_type& value = value_type());
 	template <class InputIterator>
 		vector(InputIterator first, InputIterator last,
-			typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = NULL);
+			typename ft::enable_if<ft::is_iter<InputIterator>::value, InputIterator>::type* = NULL);
 	vector(const vector& other);
 	~vector();
 	vector &operator=(const vector& other);
 	template <class InputIterator>
 		void assign(InputIterator first, InputIterator last,
-			typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = NULL);
+			typename ft::enable_if<ft::is_iter<InputIterator>::value, InputIterator>::type* = NULL);
 	void assign(size_type n, const_reference u);
 	allocator_type get_allocator() const;
 
@@ -84,7 +87,7 @@ public:
 	void insert(iterator position, size_type n, const_reference x);
 	template <class InputIterator>
 		void insert(iterator position, InputIterator first, InputIterator last,
-			typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = NULL);
+			typename ft::enable_if<ft::is_iter<InputIterator>::value, InputIterator>::type* = NULL);
 	iterator erase(iterator position);
 	iterator erase(iterator first, iterator last);
 	void swap(vector<value_type>&);
