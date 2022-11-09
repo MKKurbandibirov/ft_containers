@@ -46,6 +46,12 @@ struct rb_tree_header {
 };
 
 template<class T>
+class RBT_iterator;
+
+template<class T>
+class RBT_const_iterator;
+
+template<class T>
 class rb_tree {
 private:
 	void rotate_right(Node<T> *x);

@@ -9,6 +9,12 @@ namespace ft
 {
 
 template<class T>
+struct Node;
+
+template<class T>
+class rb_tree;
+
+template<class T>
 class RBT_iterator {
 private:
 	Node<T>*	node;
@@ -23,7 +29,7 @@ public:
 
 	RBT_iterator() {}
 	RBT_iterator(Node<T>* node, rb_tree<T> tree): node(node), tree(tree) {}
-	RBT_iterator(const RBT_iterator& other): node(node), tree(tree) {}
+	RBT_iterator(const RBT_iterator& other): node(other.node), tree(other.tree) {}
 	virtual ~RBT_iterator() {}
 
 	RBT_iterator& operator=(const RBT_iterator& other) {
@@ -96,7 +102,7 @@ public:
 
 	RBT_const_iterator() {}
 	RBT_const_iterator(Node<T>* node, rb_tree<T> tree): node(node), tree(tree) {}
-	RBT_const_iterator(const RBT_const_iterator& other): node(node), tree(tree) {}
+	RBT_const_iterator(const RBT_const_iterator& other): node(other.node), tree(other.tree) {}
 	virtual ~RBT_const_iterator() {}
 
 	RBT_const_iterator& operator=(const RBT_const_iterator& other) {

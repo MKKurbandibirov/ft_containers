@@ -323,7 +323,7 @@ Node<T>* rb_tree<T>::next(Node<T>* x) const {
 		return minimum(x->right);
 	}
 	Node<T> *y = x->parent;
-	while (y != NIL && x == y->right) {
+	while (y && y != NIL && x == y->right) {
 		x = y;
 		y = y->parent;
 	}
@@ -335,7 +335,7 @@ Node<T>* rb_tree<T>::prev(Node<T>* x) const {
 	if (x->left != NIL)
 		return maximum(x->left);
 	Node<T> *y = x->parent;
-	while (y != NIL && x == y->left) {
+	while (y && y != NIL && x == y->left) {
 		x = y;
 		y = y->parent;
 	}
