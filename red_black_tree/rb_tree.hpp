@@ -70,6 +70,8 @@ public:
 	Node<T>* NIL;
 	
 	rb_tree();
+	rb_tree(const rb_tree& other);
+	rb_tree<T>& operator=(const rb_tree& other);
 	~rb_tree();
 	void clear_tree(Node<T> *x);
 

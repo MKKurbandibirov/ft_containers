@@ -12,6 +12,28 @@ rb_tree<T>::rb_tree() {
 }
 
 template<class T>
+rb_tree<T>::rb_tree(const rb_tree& other) {
+	root = other.root;
+	header = other.header;
+	NIL = other.NIL;
+	alloc = other.alloc;
+	// insertion
+}
+
+template<class T>
+rb_tree<T>& rb_tree<T>::operator=(const rb_tree& other) {
+	if (this == &other) {
+		return *this;
+	}
+	root = other.root;
+	header = other.header;
+	NIL = other.NIL;
+	alloc = other.alloc;
+	//insertion
+	return *this;
+}
+
+template<class T>
 void rb_tree<T>::rotate_left(Node<T>* x) {
 	Node<T> *y = x->right;
 

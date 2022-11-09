@@ -9,6 +9,8 @@
 # include "../util/equal.hpp"
 # include "../util/lexicographical_compare.hpp"
 # include "../util/distance.hpp"
+# include "../util/enable_if.hpp"
+# include "../util/is_iter.hpp"
 
 namespace ft
 {
@@ -36,29 +38,28 @@ public:
 	typedef ft::ReverseIterator<const_iterator>						const_reverse_iterator;
 
 	// -------------- Construct/Copy/Destroy -------------- //
-	// explicit set();
+	explicit set();
 	// template <class InputIterator>
 	// 	set(InputIterator first, InputIterator last,
-	// 		typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = NULL);
+	// 		typename ft::enable_if<ft::is_iter<InputIterator>::value, InputIterator>::type* = NULL);
 	// set(const set<Key>& x);
-	// ~set();
+	~set();
 	// set<Key>& operator=(const set<Key>& x);
-	// allocator_type get_allocator() const;
 
 	// ------------- Iterators ------------- //
-	// iterator begin();
-	// const_iterator begin() const;
-	// iterator end();
-	// const_iterator end() const;
-	// reverse_iterator rbegin();
-	// const_reverse_iterator rbegin() const;
-	// reverse_iterator rend();
-	// const_reverse_iterator rend() const;
+	iterator begin();
+	const_iterator begin() const;
+	iterator end();
+	const_iterator end() const;
+	reverse_iterator rbegin();
+	const_reverse_iterator rbegin() const;
+	reverse_iterator rend();
+	const_reverse_iterator rend() const;
 
 	// ------------- Capacity ------------- //
-	// bool empty() const;
-	// size_type size() const;
-	// size_type max_size() const;
+	bool empty() const;
+	size_type size() const;
+	size_type max_size() const;
 
 	// ------------ Modifiers ------------ //
 	// pair<iterator,bool> insert(const value_type& x);
@@ -84,27 +85,27 @@ public:
 	// pair<iterator,iterator> equal_range(const key_type& x) const;
 };
 
-	// template <class Key>
-	// bool operator==(const set<Key>& x,const set<Key>& y);
+// template <class Key>
+// bool operator==(const set<Key>& x,const set<Key>& y);
 
-	// template <class Key>
-	// bool operator!=(const set<Key>& x,const set<Key>& y);
+// template <class Key>
+// bool operator!=(const set<Key>& x,const set<Key>& y);
 
-	// template <class Key>
-	// bool operator<=(const set<Key>& x,const set<Key>& y);
+// template <class Key>
+// bool operator<=(const set<Key>& x,const set<Key>& y);
 
-	// template <class Key>
-	// bool operator>=(const set<Key>& x,const set<Key>& y);
+// template <class Key>
+// bool operator>=(const set<Key>& x,const set<Key>& y);
 
-	// template <class Key>
-	// bool operator>(const set<Key>& x,const set<Key>& y);
+// template <class Key>
+// bool operator>(const set<Key>& x,const set<Key>& y);
 
-	// template <class Key>
-	// bool operator<(const set<Key>& x,const set<Key>& y);
+// template <class Key>
+// bool operator<(const set<Key>& x,const set<Key>& y);
 
-	// ---------- Specialized Algorithms ---------- //
-	// template <class Key>
-	// void swap(set<Key>& x,set<Key>& y);
+// ---------- Specialized Algorithms ---------- //
+// template <class Key>
+// void swap(set<Key>& x,set<Key>& y);
 
 
 } // namespace ft
