@@ -15,16 +15,15 @@ map<key_type, mapped_type>::map(const map& other) {
 	tree.header = other.tree.header;
 }
 
-// Dont work!
-// template<class key_type, class mapped_type>
-// template<class InputIterator>
-// map<key_type, mapped_type>::map(InputIterator first, InputIterator last,
-// 	typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type*) {
-// 	// if (first > last) {
-// 	// 	throw std::length_error("map");
-// 	// }
-// 	insert(first, last);
-// }
+template<class key_type, class mapped_type>
+template<class InputIterator>
+map<key_type, mapped_type>::map(InputIterator first, InputIterator last,
+	typename ft::enable_if<ft::is_iter<InputIterator>::value, InputIterator>::type*) {
+	// if (first > last) {
+	// 	throw std::length_error("map");
+	// }
+	insert(first, last);
+}
 
 template<class key_type, class mapped_type>
 map<key_type, mapped_type>& map<key_type, mapped_type>::operator=(const map& other) {
@@ -48,25 +47,25 @@ map<key_type, mapped_type>::~map() {}
 template<class key_type, class mapped_type>
 typename map<key_type, mapped_type>::iterator
 map<key_type, mapped_type>::begin() {
-	return iterator(tree.minimum(tree.root), tree.root, tree.header);
+	return iterator(tree.minimum(tree.root), tree);
 }
 
 template<class key_type, class mapped_type>
 typename map<key_type, mapped_type>::const_iterator
 map<key_type, mapped_type>::begin() const {
-	return const_iterator(tree.minimum(tree.root), tree.root, tree.header);
+	return const_iterator(tree.minimum(tree.root), tree);
 }
 
 template<class key_type, class mapped_type>
 typename map<key_type, mapped_type>::iterator
 map<key_type, mapped_type>::end() {
-	return iterator(tree.header.header, tree.root, tree.header);
+	return iterator(tree.header.header, tree);
 }
 
 template<class key_type, class mapped_type>
 typename map<key_type, mapped_type>::const_iterator
 map<key_type, mapped_type>::end() const {
-	return const_iterator(tree.header.header, tree.root, tree.header);
+	return const_iterator(tree.header.header, tree);
 }
 
 template<class key_type, class mapped_type>
@@ -132,10 +131,10 @@ typename ft::pair<typename map<key_type, mapped_type>::iterator, bool>
 map<key_type, mapped_type>::insert(const value_type& value) {
 	Node<ft::pair<key_type, mapped_type> >* tmp = tree.find_node(value);
 	if (tmp) {
-		typename map<key_type, mapped_type>::iterator iter(tmp, tree.root, tree.header);
+		typename map<key_type, mapped_type>::iterator iter(tmp, tree);
 		return ft::make_pair(iter, false);
 	}
-	typename map<key_type, mapped_type>::iterator iter(tree.insert_node(value), tree.root, tree.header);
+	typename map<key_type, mapped_type>::iterator iter(tree.insert_node(value), tree);
 	return ft::make_pair(iter, true);
 }
 
@@ -143,20 +142,19 @@ template<class key_type, class mapped_type>
 typename map<key_type, mapped_type>::iterator
 map<key_type, mapped_type>::insert(iterator position, const value_type& value) {
 	(void)position;
-	return iterator(insert(value).first, tree.root, tree.header);
+	return iterator(insert(value).first, tree);
 }
 
-// Dont work!
-// template<class key_type, class mapped_type>
-// template<class InputIterator>
-// void map<key_type, mapped_type>::insert(InputIterator first, InputIterator last,
-// 	typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type*) {
-// 	difference_type n = ft::distance(first, last);
-// 	while (n--) {
-// 		insert(*first);
-// 		++first;
-// 	}
-// }
+template<class key_type, class mapped_type>
+template<class InputIterator>
+void map<key_type, mapped_type>::insert(InputIterator first, InputIterator last,
+	typename ft::enable_if<ft::is_iter<InputIterator>::value, InputIterator>::type*) {
+	difference_type n = ft::distance(first, last);
+	while (n--) {
+		insert(*first);
+		++first;
+	}
+}
 
 template<class key_type, class mapped_type>
 void map<key_type, mapped_type>::erase(iterator position) {
@@ -221,7 +219,7 @@ map<key_type, mapped_type>::find(const key_type& val) {
 	if (node == NULL) {
 		return end();
 	}
-	return iterator(node, tree.root, tree.header);
+	return iterator(node, tree);
 }
 
 template<class key_type, class mapped_type>
@@ -231,7 +229,7 @@ map<key_type, mapped_type>::find(const key_type& val) const {
 	if (node == NULL) {
 		return end();
 	}
-	return const_iterator(node, tree.root, tree.header);
+	return const_iterator(node, tree);
 }
 
 template<class key_type, class mapped_type>

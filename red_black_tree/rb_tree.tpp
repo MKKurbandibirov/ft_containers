@@ -12,6 +12,28 @@ rb_tree<T>::rb_tree() {
 }
 
 template<class T>
+rb_tree<T>::rb_tree(const rb_tree& other) {
+	root = other.root;
+	header = other.header;
+	NIL = other.NIL;
+	alloc = other.alloc;
+	// insertion
+}
+
+template<class T>
+rb_tree<T>& rb_tree<T>::operator=(const rb_tree& other) {
+	if (this == &other) {
+		return *this;
+	}
+	root = other.root;
+	header = other.header;
+	NIL = other.NIL;
+	alloc = other.alloc;
+	//insertion
+	return *this;
+}
+
+template<class T>
 void rb_tree<T>::rotate_left(Node<T>* x) {
 	Node<T> *y = x->right;
 
@@ -323,7 +345,7 @@ Node<T>* rb_tree<T>::next(Node<T>* x) const {
 		return minimum(x->right);
 	}
 	Node<T> *y = x->parent;
-	while (y != NIL && x == y->right) {
+	while (y && y != NIL && x == y->right) {
 		x = y;
 		y = y->parent;
 	}
@@ -335,7 +357,7 @@ Node<T>* rb_tree<T>::prev(Node<T>* x) const {
 	if (x->left != NIL)
 		return maximum(x->left);
 	Node<T> *y = x->parent;
-	while (y != NIL && x == y->left) {
+	while (y && y != NIL && x == y->left) {
 		x = y;
 		y = y->parent;
 	}

@@ -93,7 +93,30 @@ int main() {
 	// 		std::cout << *ft_re_it;
 	// 		--ft_re_it;
 	// 	}
-	// 	// std::cout << *ft_r_it << " " << *ft_re_it  << " DIST: " << std::distance(ft_r_it, ft_re_it)<< std::endl ;
+
+	// 	std::cout << "\n---------------------------------------------------------------------\n";
+
+	// 	// ft::vector<std::string>::iterator beg = ft_v.begin();
+	// 	// ft::vector<std::string>::iterator end = ft_v.end();
+	// 	// while (beg != end) {
+	// 	// 	end--;
+	// 	// 	std::cout << *end << std::endl;
+	// 	// }
+
+	// 	ft::vector<std::string> ftv(ft_v.begin(), ft_v.end());
+	// 	ft::vector<std::string>::iterator beg = ftv.begin();
+	// 	ft::vector<std::string>::iterator end = ftv.end();
+	// 	while (beg != end) {
+	// 		end--;
+	// 		std::cout << *end << std::endl;
+	// 	}
+
+	// 	ft::vector<std::string>::reverse_iterator rbeg = ftv.rbegin();
+	// 	ft::vector<std::string>::reverse_iterator rend = ftv.rend();
+	// 	while (rbeg != rend) {
+	// 		--rend;
+	// 		std::cout << *rend << std::endl;
+	// 	}
 	// }
 
 	// {
@@ -187,14 +210,14 @@ int main() {
 		
 	// 	t.delete_node(t.find_node(10));
 
-	// 	ft::rb_tree<int>::RBT_iterator it1(t.minimum(t.root), t.root, t.header);
+	// 	ft::rb_tree<int>::iterator it1(t.minimum(t.root), t);
 	
 	// 	for (int i = 0; i < 6; ++i) {
 	// 		std::cout << *it1 << std::endl;
 	// 		++it1;
 	// 	}
 
-	// 	ft::rb_tree<int>::RBT_iterator it2(t.maximum(t.root), t.root, t.header);
+	// 	ft::rb_tree<int>::iterator it2(t.maximum(t.root), t);
 	
 	// 	for (int i = 0; i < 6; ++i) {
 	// 		std::cout << *it2 << std::endl;
@@ -314,7 +337,22 @@ int main() {
 		ft::pair<ft::map<char, int>::iterator, ft::map<char, int>::iterator> p = map.equal_range('c');
 		std::cout << (*p.first).first << " - " << (*p.second).second << std::endl;
 	
-		// std::cout << "---------------------------------------------------\n";
+		std::cout << "---------------------------------------------------\n";
+
+		ft::map<char, int> m_c(map.begin(), map.end());
+
+		ft::map<char, int>::iterator lb_c = m_c.lower_bound('b');
+		std::cout << (*lb_c).first << " - " << (*lb_c).second << std::endl;
+
+		ft::map<char, int>::iterator ub_c = m_c.upper_bound('d');
+		std::cout << (*ub_c).first << " - " << (*ub_c).second << std::endl;
+
+		// m_c.erase(lb_c, ub_c);
+		// for (ft::map<char,int>::iterator it=m_c.begin(); it!=m_c.end(); ++it)
+    	// 	std::cout << (*it).first << " => " << (*it).second << '\n';
+
+		ft::pair<ft::map<char, int>::iterator, ft::map<char, int>::iterator> p_c = m_c.equal_range('c');
+		std::cout << (*p_c.first).first << " - " << (*p_c.second).second << std::endl;
 
 		// std::map<char, int> m11;
 		// std::map<char, int> m22;
