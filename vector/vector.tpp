@@ -121,6 +121,30 @@ void vector<value_type>::assign(InputIterator first, InputIterator last,
 
 // ------------------------ Iterators ------------------------ //
 template<class value_type>
+typename vector<value_type>::iterator
+vector<value_type>::begin() {
+	return iterator(arr);
+}
+
+template<class value_type>
+typename vector<value_type>::const_iterator
+vector<value_type>::begin() const {
+	return const_iterator(arr);
+}
+
+template<class value_type>
+typename vector<value_type>::iterator
+vector<value_type>::end() {
+	return iterator(arr + sz);
+}
+
+template<class value_type>
+typename vector<value_type>::const_iterator
+vector<value_type>::end() const {
+	return const_iterator(arr + sz);
+}
+
+template<class value_type>
 typename vector<value_type>::reverse_iterator
 vector<value_type>::rbegin() {
 	return reverse_iterator(this->end());
