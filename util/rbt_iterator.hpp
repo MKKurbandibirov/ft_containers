@@ -53,6 +53,10 @@ public:
 		return node->value;
 	}
 
+	pointer operator->() const {
+		return &node->value;
+	}
+
 	RBT_iterator& operator++(void) {
 		if (node->value == tree.maximum(tree.root)->value) {
 			node = tree.header.header;

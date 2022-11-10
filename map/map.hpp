@@ -75,6 +75,7 @@ namespace ft
 
 	// --------- Element Access --------- //
 	mapped_type& operator[](const key_type& x);
+	mapped_type& at(const key_type& x);
 	
 	// ------------ Modifiers ------------ //
 	pair<iterator, bool> insert(const value_type& x);
