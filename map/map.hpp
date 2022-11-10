@@ -11,6 +11,7 @@
 # include "../util/lexicographical_compare.hpp"
 # include "../util/distance.hpp"
 # include "../util/is_iter.hpp"
+# include "../util/enable_if.hpp"
 
 namespace ft
 {
