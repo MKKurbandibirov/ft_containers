@@ -37,6 +37,15 @@ public:
 		return *this;
 	}
 
+	Iterator& operator+=(const difference_type other) {
+		curr += other;
+		return *this;
+	}
+
+	Iterator operator+(const difference_type other) {
+		return iterator(curr + other); 
+	}
+
 	Iterator& operator--() {
 		curr--;
 		return *this;
@@ -48,8 +57,21 @@ public:
 		return *this;
 	}
 
+	Iterator& operator-=(const difference_type other) {
+		curr -= other;
+		return *this;
+	}
+
+	Iterator operator-(const difference_type other) {
+		return iterator(curr - other); 
+	}
+
 	reference operator*() {
 		return *curr;
+	}
+
+	pointer operator->() {
+		return curr;
 	}
 
 	bool operator==(const Iterator& other) const {

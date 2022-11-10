@@ -30,41 +30,53 @@ public:
 		return *this;
 	}
 
-	ReverseIterator& operator++();
-	ReverseIterator& operator--();
-	reference operator*();
-	bool operator==(const ReverseIterator& other) const;
-	bool operator!=(const ReverseIterator& other) const;	
+	// ReverseIterator& operator++();
+	// ReverseIterator& operator--();
+	// reference operator*();
+	// bool operator==(const ReverseIterator& other) const;
+	// bool operator!=(const ReverseIterator& other) const;	
+
+
+	ReverseIterator& operator++() {
+		--this->iter;
+		return *this;
+	}
+
+	ReverseIterator& operator++(int d) {
+		(void) d;
+		--this->iter;
+		return *this;
+	}
+
+	ReverseIterator& operator--() {
+		++this->iter;
+		return *this;
+	}
+
+	ReverseIterator& operator--(int d) {
+		(void)d;
+		++this->iter;
+		return *this;
+	}
+
+	reference operator*() {
+		T tmp = this->iter;
+		return *--tmp;
+	}
+
+	pointer operator->() {
+		return this->iter;
+	}
+
+	bool operator==(const ReverseIterator& other) const {
+		return this->iter == other.iter;
+	}
+
+	bool operator!=(const ReverseIterator& other) const {
+		return this->iter != other.iter;
+	}
+
 };
-
-template<class T>
-ReverseIterator<T>& ReverseIterator<T>::operator++() {
-	--this->iter;
-	return *this;
-}
-
-template<class T>
-ReverseIterator<T>& ReverseIterator<T>::operator--() {
-	++this->iter;
-	return *this;
-}
-
-template<class T>
-typename iterator_traits<T>::reference
-ReverseIterator<T>::operator*() {
-	T tmp = this->iter;
-	return *--tmp;
-}
-
-template<class T>
-bool ReverseIterator<T>::operator==(const ReverseIterator& other) const {
-	return this->iter == other.iter;
-}
-
-template<class T>
-bool ReverseIterator<T>::operator!=(const ReverseIterator& other) const {
-	return this->iter != other.iter;
-}
 
 } // namespace ft
 

@@ -19,9 +19,6 @@ template<class key_type, class mapped_type>
 template<class InputIterator>
 map<key_type, mapped_type>::map(InputIterator first, InputIterator last,
 	typename ft::enable_if<ft::is_iter<InputIterator>::value, InputIterator>::type*) {
-	// if (first > last) {
-	// 	throw std::length_error("map");
-	// }
 	insert(first, last);
 }
 
@@ -125,6 +122,17 @@ map<key_type, mapped_type>::operator[](const key_type& x) {
 	return (*tmp).second;
 }
 
+template<class key_type, class mapped_type>
+typename map<key_type, mapped_type>::mapped_type&
+map<key_type, mapped_type>::at(const key_type& x) {
+	iterator tmp = find(x);
+	if (tmp == end()) {
+		insert(ft::make_pair<key_type, mapped_type>(x, mapped_type()));
+	}
+	tmp = find(x);
+	return (*tmp).second;
+}
+
 // ------------ Modifiers ------------ //
 template<class key_type, class mapped_type>
 typename ft::pair<typename map<key_type, mapped_type>::iterator, bool>
@@ -196,6 +204,11 @@ map<key_type, mapped_type>::erase(const key_type& x) {
 template<class key_type, class mapped_type>
 void map<key_type, mapped_type>::swap(map<key_type, mapped_type>& other) {
 	tree.swap(other.tree);
+}
+
+template<class key_type, class mapped_type>
+void map<key_type, mapped_type>::clear() {
+	tree.clear_tree();
 }
 
 // ------------- Observers ------------- //

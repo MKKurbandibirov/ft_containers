@@ -11,6 +11,7 @@
 # include "../util/lexicographical_compare.hpp"
 # include "../util/distance.hpp"
 # include "../util/is_iter.hpp"
+# include "../util/enable_if.hpp"
 
 namespace ft
 {
@@ -74,6 +75,7 @@ namespace ft
 
 	// --------- Element Access --------- //
 	mapped_type& operator[](const key_type& x);
+	mapped_type& at(const key_type& x);
 	
 	// ------------ Modifiers ------------ //
 	pair<iterator, bool> insert(const value_type& x);
@@ -106,10 +108,7 @@ namespace ft
 
 	template<class Key, class T>
 	bool operator==(const map<Key,T>& x, const map<Key,T>& y) {
-		typename map<Key, T>::const_iterator beg_x = x.begin();
-		typename map<Key, T>::const_iterator end_x = x.end();
-		typename map<Key, T>::const_iterator beg_y = y.begin();
-		return ft::equal(beg_x, end_x, beg_y);	
+		return ft::equal(x.begin(), x.end(), y.begin());	
 	}
 
 	template<class Key, class T>
@@ -124,11 +123,7 @@ namespace ft
 
 	template<class Key, class T>
 	bool operator<(const map<Key,T>& x, const map<Key,T>& y) {
-		typename map<Key, T>::const_iterator beg_x = x.begin();
-		typename map<Key, T>::const_iterator end_x = x.end();
-		typename map<Key, T>::const_iterator beg_y = y.begin();
-		typename map<Key, T>::const_iterator end_y = y.end();
-		return ft::lexicographical_compare(beg_x, end_x, beg_y, end_y);
+		return ft::lexicographical_compare(x.begin(), x.end(), y.begin(), y.end());
 	}
 
 	template<class Key, class T>
