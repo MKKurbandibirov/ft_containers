@@ -30,13 +30,6 @@ public:
 		return *this;
 	}
 
-	// ReverseIterator& operator++();
-	// ReverseIterator& operator--();
-	// reference operator*();
-	// bool operator==(const ReverseIterator& other) const;
-	// bool operator!=(const ReverseIterator& other) const;	
-
-
 	ReverseIterator& operator++() {
 		--this->iter;
 		return *this;

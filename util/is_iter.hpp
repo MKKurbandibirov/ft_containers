@@ -1,6 +1,8 @@
 #ifndef IS_ITER_HPP
 # define IS_ITER_HPP
 
+# include <vector>
+
 # include "is_integral.hpp"
 # include "iterator.hpp"
 # include "reverse_iterator.hpp"
@@ -15,6 +17,7 @@ template<typename T> struct is_iter<const T>: public is_iter<T> {};
 template<typename T> struct is_iter<typename ft::Iterator<T> >: public true_type {};
 template<typename T> struct is_iter<typename ft::ReverseIterator<T> >: public true_type {};
 template<typename T> struct is_iter<typename ft::RBT_iterator<T> >: public true_type {};
+// template<typename T> struct is_iter<typename __gnu_cxx::__normal_iterator<T*, std::vector<T> > >: public true_type {};
 
 } // namespace ft
 

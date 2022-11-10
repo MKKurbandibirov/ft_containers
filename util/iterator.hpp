@@ -43,7 +43,7 @@ public:
 	}
 
 	Iterator operator+(const difference_type other) {
-		return iterator(curr + other); 
+		return Iterator(curr + other); 
 	}
 
 	Iterator& operator--() {
@@ -63,7 +63,7 @@ public:
 	}
 
 	Iterator operator-(const difference_type other) {
-		return iterator(curr - other); 
+		return Iterator(curr - other); 
 	}
 
 	reference operator*() {
@@ -97,8 +97,6 @@ public:
 	bool operator<=(const Iterator& other) const {
 		return curr < other.curr || curr == other.curr;
 	}
-	
-	// Iterator& operator-(const Iterator& other);
 
 	pointer base();
 private:
@@ -136,6 +134,15 @@ public:
 		return *this;
 	}
 
+	Const_Iterator& operator+=(const difference_type other) {
+		curr += other;
+		return *this;
+	}
+
+	Const_Iterator operator+(const difference_type other) {
+		return Const_Iterator(curr + other); 
+	}
+
 	Const_Iterator& operator--() {
 		curr--;
 		return *this;
@@ -145,6 +152,15 @@ public:
 		(void)d;
 		curr--;
 		return *this;
+	}
+
+	Const_Iterator& operator-=(const difference_type other) {
+		curr -= other;
+		return *this;
+	}
+
+	Const_Iterator operator-(const difference_type other) {
+		return Const_Iterator(curr - other); 
 	}
 
 	reference operator*() {
