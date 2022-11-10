@@ -13,6 +13,7 @@
 #include "red_black_tree/rb_tree.hpp"
 #include "util/is_integral.hpp"
 #include "map/map.hpp"
+#include "set/set.hpp"
 
 
 
@@ -240,138 +241,165 @@ int main() {
 	// 	std::cout << as[3] << std::endl;
 	// }
 
+	// {
+	// 	ft::map<int, std::string> m;
+	// 	ft::pair<int, std::string> elem2(2, "Simon");
+	// 	m.insert(elem2);
+	// 	ft::pair<int, std::string> elem1(1, "John");
+	// 	m.insert(elem1);
+
+	// 	// ft::map<int, std::string> m2(m);
+
+	// 	// ft::map<int, std::string> m3 = m2;
+
+	// 	ft::map<int, std::string> m7;
+	// 	ft::pair<int, std::string> elem4(2, "Alex");
+	// 	m7.insert(elem4);
+	// 	ft::pair<int, std::string> elem5(1, "Steven");
+	// 	m7.insert(elem5);
+	// 	ft::pair<int, std::string> elem6(3, "Frank");
+	// 	m7.insert(elem6);
+
+	// 	// ft::map<int, std::string> m6;
+
+	// 	// std::cout << std::boolalpha << m.empty() << std::endl;
+	// 	// std::cout << m.size() << std::endl;
+	// 	// std::cout << m.max_size() << std::endl;
+
+	// 	// m6.swap(m7);
+	// 	// m3.erase(m3.begin(), m3.end());
+	// 	// m3.erase(m3.begin());
+	// 	// m3.erase(m3.begin());
+
+
+	// 	// std::cout << std::boolalpha << m7.empty() << std::endl;
+	// 	// std::cout << m7.size() << std::endl;
+	// 	// std::cout << m7.max_size() << std::endl;
+
+	// 	m.swap(m7);
+
+	// 	std::cout << std::boolalpha << m.empty() << std::endl;
+	// 	std::cout << m.size() << std::endl;
+	// 	std::cout << m.max_size() << std::endl;
+
+	// 	std::cout << std::boolalpha << m7.empty() << std::endl;
+	// 	std::cout << m7.size() << std::endl;
+	// 	std::cout << m7.max_size() << std::endl;
+
+	// 	// ft::map<int, std::string>::iterator it_b = m3.begin();
+	// 	// ft::map<int, std::string>::iterator it_e = m3.end();
+	// 	// while (it_b != it_e) {
+	// 	// 	std::cout << (*it_b).first << std::endl;
+	// 	// 	++it_b;
+	// 	// }
+	// 	// std::cout << (*--m.end()).first << std::endl;
+
+	// 	// m.erase()
+
+	// 	// std::map<int, std::string> mm;
+	// 	// mm.insert(std::make_pair<int, std::string>(11, "ahaha"));
+	// 	// mm.insert(std::make_pair<int, std::string>(12, "hahah"));
+	// 	// ft::map<int, std::string> m5(mm.begin(), mm.end());
+	// 	// ft::map<int, std::string>::iterator it_b = m5.begin();
+	// 	// ft::map<int, std::string>::iterator it_e = m5.end();
+	// 	// while (it_b != it_e) {
+	// 	// 	std::cout << (*it_b).first << std::endl;
+	// 	// 	++it_b;
+	// 	// }
+
+	// 	// std::cout << m[3].second << std::endl;
+	// 	// std::cout << m.erase(3) << m.count(3) << m.count(2) <<  std::endl;
+
+	// 	ft::map<int, std::string>::key_compare kk = m.key_comp();
+	// 	std::cout << std::boolalpha << kk(4, 2) << std::endl;
+
+	// 	ft::map<int, std::string>::value_compare kv = m.value_comp();
+	// 	std::cout << std::boolalpha << kv(ft::make_pair<int, std::string>(6, "John"), ft::make_pair<int, std::string>(4, "John")) << std::endl;
+	
+	// 	std::cout << "---------------------------------------------------\n";
+
+	// 	ft::map<char, int> map;
+	// 	map['a'] = 20;
+	// 	map['b'] = 40;
+	// 	map['c'] = 60;
+	// 	map['d'] = 80;
+	// 	map['e'] = 100;
+
+	// 	ft::map<char, int>::iterator lb = map.lower_bound('b');
+	// 	std::cout << (*lb).first << " - " << (*lb).second << std::endl;
+
+	// 	ft::map<char, int>::iterator ub = map.upper_bound('d');
+	// 	std::cout << (*ub).first << " - " << (*ub).second << std::endl;
+
+	// 	// map.erase(lb, ub);
+	// 	// for (ft::map<char,int>::iterator it=map.begin(); it!=map.end(); ++it)
+    // 	// 	std::cout << (*it).first << " => " << (*it).second << '\n';
+
+	// 	ft::pair<ft::map<char, int>::iterator, ft::map<char, int>::iterator> p = map.equal_range('c');
+	// 	std::cout << (*p.first).first << " - " << (*p.second).second << std::endl;
+	
+	// 	std::cout << "---------------------------------------------------\n";
+
+	// 	ft::map<char, int> m_c(map.begin(), map.end());
+
+	// 	ft::map<char, int>::iterator lb_c = m_c.lower_bound('b');
+	// 	std::cout << (*lb_c).first << " - " << (*lb_c).second << std::endl;
+
+	// 	ft::map<char, int>::iterator ub_c = m_c.upper_bound('d');
+	// 	std::cout << (*ub_c).first << " - " << (*ub_c).second << std::endl;
+
+	// 	m_c.erase(lb_c, ub_c);
+	// 	for (ft::map<char,int>::iterator it=m_c.begin(); it!=m_c.end(); ++it)
+    // 		std::cout << (*it).first << " => " << (*it).second << '\n';
+
+	// 	ft::pair<ft::map<char, int>::iterator, ft::map<char, int>::iterator> p_c = m_c.equal_range('a');
+	// 	std::cout << (*p_c.first).first << " - " << (*p_c.second).second << std::endl;
+
+	// 	// std::map<char, int> m11;
+	// 	// std::map<char, int> m22;
+
+	// 	// m11['a'] = 10;
+	// 	// m11['b'] = 20;
+	// 	// m11['c'] = 30;
+	// 	// m11['d'] = 40;
+
+
+	// 	// m22['a'] = 110;
+	// 	// m22['b'] = 120;
+	// 	// m22['c'] = 130;
+	// 	// m22['d'] = 140;
+
+	// 	// m11 = m22;
+
+	// 	// m11.erase('b');
+	// 	// std::cout << m22['b'] << std::endl;
+	// }
+
 	{
-		ft::map<int, std::string> m;
-		ft::pair<int, std::string> elem2(2, "Simon");
-		m.insert(elem2);
-		ft::pair<int, std::string> elem1(1, "John");
-		m.insert(elem1);
+		ft::set<char> s;
 
-		// ft::map<int, std::string> m2(m);
+		s.insert('a');
+		s.insert('b');
+		s.insert('c');
 
-		// ft::map<int, std::string> m3 = m2;
+		ft::set<char> s_1(s.begin(), s.end());
+		s_1.insert('d');
+		s_1.insert('e');
+		s_1.insert('f');
+		s_1.insert('g');
 
-		ft::map<int, std::string> m7;
-		ft::pair<int, std::string> elem4(2, "Alex");
-		m7.insert(elem4);
-		ft::pair<int, std::string> elem5(1, "Steven");
-		m7.insert(elem5);
-		ft::pair<int, std::string> elem6(3, "Frank");
-		m7.insert(elem6);
+		ft::set<char>::iterator lb_c = s_1.lower_bound('b');
+		std::cout << (*lb_c) << std::endl;
 
-		// ft::map<int, std::string> m6;
+		ft::set<char>::iterator ub_c = s_1.upper_bound('d');
+		std::cout << (*ub_c) << std::endl;
 
-		// std::cout << std::boolalpha << m.empty() << std::endl;
-		// std::cout << m.size() << std::endl;
-		// std::cout << m.max_size() << std::endl;
+		s_1.erase(lb_c, ub_c);
+		for (ft::set<char>::iterator it=s_1.begin(); it!=s_1.end(); ++it)
+			std::cout << (*it) << '\n';
 
-		// m6.swap(m7);
-		// m3.erase(m3.begin(), m3.end());
-		// m3.erase(m3.begin());
-		// m3.erase(m3.begin());
-
-
-		// std::cout << std::boolalpha << m7.empty() << std::endl;
-		// std::cout << m7.size() << std::endl;
-		// std::cout << m7.max_size() << std::endl;
-
-		m.swap(m7);
-
-		std::cout << std::boolalpha << m.empty() << std::endl;
-		std::cout << m.size() << std::endl;
-		std::cout << m.max_size() << std::endl;
-
-		std::cout << std::boolalpha << m7.empty() << std::endl;
-		std::cout << m7.size() << std::endl;
-		std::cout << m7.max_size() << std::endl;
-
-		// ft::map<int, std::string>::iterator it_b = m3.begin();
-		// ft::map<int, std::string>::iterator it_e = m3.end();
-		// while (it_b != it_e) {
-		// 	std::cout << (*it_b).first << std::endl;
-		// 	++it_b;
-		// }
-		// std::cout << (*--m.end()).first << std::endl;
-
-		// m.erase()
-
-		// std::map<int, std::string> mm;
-		// mm.insert(std::make_pair<int, std::string>(11, "ahaha"));
-		// mm.insert(std::make_pair<int, std::string>(12, "hahah"));
-		// ft::map<int, std::string> m5(mm.begin(), mm.end());
-		// ft::map<int, std::string>::iterator it_b = m5.begin();
-		// ft::map<int, std::string>::iterator it_e = m5.end();
-		// while (it_b != it_e) {
-		// 	std::cout << (*it_b).first << std::endl;
-		// 	++it_b;
-		// }
-
-		// std::cout << m[3].second << std::endl;
-		// std::cout << m.erase(3) << m.count(3) << m.count(2) <<  std::endl;
-
-		ft::map<int, std::string>::key_compare kk = m.key_comp();
-		std::cout << std::boolalpha << kk(4, 2) << std::endl;
-
-		ft::map<int, std::string>::value_compare kv = m.value_comp();
-		std::cout << std::boolalpha << kv(ft::make_pair<int, std::string>(6, "John"), ft::make_pair<int, std::string>(4, "John")) << std::endl;
-	
-		std::cout << "---------------------------------------------------\n";
-
-		ft::map<char, int> map;
-		map['a'] = 20;
-		map['b'] = 40;
-		map['c'] = 60;
-		map['d'] = 80;
-		map['e'] = 100;
-
-		ft::map<char, int>::iterator lb = map.lower_bound('b');
-		std::cout << (*lb).first << " - " << (*lb).second << std::endl;
-
-		ft::map<char, int>::iterator ub = map.upper_bound('d');
-		std::cout << (*ub).first << " - " << (*ub).second << std::endl;
-
-		// map.erase(lb, ub);
-		// for (ft::map<char,int>::iterator it=map.begin(); it!=map.end(); ++it)
-    	// 	std::cout << (*it).first << " => " << (*it).second << '\n';
-
-		ft::pair<ft::map<char, int>::iterator, ft::map<char, int>::iterator> p = map.equal_range('c');
-		std::cout << (*p.first).first << " - " << (*p.second).second << std::endl;
-	
-		std::cout << "---------------------------------------------------\n";
-
-		ft::map<char, int> m_c(map.begin(), map.end());
-
-		ft::map<char, int>::iterator lb_c = m_c.lower_bound('b');
-		std::cout << (*lb_c).first << " - " << (*lb_c).second << std::endl;
-
-		ft::map<char, int>::iterator ub_c = m_c.upper_bound('d');
-		std::cout << (*ub_c).first << " - " << (*ub_c).second << std::endl;
-
-		// m_c.erase(lb_c, ub_c);
-		// for (ft::map<char,int>::iterator it=m_c.begin(); it!=m_c.end(); ++it)
-    	// 	std::cout << (*it).first << " => " << (*it).second << '\n';
-
-		ft::pair<ft::map<char, int>::iterator, ft::map<char, int>::iterator> p_c = m_c.equal_range('c');
-		std::cout << (*p_c.first).first << " - " << (*p_c.second).second << std::endl;
-
-		// std::map<char, int> m11;
-		// std::map<char, int> m22;
-
-		// m11['a'] = 10;
-		// m11['b'] = 20;
-		// m11['c'] = 30;
-		// m11['d'] = 40;
-
-
-		// m22['a'] = 110;
-		// m22['b'] = 120;
-		// m22['c'] = 130;
-		// m22['d'] = 140;
-
-		// m11 = m22;
-
-		// m11.erase('b');
-		// std::cout << m22['b'] << std::endl;
+		s_1.erase(s_1.begin(), s_1.end());
+		std::cout << std::boolalpha << s_1.empty() << std::endl;
 	}
 
 	return 0;

@@ -11,6 +11,7 @@
 # include "../util/distance.hpp"
 # include "../util/enable_if.hpp"
 # include "../util/is_iter.hpp"
+# include "../util/pair.hpp"
 
 namespace ft
 {
@@ -28,7 +29,7 @@ public:
 	typedef std::allocator<value_type> 								allocator_type;
 	typedef typename allocator_type::reference						reference;
 	typedef typename allocator_type::const_reference				const_reference;
-	typename ft::rb_tree<value_type>::iterator						iterator;
+	typedef typename ft::rb_tree<value_type>::iterator				iterator;
 	typedef typename ft::rb_tree<value_type>::const_iterator		const_iterator;
 	typedef std::size_t												size_type;
 	typedef typename ft::iterator_traits<iterator>::difference_type	difference_type;
@@ -39,12 +40,12 @@ public:
 
 	// -------------- Construct/Copy/Destroy -------------- //
 	explicit set();
-	// template <class InputIterator>
-	// 	set(InputIterator first, InputIterator last,
-	// 		typename ft::enable_if<ft::is_iter<InputIterator>::value, InputIterator>::type* = NULL);
-	// set(const set<Key>& x);
+	template <class InputIterator>
+		set(InputIterator first, InputIterator last,
+			typename ft::enable_if<ft::is_iter<InputIterator>::value, InputIterator>::type* = NULL);
+	set(const set<Key>& x);
 	~set();
-	// set<Key>& operator=(const set<Key>& x);
+	set<Key>& operator=(const set<Key>& x);
 
 	// ------------- Iterators ------------- //
 	iterator begin();
@@ -62,50 +63,64 @@ public:
 	size_type max_size() const;
 
 	// ------------ Modifiers ------------ //
-	// pair<iterator,bool> insert(const value_type& x);
-	// iterator insert(iterator position, const value_type& x);
-	// template <class InputIterator>
-	// 	void insert(InputIterator first, InputIterator last,
-	// 		typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = NULL);
-	// void erase(iterator position);
-	// size_type erase(const key_type& x);
-	// void erase(iterator first, iterator last);
-	// void swap(set<Key>&);
-	// void clear();
+	pair<iterator,bool> insert(const value_type& x);
+	iterator insert(iterator position, const value_type& x);
+	template <class InputIterator>
+		void insert(InputIterator first, InputIterator last,
+			typename ft::enable_if<ft::is_iter<InputIterator>::value, InputIterator>::type* = NULL);
+	void erase(iterator position);
+	size_type erase(const key_type& x);
+	void erase(iterator first, iterator last);
+	void swap(set<Key>&);
+	void clear();
 
 	// ------------- Observers ------------- //
-	// key_compare key_comp() const;
-	// value_compare value_comp() const;
+	key_compare key_comp() const;
+	value_compare value_comp() const;
 
 	// ----------- Set Operations ----------- //
-	// iterator find(const key_type& x) const;
-	// size_type count(const key_type& x) const;
-	// iterator lower_bound(const key_type& x) const;
-	// iterator upper_bound(const key_type& x) const;
-	// pair<iterator,iterator> equal_range(const key_type& x) const;
+	iterator find(const key_type& x) const;
+	size_type count(const key_type& x) const;
+	iterator lower_bound(const key_type& x);
+	iterator upper_bound(const key_type& x);
+	pair<iterator,iterator> equal_range(const key_type& x) const;
 };
 
-// template <class Key>
-// bool operator==(const set<Key>& x,const set<Key>& y);
+template <class Key>
+bool operator==(const set<Key>& x,const set<Key>& y) {
+	return ft::equal(x.begin(), x.end(), y.begin());
+}
 
-// template <class Key>
-// bool operator!=(const set<Key>& x,const set<Key>& y);
+template <class Key>
+bool operator!=(const set<Key>& x,const set<Key>& y) {
+	return !(x == y);
+}
 
-// template <class Key>
-// bool operator<=(const set<Key>& x,const set<Key>& y);
+template <class Key>
+bool operator<=(const set<Key>& x,const set<Key>& y) {
+	return x < y || x == y;
+}
 
-// template <class Key>
-// bool operator>=(const set<Key>& x,const set<Key>& y);
+template <class Key>
+bool operator>=(const set<Key>& x,const set<Key>& y) {
+	return x > y || x == y;
+}
 
-// template <class Key>
-// bool operator>(const set<Key>& x,const set<Key>& y);
+template <class Key>
+bool operator>(const set<Key>& x,const set<Key>& y) {
+	return x != y && !(x < y);
+}
 
-// template <class Key>
-// bool operator<(const set<Key>& x,const set<Key>& y);
+template <class Key>
+bool operator<(const set<Key>& x,const set<Key>& y) {
+	return ft::lexicographical_compare(x.begin(), x.end(), y.begin(), y.end());
+}
 
 // ---------- Specialized Algorithms ---------- //
-// template <class Key>
-// void swap(set<Key>& x,set<Key>& y);
+template <class Key>
+void swap(set<Key>& x,set<Key>& y) {
+	x.swap(y);
+}
 
 
 } // namespace ft

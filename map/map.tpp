@@ -19,9 +19,6 @@ template<class key_type, class mapped_type>
 template<class InputIterator>
 map<key_type, mapped_type>::map(InputIterator first, InputIterator last,
 	typename ft::enable_if<ft::is_iter<InputIterator>::value, InputIterator>::type*) {
-	// if (first > last) {
-	// 	throw std::length_error("map");
-	// }
 	insert(first, last);
 }
 
@@ -196,6 +193,11 @@ map<key_type, mapped_type>::erase(const key_type& x) {
 template<class key_type, class mapped_type>
 void map<key_type, mapped_type>::swap(map<key_type, mapped_type>& other) {
 	tree.swap(other.tree);
+}
+
+template<class key_type, class mapped_type>
+void map<key_type, mapped_type>::clear() {
+	tree.clear_tree();
 }
 
 // ------------- Observers ------------- //
